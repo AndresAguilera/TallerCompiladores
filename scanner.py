@@ -4,6 +4,7 @@ import codecs
 import os
 import sys
 
+# Lista de tokens
 tokens = ['PLUS','MINUS','TIMES','DIVIDE','EXP','EXPD',
           'LT','LEQ','GT','GEQ','EQ','NEQ',
           'LPARENT','RPARENT', 'LBRACKET','RBRACKET','LKEY','RKEY',
@@ -11,6 +12,8 @@ tokens = ['PLUS','MINUS','TIMES','DIVIDE','EXP','EXPD',
            'SEMICOLON', 'COMMA' ,'ID','ASSIGN', 'NUMBER'
 
           ]
+
+# Diccionario de palabras reservadas
 reservadas = {
     'else':'ELSE',
     'if':'IF',
@@ -23,15 +26,16 @@ reservadas = {
 
 tokens = tokens+list(reservadas.values())
 
-
+# Ignorar espacios en blanco, saltos de linea y tabulaciones
 t_ignore = ' \t'
 
+# Definición de tokens
 t_PLUS = r'\+'
 t_MINUS = r'\-'
 t_TIMES = r'\*'
 t_DIVIDE = r'\/'
 t_EXP = r'\^'
-# t_EXPP = r'\\**'
+t_EXPD = r'\*\*'
 
 t_LT = r'<'
 t_LEQ = r'<='
@@ -47,26 +51,30 @@ t_RBRACKET = r'\]'
 t_LKEY = r'/{'
 t_RKEY = r'/}'
 
-
 t_SCOMMENT = r'\%'
-# t_BEGINCOMMENT = r'\/#'
-# t_ENDCOMMENT = r'\#/'
+t_BEGINCOMMENT = r'\/\#'
+t_ENDCOMMENT = r'\#\/'
 
 t_SEMICOLON = r';'
 t_COMMA = r','
 t_ASSIGN = r'::=='
 
+
 # t_ID = r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
+def t_ID(t):
+    r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
+    if t.value.lower() in reservadas:
+        t.value = t.value.lower()
+        t.type = t.value.upper()
+        return t
+
+# Reconocimiento de IDs
 # def t_ID(t):
 #     r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
-#     if t.value.upper() in reservadas:
-#         t.value = t.value.upper()
-#         t.type = t.value
-#
-#         return t
+#     t.type = reservadas.get(t.value,'ID')
+#     return t
 
-
-
+# Reconocimiento de números
 t_NUMBER = r'[0-9]|([1-9]+)'
 # def t_NUMBER(t):
 #     r'/d+'
@@ -74,17 +82,17 @@ t_NUMBER = r'[0-9]|([1-9]+)'
 #     return t
 
 
-
+# Identifica caracteres ilegales
 def t_error(t):
-    print("Caracter ilegal: '%s'" % t.value[0])
-    t.lexer.skip(1)
+    if t.value.lower() in reservadas:
+        t.value = t.value.lower()
+        t.type = t.value.upper()
+        return t
+    else:
+        print("Caracter ilegal: '%s'" % t.value[0])
+        t.lexer.skip(1)
 
-def t_VAR(t):
-    # r'[a-zA-Z_][\w_]*'
-    r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
-    t.type = reservadas.get(t.value,'ID')
-    return t
-
+# Busca archivos de prueba en el directorio del proyecto
 def searchFiles(path):
     archivos = []
     fileNum = ''
@@ -99,7 +107,7 @@ def searchFiles(path):
         counter = counter+1
 
     while answer == False:
-        fileNum = input('\nTest Number')
+        fileNum = input('\nSeleccione el archivo de prueba que desea analizar')
         for file in files:
             if file == files[int(fileNum)-1]:
                 answer = True
