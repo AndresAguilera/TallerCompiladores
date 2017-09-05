@@ -1,3 +1,3 @@
-a_2 ::== 3()
-3 a2 d 1 01 12 0
-else ELSE eLsE else ** /# #/
+a_2 = 3()
+3 ab_cc ab__cc a_1 a2 ab_Cde abCe_a12 acbe
+else ELSE eLsE else </ />

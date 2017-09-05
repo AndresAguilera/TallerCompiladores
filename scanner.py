@@ -5,7 +5,7 @@ import os
 import sys
 
 # Lista de tokens
-tokens = ['PLUS','MINUS','TIMES','DIVIDE','EXP','EXPD',
+tokens = ['PLUS','MINUS','TIMES','DIVIDE',
           'LT','LEQ','GT','GEQ','EQ','NEQ',
           'LPARENT','RPARENT', 'LBRACKET','RBRACKET','LKEY','RKEY',
             'SCOMMENT', 'BEGINCOMMENT','ENDCOMMENT',
@@ -20,13 +20,12 @@ reservadas = {
     'int':'INT',
     'void':'VOID',
     'return':'RETURN',
-    'while':'WHILE',
-    'for':'FOR'
+    'while':'WHILE'
 }
 
 tokens = tokens+list(reservadas.values())
 
-# Ignorar espacios en blanco, saltos de linea y tabulaciones
+# Ignorar espacios en blanco y tabulaciones
 t_ignore = ' \t'
 
 # Definición de tokens
@@ -34,8 +33,6 @@ t_PLUS = r'\+'
 t_MINUS = r'\-'
 t_TIMES = r'\*'
 t_DIVIDE = r'\/'
-t_EXP = r'\^'
-t_EXPD = r'\*\*'
 
 t_LT = r'<'
 t_LEQ = r'<='
@@ -52,18 +49,20 @@ t_LKEY = r'/{'
 t_RKEY = r'/}'
 
 t_SCOMMENT = r'\%'
-t_BEGINCOMMENT = r'\/\#'
-t_ENDCOMMENT = r'\#\/'
+t_BEGINCOMMENT = r'\<\/'
+t_ENDCOMMENT = r'\/\>'
 
 t_SEMICOLON = r';'
 t_COMMA = r','
-t_ASSIGN = r'::=='
+t_ASSIGN = r'='
 
-
-# t_ID = r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
+# r'[a-zA-Z][_?a-zA-Z]*[a-z0-9]'
+# r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
 def t_ID(t):
-    r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
+    r'[a-zA-Z][a-zA-Z]*[_]?[a-z0-9]*'
+    # print(t)
     if t.value.lower() in reservadas:
+        # print(t.value.lower())
         t.value = t.value.lower()
         t.type = t.value.upper()
         return t
@@ -93,7 +92,7 @@ def t_error(t):
         t.lexer.skip(1)
 
 # Busca archivos de prueba en el directorio del proyecto
-def searchFiles(path):
+def buscarArchivos(path):
     archivos = []
     fileNum = ''
     answer = False
@@ -107,18 +106,18 @@ def searchFiles(path):
         counter = counter+1
 
     while answer == False:
-        fileNum = input('\nSeleccione el archivo de prueba que desea analizar')
+        fileNum = input('\nDigite el número  del archivo de prueba que desea analizar')
         for file in files:
             if file == files[int(fileNum)-1]:
                 answer = True
                 break
 
-    print("Has escogido \"%s\" \n" %files[int(fileNum)-1])
+    print("Ha escogido \"%s\" \n" %files[int(fileNum)-1])
 
     return files[int(fileNum)-1]
 
 path = os.path.dirname(__file__) + '/tests/'
-file = searchFiles(path)
+file = buscarArchivos(path)
 test = path + file
 fp = codecs.open(test,"r","utf-8")
 message = fp.read()
