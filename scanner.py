@@ -8,7 +8,7 @@ import sys
 tokens = ['PLUS','MINUS','TIMES','DIVIDE',
           'LT','LEQ','GT','GEQ','EQ','NEQ',
           'LPARENT','RPARENT', 'LBRACKET','RBRACKET','LKEY','RKEY',
-            'SCOMMENT', 'BEGINCOMMENT','ENDCOMMENT',
+            'SCOMMENT', 'BEGINCOMMENT','ENDCOMMENT', 'MCOMMENT',
            'SEMICOLON', 'COMMA' ,'ID','ASSIGN', 'NUMBER'
 
           ]
@@ -26,7 +26,7 @@ reservadas = {
 tokens = tokens+list(reservadas.values())
 
 # Ignorar espacios en blanco y tabulaciones
-t_ignore = ' \t'
+t_ignore = ' \t|\n'
 
 # Definición de tokens
 t_PLUS = r'\+'
@@ -48,7 +48,7 @@ t_RBRACKET = r'\]'
 t_LKEY = r'/{'
 t_RKEY = r'/}'
 
-t_SCOMMENT = r'\%'
+t_SCOMMENT = r'(\?|!).*\n'
 t_MCOMMENT = r'<\/.*\/>'
 
 # t_BEGINCOMMENT = r'\<\/'
@@ -57,9 +57,11 @@ t_MCOMMENT = r'<\/.*\/>'
 t_SEMICOLON = r';'
 t_COMMA = r','
 t_ASSIGN = r'='
-#  r'[a-zA-Z]([a-zA-Z]|[_?a-zA-Z])[a-z0-9]*'
+
+# r'[a-zA-Z]([a-zA-Z]|[_?a-zA-Z])[a-z0-9]*'
 # r'[a-zA-Z][_?a-zA-Z]*[a-z0-9]'
 # r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
+
 def t_ID(t):
     r'[a-zA-Z]([a-zA-Z]|(_[a-zA-Z0-9]))*[a-z0-9]*'
     if t.value.lower() in reservadas:
