@@ -49,23 +49,23 @@ t_LKEY = r'/{'
 t_RKEY = r'/}'
 
 t_SCOMMENT = r'\%'
-t_BEGINCOMMENT = r'\<\/'
-t_ENDCOMMENT = r'\/\>'
+t_MCOMMENT = r'<\/.*\/>'
+
+# t_BEGINCOMMENT = r'\<\/'
+# t_ENDCOMMENT = r'\/\>'
 
 t_SEMICOLON = r';'
 t_COMMA = r','
 t_ASSIGN = r'='
-
+#  r'[a-zA-Z]([a-zA-Z]|[_?a-zA-Z])[a-z0-9]*'
 # r'[a-zA-Z][_?a-zA-Z]*[a-z0-9]'
 # r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
 def t_ID(t):
-    r'[a-zA-Z][a-zA-Z]*[_]?[a-z0-9]*'
-    # print(t)
+    r'[a-zA-Z]([a-zA-Z]|(_[a-zA-Z0-9]))*[a-z0-9]*'
     if t.value.lower() in reservadas:
-        # print(t.value.lower())
         t.value = t.value.lower()
         t.type = t.value.upper()
-        return t
+    return t
 
 # Reconocimiento de IDs
 # def t_ID(t):
