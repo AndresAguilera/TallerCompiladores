@@ -58,12 +58,10 @@ t_SEMICOLON = r';'
 t_COMMA = r','
 t_ASSIGN = r'='
 
-# r'[a-zA-Z]([a-zA-Z]|[_?a-zA-Z])[a-z0-9]*'
-# r'[a-zA-Z][_?a-zA-Z]*[a-z0-9]'
-# r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
+# r'[a-zA-Z]([a-zA-Z]|(_[a-zA-Z0-9]))*[a-z0-9]*'
 
 def t_ID(t):
-    r'[a-zA-Z]([a-zA-Z]|(_[a-zA-Z0-9]))*[a-z0-9]*'
+    r'[a-zA-Z](_?[a-zA-Z]+_?)*[a-z0-9]*'
     if t.value.lower() in reservadas:
         t.value = t.value.lower()
         t.type = t.value.upper()
@@ -75,12 +73,12 @@ def t_ID(t):
 #     t.type = reservadas.get(t.value,'ID')
 #     return t
 
+
 # Reconocimiento de números
-t_NUMBER = r'[0-9]|([1-9]+)'
-# def t_NUMBER(t):
-#     r'/d+'
-#     t.value = int(t.value)
-#     return t
+def t_NUMBER(t):
+    r'(0[0-9])|[1-9]+[0-9]+'
+    t.value = int(t.value)
+    return t
 
 
 # Identifica caracteres ilegales
