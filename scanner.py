@@ -58,13 +58,14 @@ t_SEMICOLON = r';'
 t_COMMA = r','
 t_ASSIGN = r'='
 
-# r'[a-zA-Z]([a-zA-Z]|(_[a-zA-Z0-9]))*[a-z0-9]*'
+# r'(?i)[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+'
 
 def t_ID(t):
-    r'[a-zA-Z](_?[a-zA-Z]+_?)*[a-z0-9]*'
+    r'(?i)[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+'
     if t.value.lower() in reservadas:
         t.value = t.value.lower()
         t.type = t.value.upper()
+        return t
     return t
 
 # Reconocimiento de IDs
