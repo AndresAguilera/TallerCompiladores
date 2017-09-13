@@ -25,6 +25,22 @@ reservadas = {
 
 tokens = tokens+list(reservadas.values())
 
+def t_ELSE(t) :
+    r'(?i)else'
+    return t
+def t_IF(t) :
+    r'(?i)if'
+    return t
+def t_INT(t) :
+    r'(?i)int'
+    return t
+def t_RETURN(t) :
+    r'(?i)return'
+    return t
+def t_WHILE(t) :
+    r'(?i)while'
+    return t
+
 # Ignorar espacios en blanco y tabulaciones
 t_ignore = ' \t|\n'
 
@@ -45,11 +61,11 @@ t_LPARENT = r'\('
 t_RPARENT = r'\)'
 t_LBRACKET = r'\['
 t_RBRACKET = r'\]'
-t_LKEY = r'/{'
-t_RKEY = r'/}'
+t_LKEY = r'\{'
+t_RKEY = r'\}'
 
 t_SCOMMENT = r'(\?|!).*\n'
-t_MCOMMENT = r'<\/.*\/>'
+t_MCOMMENT = r'<\/([^\/]|\n)*\/>'
 
 # t_BEGINCOMMENT = r'\<\/'
 # t_ENDCOMMENT = r'\/\>'
@@ -58,21 +74,17 @@ t_SEMICOLON = r';'
 t_COMMA = r','
 t_ASSIGN = r'='
 
+
 # r'(?i)[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+'
+# r'([a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+)|[a-z]'
 
 def t_ID(t):
-    r'(?i)[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+'
-    if t.value.lower() in reservadas:
-        t.value = t.value.lower()
-        t.type = t.value.upper()
-        return t
+    r'([a-zA-Z](_?[a-zA-Z]+)*_?([a-z]|[0-9])+)|[a-z]'
+    # if t.value.lower() in reservadas:
+    #     t.value = t.value.lower()
+    #     t.type = t.value.upper()
+    #     return t
     return t
-
-# Reconocimiento de IDs
-# def t_ID(t):
-#     r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
-#     t.type = reservadas.get(t.value,'ID')
-#     return t
 
 
 # Reconocimiento de números
