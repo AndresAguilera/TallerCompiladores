@@ -79,7 +79,7 @@ t_ASSIGN = r'='
 # r'([a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+)|[a-z]'
 
 def t_ID(t):
-    r'([a-zA-Z](_?[a-zA-Z]+)*_?([a-z]|[0-9])+)|[a-z]'
+    r'[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+|[a-z]'
     # if t.value.lower() in reservadas:
     #     t.value = t.value.lower()
     #     t.type = t.value.upper()
@@ -96,13 +96,13 @@ def t_NUMBER(t):
 
 # Identifica caracteres ilegales
 def t_error(t):
-    if t.value.lower() in reservadas:
-        t.value = t.value.lower()
-        t.type = t.value.upper()
-        return t
-    else:
-        print("Caracter ilegal: '%s'" % t.value[0])
-        t.lexer.skip(1)
+    # if t.value.lower() in reservadas:
+    #     t.value = t.value.lower()
+    #     t.type = t.value.upper()
+    #     return t
+    # else:
+    print("Caracter ilegal: '%s'" % t.value[0])
+    t.lexer.skip(1)
 
 # Busca archivos de prueba en el directorio del proyecto
 def buscarArchivos(path):
@@ -129,18 +129,18 @@ def buscarArchivos(path):
 
     return files[int(fileNum)-1]
 
-path = os.path.dirname(__file__) + '/tests/'
-file = buscarArchivos(path)
-test = path + file
-fp = codecs.open(test,"r","utf-8")
-message = fp.read()
-fp.close()
+# path = os.path.dirname(__file__) + '/tests/'
+# file = buscarArchivos(path)
+# test = path + file
+# fp = codecs.open(test,"r","utf-8")
+# message = fp.read()
+# fp.close()
+#
+# analyzer = lex.lex()
+#
+# analyzer.input(message)
 
-analyzer = lex.lex()
-
-analyzer.input(message)
-
-while True:
-    tok = analyzer.token()
-    if not tok: break
-    print(tok)
+# while True:
+#     tok = analyzer.token()
+#     if not tok: break
+#     print(tok)
