@@ -25,6 +25,22 @@ reservadas = {
 
 tokens = tokens+list(reservadas.values())
 
+def t_ELSE(t) :
+    r'(?i)else'
+    return t
+def t_IF(t) :
+    r'(?i)if'
+    return t
+def t_INT(t) :
+    r'(?i)int'
+    return t
+def t_RETURN(t) :
+    r'(?i)return'
+    return t
+def t_WHILE(t) :
+    r'(?i)while'
+    return t
+
 # Ignorar espacios en blanco y tabulaciones
 t_ignore = ' \t|\n'
 
@@ -45,11 +61,11 @@ t_LPARENT = r'\('
 t_RPARENT = r'\)'
 t_LBRACKET = r'\['
 t_RBRACKET = r'\]'
-t_LKEY = r'/{'
-t_RKEY = r'/}'
+t_LKEY = r'\{'
+t_RKEY = r'\}'
 
 t_SCOMMENT = r'(\?|!).*\n'
-t_MCOMMENT = r'<\/.*\/>'
+t_MCOMMENT = r'<\/([^\/]|\n)*\/>'
 
 # t_BEGINCOMMENT = r'\<\/'
 # t_ENDCOMMENT = r'\/\>'
@@ -58,40 +74,35 @@ t_SEMICOLON = r';'
 t_COMMA = r','
 t_ASSIGN = r'='
 
-# r'[a-zA-Z]([a-zA-Z]|[_?a-zA-Z])[a-z0-9]*'
-# r'[a-zA-Z][_?a-zA-Z]*[a-z0-9]'
-# r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
+
+# r'(?i)[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+'
+# r'([a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+)|[a-z]'
 
 def t_ID(t):
-    r'[a-zA-Z]([a-zA-Z]|(_[a-zA-Z0-9]))*[a-z0-9]*'
-    if t.value.lower() in reservadas:
-        t.value = t.value.lower()
-        t.type = t.value.upper()
+    r'[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+|[a-z]'
+    # if t.value.lower() in reservadas:
+    #     t.value = t.value.lower()
+    #     t.type = t.value.upper()
+    #     return t
     return t
 
-# Reconocimiento de IDs
-# def t_ID(t):
-#     r'[a-z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]'
-#     t.type = reservadas.get(t.value,'ID')
-#     return t
 
 # Reconocimiento de números
-t_NUMBER = r'[0-9]|([1-9]+)'
-# def t_NUMBER(t):
-#     r'/d+'
-#     t.value = int(t.value)
-#     return t
+def t_NUMBER(t):
+    r'(0[0-9])|[1-9]+[0-9]+'
+    t.value = int(t.value)
+    return t
 
 
 # Identifica caracteres ilegales
 def t_error(t):
-    if t.value.lower() in reservadas:
-        t.value = t.value.lower()
-        t.type = t.value.upper()
-        return t
-    else:
-        print("Caracter ilegal: '%s'" % t.value[0])
-        t.lexer.skip(1)
+    # if t.value.lower() in reservadas:
+    #     t.value = t.value.lower()
+    #     t.type = t.value.upper()
+    #     return t
+    # else:
+    print("Caracter ilegal: '%s'" % t.value[0])
+    t.lexer.skip(1)
 
 # Busca archivos de prueba en el directorio del proyecto
 def buscarArchivos(path):
@@ -118,18 +129,18 @@ def buscarArchivos(path):
 
     return files[int(fileNum)-1]
 
-path = os.path.dirname(__file__) + '/tests/'
-file = buscarArchivos(path)
-test = path + file
-fp = codecs.open(test,"r","utf-8")
-message = fp.read()
-fp.close()
+# path = os.path.dirname(__file__) + '/tests/'
+# file = buscarArchivos(path)
+# test = path + file
+# fp = codecs.open(test,"r","utf-8")
+# message = fp.read()
+# fp.close()
+#
+# analyzer = lex.lex()
+#
+# analyzer.input(message)
 
-analyzer = lex.lex()
-
-analyzer.input(message)
-
-while True:
-    tok = analyzer.token()
-    if not tok: break
-    print(tok)
+# while True:
+#     tok = analyzer.token()
+#     if not tok: break
+#     print(tok)
