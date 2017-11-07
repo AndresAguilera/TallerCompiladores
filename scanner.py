@@ -7,8 +7,9 @@ import sys
 # Lista de tokens
 tokens = ['PLUS','MINUS','TIMES','DIVIDE',
           'LT','LEQ','GT','GEQ','EQ','NEQ',
-          'LPARENT','RPARENT', 'LBRACKET','RBRACKET','LKEY','RKEY',
+          'LPARENT','RPARENT', 'LBRACKET','RBRACKET','LBRACE','RBRACE',
             'SCOMMENT', 'BEGINCOMMENT','ENDCOMMENT', 'MCOMMENT',
+          'POWOP1', 'POWOP2',
            'SEMICOLON', 'COMMA' ,'ID','ASSIGN', 'NUMBER'
 
           ]
@@ -61,8 +62,11 @@ t_LPARENT = r'\('
 t_RPARENT = r'\)'
 t_LBRACKET = r'\['
 t_RBRACKET = r'\]'
-t_LKEY = r'\{'
-t_RKEY = r'\}'
+t_LBRACE = r'\{'
+t_RBRACE = r'\}'
+
+t_POWOP1 = r'\^'
+t_POWOP2 = r'\*\*'
 
 t_SCOMMENT = r'(\?|!).*\n'
 t_MCOMMENT = r'<\/([^\/]|\n)*\/>'
@@ -105,39 +109,38 @@ def t_error(t):
     t.lexer.skip(1)
 
 # Busca archivos de prueba en el directorio del proyecto
-def buscarArchivos(path):
-    archivos = []
-    fileNum = ''
-    answer = False
-    counter = 1
-
-    for base, dirs, files in os.walk(path):
-        archivos.append(files)
-
-    for file in files:
-        print(str(counter) + ". " + file)
-        counter = counter+1
-
-    while answer == False:
-        fileNum = input('\nDigite el número  del archivo de prueba que desea analizar')
-        for file in files:
-            if file == files[int(fileNum)-1]:
-                answer = True
-                break
-
-    print("Ha escogido \"%s\" \n" %files[int(fileNum)-1])
-
-    return files[int(fileNum)-1]
-
+# def buscarArchivos(path):
+#     archivos = []
+#     fileNum = ''
+#     answer = False
+#     counter = 1
+#
+#     for base, dirs, files in os.walk(path):
+#         archivos.append(files)
+#
+#     for file in files:
+#         print(str(counter) + ". " + file)
+#         counter = counter+1
+#
+#     while answer == False:
+#         fileNum = input('\nDigite el número  del archivo de prueba que desea analizar')
+#         for file in files:
+#             if file == files[int(fileNum)-1]:
+#                 answer = True
+#                 break
+#
+#     print("Ha escogido \"%s\" \n" %files[int(fileNum)-1])
+#
+#     return files[int(fileNum)-1]
+#
 # path = os.path.dirname(__file__) + '/tests/'
 # file = buscarArchivos(path)
 # test = path + file
 # fp = codecs.open(test,"r","utf-8")
 # message = fp.read()
 # fp.close()
-#
+
 # analyzer = lex.lex()
-#
 # analyzer.input(message)
 
 # while True:
