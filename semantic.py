@@ -276,8 +276,6 @@ class funDeclaration(Nodo):
         self.son5 = son5
         self.son6 = son6
 
-
-
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
             self.son1[0].imprimir(" "+ident)
