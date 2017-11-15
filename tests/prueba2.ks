@@ -1,2 +1,7 @@
-while(02==01)
- var aA := 02;
+void miFuncion (void){
+int a;
+while (02==01)
+{
+ int aA;
+ }
+}

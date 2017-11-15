@@ -11,14 +11,15 @@ class Nodo():
 class Null(Nodo):
     def __init__(self):
         self.type = 'void'
+        self.name = "Nodo nulo"
 
     def imprimir(self, ident):
-        print(ident + "nodo nulo")
+        print(ident + "Nodo nulo")
 
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id+"[label= "+"nodo_nulo"+"]"+"\n\t"
+        txt += id+"[label= "+"Nodo_nulo"+"]"+"\n\t"
 
         return id
 
@@ -29,10 +30,7 @@ class program(Nodo):
         self.son1 = son1
 
     def imprimir(self,ident):
-        if type(self.son1) == type(tuple()): 
-            self.son1[0].imprimir(" "+ident)
-        else:
-            self.son1.imprimir(" "+ident)
+        self.son1.imprimir(" "+ident)
         print(ident + "Nodo: " + self.name)
 
     def traducir(self):
@@ -139,19 +137,27 @@ class declaration2(Nodo):
 # 4
 
 class varDeclaration1(Nodo):
-    def __init__(self,son1, son2, son3, name):
+    def __init__(self,son1,son2,son3, name):
         self.name = name
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
 
     def imprimir(self,ident):
-        if type(self.son1) == type(tuple()): 
+        if type(self.son1) == type(tuple()):
             self.son1[0].imprimir(" "+ident)
-            self.son2.imprimir(" "+ident)
-            self.son3.imprimir(" "+ident)
         else:
             self.son1.imprimir(" "+ident)
+
+        if type(self.son2) == type(tuple()):
+            self.son2[0].imprimir(" "+ident)
+        else:
+            self.son2.imprimir(" "+ident)
+
+        if type(self.son3) == type(tuple()):
+            self.son3[0].imprimir(" "+ident)
+        else:
+            self.son3.imprimir(" "+ident)
         print(ident + "Nodo: " + self.name)
         
 
@@ -180,15 +186,15 @@ class varDeclaration2(Nodo):
         self.son6 = son6
 
     def imprimir(self,ident):
-        if type(self.son1) == type(tuple()): 
-            self.son1[0].imprimir(" "+ident)
-            self.son2.imprimir(" "+ident)
-            self.son3.imprimir(" "+ident)
-            self.son4.imprimir(" "+ident)
-            self.son5.imprimir(" "+ident)
-            self.son6.imprimir(" "+ident)
-        else:
-            self.son1.imprimir(" "+ident)
+            # if type(self.son1) == type(tuple()):
+            #     self.son1[0].imprimir(" "+ident)
+            # else:
+        self.son1.imprimir(" "+ident)
+        self.son2.imprimir(" " + ident)
+        self.son3.imprimir(" " + ident)
+        self.son4.imprimir(" " + ident)
+        self.son5.imprimir(" " + ident)
+        self.son6.imprimir(" " + ident)
         print(ident + "Nodo: " + self.name)
         
 
@@ -261,7 +267,7 @@ class typeSpecifier2(Nodo):
     
 # 6
 class funDeclaration(Nodo):
-    def __init__(self,son1, son2, son3, son4, son5, son6, name):
+    def __init__(self,son1, son2, son3,son4,son5,son6, name):
         self.name = name
         self.son1 = son1
         self.son2 = son2
@@ -271,16 +277,37 @@ class funDeclaration(Nodo):
         self.son6 = son6
 
 
+
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
             self.son1[0].imprimir(" "+ident)
-            self.son2.imprimir(" "+ident)
-            self.son3.imprimir(" "+ident)
-            self.son4.imprimir(" "+ident)
-            self.son5.imprimir(" "+ident)
-            self.son6.imprimir(" "+ident)
         else:
             self.son1.imprimir(" "+ident)
+
+        if type(self.son2) == type(tuple()):
+            self.son2[0].imprimir(" "+ident)
+        else:
+            self.son2.imprimir(" "+ident)
+
+        if type(self.son3) == type(tuple()):
+            self.son3[0].imprimir(" "+ident)
+        else:
+            self.son3.imprimir(" "+ident)
+
+        if type(self.son4) == type(tuple()):
+            self.son4[0].imprimir(" "+ident)
+        else:
+            self.son4.imprimir(" "+ident)
+
+        if type(self.son5) == type(tuple()):
+            self.son5[0].imprimir(" "+ident)
+        else:
+            self.son5.imprimir(" "+ident)
+
+        if type(self.son6) == type(tuple()):
+            self.son6[0].imprimir(" "+ident)
+        else:
+            self.son6.imprimir(" "+ident)
         print(ident + "Nodo: " + self.name)
         
 
@@ -480,13 +507,10 @@ class compoundStmt(Nodo):
         self.son4 = son4
 
     def imprimir(self,ident):
-        if type(self.son1) == type(tuple()): 
-            self.son1[0].imprimir(" "+ident)
-            self.son2.imprimir(" "+ident)
-            self.son3.imprimir(" "+ident)
-            self.son4.imprimir(" "+ident)
-        else:
-            self.son1.imprimir(" "+ident)
+        self.son1.imprimir(" "+ident)
+        self.son2.imprimir(" "+ident)
+        self.son3.imprimir(" "+ident)
+        self.son4.imprimir(" "+ident)
         print(ident + "Nodo: " + self.name)
         
 
@@ -1670,11 +1694,11 @@ class call(Nodo):
         self.son4 = son4
 
     def imprimir(self, ident):
-        if type(self.son1) == type(tuple()): 
+        if type(self.son1) == type(tuple()):
             self.son1[0].imprimir(" "+ident)
-            self.son2.imprimir(" "+ident)
-            self.son3.imprimir(" "+ident)
-            self.son4.imprimir(" "+ident)
+            self.son2[0].imprimir(" "+ident)
+            self.son3[0].imprimir(" "+ident)
+            self.son4[0].imprimir(" "+ident)
         else:
             self.son1.imprimir(" "+ident)
         print(ident + "Nodo: " + self.name)
@@ -1818,13 +1842,13 @@ class error(Nodo):
 
         return id
 
-# Terminales
+# Terminales y reservadas
 class ID(Nodo):
     def __init__(self , name):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"ID: "+self.name)
 
     def traducir(self):
         global txt
@@ -1836,7 +1860,7 @@ class PLUS(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"PLUS: "+self.name)
 
     def traducir(self):
         global txt
@@ -1848,7 +1872,7 @@ class MINUS(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"MINUS: "+self.name)
 
     def traducir(self):
         global txt
@@ -1860,7 +1884,7 @@ class TIMES(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"TIMES: "+self.name)
 
     def traducir(self):
         global txt
@@ -1872,7 +1896,7 @@ class DIVIDE(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"DIVIDE: "+self.name)
 
     def traducir(self):
         global txt
@@ -1884,7 +1908,7 @@ class LT(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"LT: "+self.name)
 
     def traducir(self):
         global txt
@@ -1896,7 +1920,7 @@ class LEQ(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"LEQ: "+self.name)
 
     def traducir(self):
         global txt
@@ -1908,7 +1932,7 @@ class GT(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"GT: "+self.name)
 
     def traducir(self):
         global txt
@@ -1920,7 +1944,7 @@ class GEQ(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"GEQ: "+self.name)
 
     def traducir(self):
         global txt
@@ -1932,7 +1956,7 @@ class EQ(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"EQ: "+self.name)
 
     def traducir(self):
         global txt
@@ -1944,7 +1968,7 @@ class NEQ(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"NEQ: "+self.name)
 
     def traducir(self):
         global txt
@@ -1956,7 +1980,7 @@ class LPARENT(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"LPARENT: "+self.name)
 
     def traducir(self):
         global txt
@@ -1968,7 +1992,7 @@ class RPARENT(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"RPARENT: "+self.name)
 
     def traducir(self):
         global txt
@@ -1980,7 +2004,7 @@ class LBRACKET(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"LBRACKET: "+self.name)
 
     def traducir(self):
         global txt
@@ -1992,7 +2016,7 @@ class RBRACKET(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"RBRACKET: "+self.name)
 
     def traducir(self):
         global txt
@@ -2004,7 +2028,7 @@ class LBRACE(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"LBRACE: "+self.name)
 
     def traducir(self):
         global txt
@@ -2016,7 +2040,7 @@ class RBRACE(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"RBRACE: "+self.name)
 
     def traducir(self):
         global txt
@@ -2028,7 +2052,7 @@ class POWOP1(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"POWOP1: "+self.name)
 
     def traducir(self):
         global txt
@@ -2040,7 +2064,7 @@ class POWOP2(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"POWOP2: "+self.name)
 
     def traducir(self):
         global txt
@@ -2052,7 +2076,7 @@ class SEMICOLON(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"SEMICOLON: "+self.name)
 
     def traducir(self):
         global txt
@@ -2064,7 +2088,7 @@ class COMMA(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"COMMA: "+self.name)
 
     def traducir(self):
         global txt
@@ -2076,7 +2100,7 @@ class ASSIGN(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"ASSIGN: "+self.name)
 
     def traducir(self):
         global txt
@@ -2085,10 +2109,10 @@ class ASSIGN(Nodo):
         return id
 class NUMBER(Nodo):
     def __init__(self , name):
-        self.name = name
+        self.name = str(name)
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"NUMBER: "+self.name)
 
     def traducir(self):
         global txt
@@ -2096,35 +2120,14 @@ class NUMBER(Nodo):
         txt += id + "[label= \""+self.name+"\"]"+"\n\t"
         return id
 
-# def __init__(self , name):
-#     self.name = name
-#
-# def imprimir(self , ident):
-#     print(ident+""+self.name)
-#
-# def traducir(self):
-#     global txt
-#     id = incrementarContador()
-#     txt += id + "[label= \""+self.name+"\"]"+"\n\t"
-#     return id
-#
-# def __init__(self , name):
-#     self.name = name
-#
-# def imprimir(self , ident):
-#     print(ident+""+self.name)
-#
-# def traducir(self):
-#     global txt
-#     id = incrementarContador()
-#     txt += id + "[label= \""+self.name+"\"]"+"\n\t"
-#     return id
+
+
 class SCOMMENT(Nodo):
     def __init__(self , name):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"SCOMMENT: "+self.name)
 
     def traducir(self):
         global txt
@@ -2136,7 +2139,7 @@ class BEGINCOMMENT(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"BEGINCOMMENT: "+self.name)
 
     def traducir(self):
         global txt
@@ -2148,7 +2151,71 @@ class ENDCOMMENT(Nodo):
         self.name = name
 
     def imprimir(self , ident):
-        print(ident+""+self.name)
+        print(ident+"ENDCOMMENT: "+self.name)
+
+    def traducir(self):
+        global txt
+        id = incrementarContador()
+        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        return id
+
+class ELSE(Nodo):
+    def __init__(self , name):
+        self.name = name
+
+    def imprimir(self , ident):
+        print(ident+"ELSE: "+self.name)
+
+    def traducir(self):
+        global txt
+        id = incrementarContador()
+        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        return id
+class IF(Nodo):
+    def __init__(self , name):
+        self.name = name
+
+    def imprimir(self , ident):
+        print(ident+"IF: "+self.name)
+
+    def traducir(self):
+        global txt
+        id = incrementarContador()
+        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        return id
+
+class INT(Nodo):
+    def __init__(self , name):
+        self.name = name
+
+    def imprimir(self , ident):
+        print(ident+"INT: "+self.name)
+
+    def traducir(self):
+        global txt
+        id = incrementarContador()
+        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        return id
+
+class VOID(Nodo):
+    def __init__(self , name):
+        self.name = name
+
+    def imprimir(self , ident):
+        print(ident+"VOID: "+self.name)
+
+    def traducir(self):
+        global txt
+        id = incrementarContador()
+        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        return id
+
+class RETURN(Nodo):
+    def __init__(self , name):
+        self.name = name
+
+    def imprimir(self , ident):
+        print(ident+"RETURN: "+self.name)
 
     def traducir(self):
         global txt
@@ -2157,3 +2224,16 @@ class ENDCOMMENT(Nodo):
         return id
 
 
+
+class WHILE(Nodo):
+    def __init__(self , name):
+        self.name = name
+
+    def imprimir(self , ident):
+        print(ident+"WHILE: "+self.name)
+
+    def traducir(self):
+        global txt
+        id = incrementarContador()
+        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        return id

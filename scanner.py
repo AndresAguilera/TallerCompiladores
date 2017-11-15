@@ -35,6 +35,9 @@ def t_IF(t) :
 def t_INT(t) :
     r'(?i)int'
     return t
+def t_VOID(t) :
+    r'(?i)void'
+    return t
 def t_RETURN(t) :
     r'(?i)return'
     return t
@@ -76,7 +79,7 @@ t_MCOMMENT = r'<\/([^\/]|\n)*\/>'
 
 t_SEMICOLON = r';'
 t_COMMA = r','
-t_ASSIGN = r'='
+t_ASSIGN = r':='
 
 
 # r'(?i)[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+'
