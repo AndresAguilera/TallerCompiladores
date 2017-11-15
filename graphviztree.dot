@@ -1,0 +1,49 @@
+digraph G {
+	6[label= "void"]
+	5[label = typeSpecifier2]
+	5->6
+	7[label= "miFuncion"]
+	8[label= "("]
+	10[label= "void"]
+	9[label = params2]
+	9->10
+	11[label= ")"]
+	13[label= "{"]
+	15[label= Nodo_nulo]
+	18[label= "int"]
+	17[label = typeSpecifier1]
+	17->18
+	19[label= "a"]
+	20[label= ";"]
+	16[label = varDeclaration1]
+	16->17
+	16->19
+	16->20
+	14[label = localDeclarations1]
+	14->15
+	14->16
+	22[label= Nodo_nulo]
+	23[label= Nodo_nulo]
+	21[label = statementList1]
+	21->22
+	21->23
+	24[label= "}"]
+	12[label = compoundStmt]
+	12->13
+	12->14
+	12->21
+	12->24
+	4[label = funDeclaration]
+	4->5
+	4->7
+	4->8
+	4->9
+	4->11
+	4->12
+	3[label = declaration2]
+	3->4
+	2[label = declarationList2]
+	2->3
+	1[label = program]
+	1->2
+	}
