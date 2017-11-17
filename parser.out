@@ -6,7 +6,8 @@ Unused terminals:
     BEGINCOMMENT
     ENDCOMMENT
     MCOMMENT
-    ASSIGN
+    POWOP1
+    POWOP2
 
 Grammar
 
@@ -44,7 +45,7 @@ Rule 30    selectionStmt -> IF LPARENT expression RPARENT statement ELSE stateme
 Rule 31    iterationStmt -> WHILE LPARENT expression RPARENT statement
 Rule 32    returnStmt -> RETURN SEMICOLON
 Rule 33    returnStmt -> RETURN expression SEMICOLON
-Rule 34    expression -> var EQ expression
+Rule 34    expression -> var ASSIGN expression
 Rule 35    expression -> simpleExpression
 Rule 36    var -> ID
 Rule 37    var -> ID LBRACKET expression RBRACKET
@@ -64,51 +65,47 @@ Rule 50    term -> term mulop factor
 Rule 51    term -> factor
 Rule 52    mulop -> TIMES
 Rule 53    mulop -> DIVIDE
-Rule 54    factor -> factor powop exp
-Rule 55    factor -> exp
-Rule 56    powop -> POWOP1
-Rule 57    powop -> POWOP2
-Rule 58    exp -> LPARENT expression RPARENT
-Rule 59    exp -> var
-Rule 60    exp -> call
-Rule 61    exp -> NUMBER
-Rule 62    call -> ID LPARENT args RPARENT
-Rule 63    args -> argList
-Rule 64    args -> empty
-Rule 65    argList -> argList COMMA expression
-Rule 66    argList -> expression
-Rule 67    empty -> <empty>
+Rule 54    factor -> LPARENT expression RPARENT
+Rule 55    factor -> var
+Rule 56    factor -> call
+Rule 57    factor -> NUMBER
+Rule 58    call -> ID LPARENT args RPARENT
+Rule 59    args -> argList
+Rule 60    args -> empty
+Rule 61    argList -> argList COMMA expression
+Rule 62    argList -> expression
+Rule 63    empty -> <empty>
 
 Terminals, with rules where they appear
 
-ASSIGN               : 
+ASSIGN               : 34
 BEGINCOMMENT         : 
-COMMA                : 13 65
+COMMA                : 13 61
 DIVIDE               : 53
 ELSE                 : 30
 ENDCOMMENT           : 
-EQ                   : 34 44
+EQ                   : 44
 GEQ                  : 43
 GT                   : 42
-ID                   : 6 7 10 15 16 36 37 62
+ID                   : 6 7 10 15 16 36 37 58
 IF                   : 29 30
 INT                  : 8
 LBRACE               : 17
 LBRACKET             : 7 16 37
 LEQ                  : 40
-LPARENT              : 10 29 30 31 58 62
+LPARENT              : 10 29 30 31 54 58
 LT                   : 41
 MCOMMENT             : 
 MINUS                : 49
 NEQ                  : 45
-NUMBER               : 7 61
+NUMBER               : 7 57
 PLUS                 : 48
-POWOP1               : 56
-POWOP2               : 57
+POWOP1               : 
+POWOP2               : 
 RBRACE               : 17
 RBRACKET             : 7 16 37
 RETURN               : 32 33
-RPARENT              : 10 29 30 31 58 62
+RPARENT              : 10 29 30 31 54 58
 SCOMMENT             : 
 SEMICOLON            : 6 7 27 28 32 33
 TIMES                : 52
@@ -120,17 +117,16 @@ Nonterminals, with rules where they appear
 
 additiveExpression   : 38 38 39 46
 addop                : 46
-argList              : 63 65
-args                 : 62
-call                 : 60
+argList              : 59 61
+args                 : 58
+call                 : 56
 compoundStmt         : 10 23
 declaration          : 2 3
 declarationList      : 1 2
-empty                : 19 21 64
-exp                  : 54 55
-expression           : 27 29 30 31 33 34 37 58 65 66
+empty                : 19 21 60
+expression           : 27 29 30 31 33 34 37 54 61 62
 expressionStmt       : 22
-factor               : 50 51 54
+factor               : 50 51
 funDeclaration       : 5
 iterationStmt        : 25
 localDeclarations    : 17 18
@@ -138,7 +134,6 @@ mulop                : 50
 param                : 13 14
 paramList            : 11 13
 params               : 10
-powop                : 54
 program              : 0
 relop                : 38
 returnStmt           : 26
@@ -148,7 +143,7 @@ statement            : 20 29 30 30 31
 statementList        : 17 20
 term                 : 46 47 50
 typeSpecifier        : 6 7 10 15 16
-var                  : 34 59
+var                  : 34 55
 varDeclaration       : 4 18
 
 Parsing method: LALR
@@ -446,19 +441,19 @@ state 27
     (17) compoundStmt -> LBRACE . localDeclarations statementList RBRACE
     (18) localDeclarations -> . localDeclarations varDeclaration
     (19) localDeclarations -> . empty
-    (67) empty -> .
+    (63) empty -> .
 
-    INT             reduce using rule 67 (empty -> .)
-    VOID            reduce using rule 67 (empty -> .)
-    RBRACE          reduce using rule 67 (empty -> .)
-    SEMICOLON       reduce using rule 67 (empty -> .)
-    LBRACE          reduce using rule 67 (empty -> .)
-    IF              reduce using rule 67 (empty -> .)
-    WHILE           reduce using rule 67 (empty -> .)
-    RETURN          reduce using rule 67 (empty -> .)
-    ID              reduce using rule 67 (empty -> .)
-    LPARENT         reduce using rule 67 (empty -> .)
-    NUMBER          reduce using rule 67 (empty -> .)
+    INT             reduce using rule 63 (empty -> .)
+    VOID            reduce using rule 63 (empty -> .)
+    RBRACE          reduce using rule 63 (empty -> .)
+    SEMICOLON       reduce using rule 63 (empty -> .)
+    LBRACE          reduce using rule 63 (empty -> .)
+    IF              reduce using rule 63 (empty -> .)
+    WHILE           reduce using rule 63 (empty -> .)
+    RETURN          reduce using rule 63 (empty -> .)
+    ID              reduce using rule 63 (empty -> .)
+    LPARENT         reduce using rule 63 (empty -> .)
+    NUMBER          reduce using rule 63 (empty -> .)
 
     localDeclarations              shift and go to state 30
     empty                          shift and go to state 31
@@ -487,19 +482,19 @@ state 30
     (21) statementList -> . empty
     (6) varDeclaration -> . typeSpecifier ID SEMICOLON
     (7) varDeclaration -> . typeSpecifier ID LBRACKET NUMBER RBRACKET SEMICOLON
-    (67) empty -> .
+    (63) empty -> .
     (8) typeSpecifier -> . INT
     (9) typeSpecifier -> . VOID
 
-    RBRACE          reduce using rule 67 (empty -> .)
-    SEMICOLON       reduce using rule 67 (empty -> .)
-    LBRACE          reduce using rule 67 (empty -> .)
-    IF              reduce using rule 67 (empty -> .)
-    WHILE           reduce using rule 67 (empty -> .)
-    RETURN          reduce using rule 67 (empty -> .)
-    ID              reduce using rule 67 (empty -> .)
-    LPARENT         reduce using rule 67 (empty -> .)
-    NUMBER          reduce using rule 67 (empty -> .)
+    RBRACE          reduce using rule 63 (empty -> .)
+    SEMICOLON       reduce using rule 63 (empty -> .)
+    LBRACE          reduce using rule 63 (empty -> .)
+    IF              reduce using rule 63 (empty -> .)
+    WHILE           reduce using rule 63 (empty -> .)
+    RETURN          reduce using rule 63 (empty -> .)
+    ID              reduce using rule 63 (empty -> .)
+    LPARENT         reduce using rule 63 (empty -> .)
+    NUMBER          reduce using rule 63 (empty -> .)
     INT             shift and go to state 7
     VOID            shift and go to state 8
 
@@ -542,7 +537,7 @@ state 32
     (31) iterationStmt -> . WHILE LPARENT expression RPARENT statement
     (32) returnStmt -> . RETURN SEMICOLON
     (33) returnStmt -> . RETURN expression SEMICOLON
-    (34) expression -> . var EQ expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -552,13 +547,11 @@ state 32
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     RBRACE          shift and go to state 36
     SEMICOLON       shift and go to state 44
@@ -568,7 +561,7 @@ state 32
     RETURN          shift and go to state 48
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
     statement                      shift and go to state 37
     expressionStmt                 shift and go to state 38
@@ -582,8 +575,7 @@ state 32
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
 state 33
 
@@ -622,7 +614,7 @@ state 35
     (6) varDeclaration -> typeSpecifier . ID SEMICOLON
     (7) varDeclaration -> typeSpecifier . ID LBRACKET NUMBER RBRACKET SEMICOLON
 
-    ID              shift and go to state 58
+    ID              shift and go to state 57
 
 
 state 36
@@ -743,7 +735,7 @@ state 43
 
     (27) expressionStmt -> expression . SEMICOLON
 
-    SEMICOLON       shift and go to state 59
+    SEMICOLON       shift and go to state 58
 
 
 state 44
@@ -767,13 +759,13 @@ state 45
     (29) selectionStmt -> IF . LPARENT expression RPARENT statement
     (30) selectionStmt -> IF . LPARENT expression RPARENT statement ELSE statement
 
-    LPARENT         shift and go to state 60
+    LPARENT         shift and go to state 59
 
 
 state 46
 
-    (58) exp -> LPARENT . expression RPARENT
-    (34) expression -> . var EQ expression
+    (54) factor -> LPARENT . expression RPARENT
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -783,39 +775,36 @@ state 46
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
-    expression                     shift and go to state 61
+    expression                     shift and go to state 60
     var                            shift and go to state 49
     simpleExpression               shift and go to state 50
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
 state 47
 
     (31) iterationStmt -> WHILE . LPARENT expression RPARENT statement
 
-    LPARENT         shift and go to state 62
+    LPARENT         shift and go to state 61
 
 
 state 48
 
     (32) returnStmt -> RETURN . SEMICOLON
     (33) returnStmt -> RETURN . expression SEMICOLON
-    (34) expression -> . var EQ expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -825,52 +814,45 @@ state 48
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
-    SEMICOLON       shift and go to state 63
+    SEMICOLON       shift and go to state 62
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
-    expression                     shift and go to state 64
+    expression                     shift and go to state 63
     var                            shift and go to state 49
     simpleExpression               shift and go to state 50
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
 state 49
 
-    (34) expression -> var . EQ expression
-    (59) exp -> var .
+    (34) expression -> var . ASSIGN expression
+    (55) factor -> var .
 
-  ! shift/reduce conflict for EQ resolved as shift
-    EQ              shift and go to state 65
-    POWOP1          reduce using rule 59 (exp -> var .)
-    POWOP2          reduce using rule 59 (exp -> var .)
-    TIMES           reduce using rule 59 (exp -> var .)
-    DIVIDE          reduce using rule 59 (exp -> var .)
-    LEQ             reduce using rule 59 (exp -> var .)
-    LT              reduce using rule 59 (exp -> var .)
-    GT              reduce using rule 59 (exp -> var .)
-    GEQ             reduce using rule 59 (exp -> var .)
-    NEQ             reduce using rule 59 (exp -> var .)
-    PLUS            reduce using rule 59 (exp -> var .)
-    MINUS           reduce using rule 59 (exp -> var .)
-    SEMICOLON       reduce using rule 59 (exp -> var .)
-    RPARENT         reduce using rule 59 (exp -> var .)
-    RBRACKET        reduce using rule 59 (exp -> var .)
-    COMMA           reduce using rule 59 (exp -> var .)
-
-  ! EQ              [ reduce using rule 59 (exp -> var .) ]
+    ASSIGN          shift and go to state 64
+    TIMES           reduce using rule 55 (factor -> var .)
+    DIVIDE          reduce using rule 55 (factor -> var .)
+    LEQ             reduce using rule 55 (factor -> var .)
+    LT              reduce using rule 55 (factor -> var .)
+    GT              reduce using rule 55 (factor -> var .)
+    GEQ             reduce using rule 55 (factor -> var .)
+    EQ              reduce using rule 55 (factor -> var .)
+    NEQ             reduce using rule 55 (factor -> var .)
+    PLUS            reduce using rule 55 (factor -> var .)
+    MINUS           reduce using rule 55 (factor -> var .)
+    SEMICOLON       reduce using rule 55 (factor -> var .)
+    RPARENT         reduce using rule 55 (factor -> var .)
+    RBRACKET        reduce using rule 55 (factor -> var .)
+    COMMA           reduce using rule 55 (factor -> var .)
 
 
 state 50
@@ -887,17 +869,16 @@ state 51
 
     (36) var -> ID .
     (37) var -> ID . LBRACKET expression RBRACKET
-    (62) call -> ID . LPARENT args RPARENT
+    (58) call -> ID . LPARENT args RPARENT
 
-    EQ              reduce using rule 36 (var -> ID .)
-    POWOP1          reduce using rule 36 (var -> ID .)
-    POWOP2          reduce using rule 36 (var -> ID .)
+    ASSIGN          reduce using rule 36 (var -> ID .)
     TIMES           reduce using rule 36 (var -> ID .)
     DIVIDE          reduce using rule 36 (var -> ID .)
     LEQ             reduce using rule 36 (var -> ID .)
     LT              reduce using rule 36 (var -> ID .)
     GT              reduce using rule 36 (var -> ID .)
     GEQ             reduce using rule 36 (var -> ID .)
+    EQ              reduce using rule 36 (var -> ID .)
     NEQ             reduce using rule 36 (var -> ID .)
     PLUS            reduce using rule 36 (var -> ID .)
     MINUS           reduce using rule 36 (var -> ID .)
@@ -905,8 +886,8 @@ state 51
     RPARENT         reduce using rule 36 (var -> ID .)
     RBRACKET        reduce using rule 36 (var -> ID .)
     COMMA           reduce using rule 36 (var -> ID .)
-    LBRACKET        shift and go to state 66
-    LPARENT         shift and go to state 67
+    LBRACKET        shift and go to state 65
+    LPARENT         shift and go to state 66
 
 
 state 52
@@ -927,17 +908,17 @@ state 52
     RPARENT         reduce using rule 39 (simpleExpression -> additiveExpression .)
     RBRACKET        reduce using rule 39 (simpleExpression -> additiveExpression .)
     COMMA           reduce using rule 39 (simpleExpression -> additiveExpression .)
-    LEQ             shift and go to state 70
-    LT              shift and go to state 71
-    GT              shift and go to state 72
-    GEQ             shift and go to state 73
-    EQ              shift and go to state 74
-    NEQ             shift and go to state 75
-    PLUS            shift and go to state 76
-    MINUS           shift and go to state 77
+    LEQ             shift and go to state 69
+    LT              shift and go to state 70
+    GT              shift and go to state 71
+    GEQ             shift and go to state 72
+    EQ              shift and go to state 73
+    NEQ             shift and go to state 74
+    PLUS            shift and go to state 75
+    MINUS           shift and go to state 76
 
-    relop                          shift and go to state 68
-    addop                          shift and go to state 69
+    relop                          shift and go to state 67
+    addop                          shift and go to state 68
 
 state 53
 
@@ -958,17 +939,14 @@ state 53
     RPARENT         reduce using rule 47 (additiveExpression -> term .)
     RBRACKET        reduce using rule 47 (additiveExpression -> term .)
     COMMA           reduce using rule 47 (additiveExpression -> term .)
-    TIMES           shift and go to state 79
-    DIVIDE          shift and go to state 80
+    TIMES           shift and go to state 78
+    DIVIDE          shift and go to state 79
 
-    mulop                          shift and go to state 78
+    mulop                          shift and go to state 77
 
 state 54
 
     (51) term -> factor .
-    (54) factor -> factor . powop exp
-    (56) powop -> . POWOP1
-    (57) powop -> . POWOP2
 
     TIMES           reduce using rule 51 (term -> factor .)
     DIVIDE          reduce using rule 51 (term -> factor .)
@@ -984,78 +962,49 @@ state 54
     RPARENT         reduce using rule 51 (term -> factor .)
     RBRACKET        reduce using rule 51 (term -> factor .)
     COMMA           reduce using rule 51 (term -> factor .)
-    POWOP1          shift and go to state 82
-    POWOP2          shift and go to state 83
 
-    powop                          shift and go to state 81
 
 state 55
 
-    (55) factor -> exp .
+    (56) factor -> call .
 
-    POWOP1          reduce using rule 55 (factor -> exp .)
-    POWOP2          reduce using rule 55 (factor -> exp .)
-    TIMES           reduce using rule 55 (factor -> exp .)
-    DIVIDE          reduce using rule 55 (factor -> exp .)
-    LEQ             reduce using rule 55 (factor -> exp .)
-    LT              reduce using rule 55 (factor -> exp .)
-    GT              reduce using rule 55 (factor -> exp .)
-    GEQ             reduce using rule 55 (factor -> exp .)
-    EQ              reduce using rule 55 (factor -> exp .)
-    NEQ             reduce using rule 55 (factor -> exp .)
-    PLUS            reduce using rule 55 (factor -> exp .)
-    MINUS           reduce using rule 55 (factor -> exp .)
-    SEMICOLON       reduce using rule 55 (factor -> exp .)
-    RPARENT         reduce using rule 55 (factor -> exp .)
-    RBRACKET        reduce using rule 55 (factor -> exp .)
-    COMMA           reduce using rule 55 (factor -> exp .)
+    TIMES           reduce using rule 56 (factor -> call .)
+    DIVIDE          reduce using rule 56 (factor -> call .)
+    LEQ             reduce using rule 56 (factor -> call .)
+    LT              reduce using rule 56 (factor -> call .)
+    GT              reduce using rule 56 (factor -> call .)
+    GEQ             reduce using rule 56 (factor -> call .)
+    EQ              reduce using rule 56 (factor -> call .)
+    NEQ             reduce using rule 56 (factor -> call .)
+    PLUS            reduce using rule 56 (factor -> call .)
+    MINUS           reduce using rule 56 (factor -> call .)
+    SEMICOLON       reduce using rule 56 (factor -> call .)
+    RPARENT         reduce using rule 56 (factor -> call .)
+    RBRACKET        reduce using rule 56 (factor -> call .)
+    COMMA           reduce using rule 56 (factor -> call .)
 
 
 state 56
 
-    (60) exp -> call .
+    (57) factor -> NUMBER .
 
-    POWOP1          reduce using rule 60 (exp -> call .)
-    POWOP2          reduce using rule 60 (exp -> call .)
-    TIMES           reduce using rule 60 (exp -> call .)
-    DIVIDE          reduce using rule 60 (exp -> call .)
-    LEQ             reduce using rule 60 (exp -> call .)
-    LT              reduce using rule 60 (exp -> call .)
-    GT              reduce using rule 60 (exp -> call .)
-    GEQ             reduce using rule 60 (exp -> call .)
-    EQ              reduce using rule 60 (exp -> call .)
-    NEQ             reduce using rule 60 (exp -> call .)
-    PLUS            reduce using rule 60 (exp -> call .)
-    MINUS           reduce using rule 60 (exp -> call .)
-    SEMICOLON       reduce using rule 60 (exp -> call .)
-    RPARENT         reduce using rule 60 (exp -> call .)
-    RBRACKET        reduce using rule 60 (exp -> call .)
-    COMMA           reduce using rule 60 (exp -> call .)
+    TIMES           reduce using rule 57 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 57 (factor -> NUMBER .)
+    LEQ             reduce using rule 57 (factor -> NUMBER .)
+    LT              reduce using rule 57 (factor -> NUMBER .)
+    GT              reduce using rule 57 (factor -> NUMBER .)
+    GEQ             reduce using rule 57 (factor -> NUMBER .)
+    EQ              reduce using rule 57 (factor -> NUMBER .)
+    NEQ             reduce using rule 57 (factor -> NUMBER .)
+    PLUS            reduce using rule 57 (factor -> NUMBER .)
+    MINUS           reduce using rule 57 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 57 (factor -> NUMBER .)
+    RPARENT         reduce using rule 57 (factor -> NUMBER .)
+    RBRACKET        reduce using rule 57 (factor -> NUMBER .)
+    COMMA           reduce using rule 57 (factor -> NUMBER .)
 
 
 state 57
-
-    (61) exp -> NUMBER .
-
-    POWOP1          reduce using rule 61 (exp -> NUMBER .)
-    POWOP2          reduce using rule 61 (exp -> NUMBER .)
-    TIMES           reduce using rule 61 (exp -> NUMBER .)
-    DIVIDE          reduce using rule 61 (exp -> NUMBER .)
-    LEQ             reduce using rule 61 (exp -> NUMBER .)
-    LT              reduce using rule 61 (exp -> NUMBER .)
-    GT              reduce using rule 61 (exp -> NUMBER .)
-    GEQ             reduce using rule 61 (exp -> NUMBER .)
-    EQ              reduce using rule 61 (exp -> NUMBER .)
-    NEQ             reduce using rule 61 (exp -> NUMBER .)
-    PLUS            reduce using rule 61 (exp -> NUMBER .)
-    MINUS           reduce using rule 61 (exp -> NUMBER .)
-    SEMICOLON       reduce using rule 61 (exp -> NUMBER .)
-    RPARENT         reduce using rule 61 (exp -> NUMBER .)
-    RBRACKET        reduce using rule 61 (exp -> NUMBER .)
-    COMMA           reduce using rule 61 (exp -> NUMBER .)
-
-
-state 58
 
     (6) varDeclaration -> typeSpecifier ID . SEMICOLON
     (7) varDeclaration -> typeSpecifier ID . LBRACKET NUMBER RBRACKET SEMICOLON
@@ -1064,7 +1013,7 @@ state 58
     LBRACKET        shift and go to state 12
 
 
-state 59
+state 58
 
     (27) expressionStmt -> expression SEMICOLON .
 
@@ -1080,11 +1029,11 @@ state 59
     ELSE            reduce using rule 27 (expressionStmt -> expression SEMICOLON .)
 
 
-state 60
+state 59
 
     (29) selectionStmt -> IF LPARENT . expression RPARENT statement
     (30) selectionStmt -> IF LPARENT . expression RPARENT statement ELSE statement
-    (34) expression -> . var EQ expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -1094,38 +1043,35 @@ state 60
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
-    expression                     shift and go to state 84
+    expression                     shift and go to state 80
     var                            shift and go to state 49
     simpleExpression               shift and go to state 50
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
+
+state 60
+
+    (54) factor -> LPARENT expression . RPARENT
+
+    RPARENT         shift and go to state 81
+
 
 state 61
 
-    (58) exp -> LPARENT expression . RPARENT
-
-    RPARENT         shift and go to state 85
-
-
-state 62
-
     (31) iterationStmt -> WHILE LPARENT . expression RPARENT statement
-    (34) expression -> . var EQ expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -1135,28 +1081,25 @@ state 62
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
-    expression                     shift and go to state 86
+    expression                     shift and go to state 82
     var                            shift and go to state 49
     simpleExpression               shift and go to state 50
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
-state 63
+state 62
 
     (32) returnStmt -> RETURN SEMICOLON .
 
@@ -1172,17 +1115,17 @@ state 63
     ELSE            reduce using rule 32 (returnStmt -> RETURN SEMICOLON .)
 
 
-state 64
+state 63
 
     (33) returnStmt -> RETURN expression . SEMICOLON
 
-    SEMICOLON       shift and go to state 87
+    SEMICOLON       shift and go to state 83
 
 
-state 65
+state 64
 
-    (34) expression -> var EQ . expression
-    (34) expression -> . var EQ expression
+    (34) expression -> var ASSIGN . expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -1192,31 +1135,28 @@ state 65
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
     var                            shift and go to state 49
-    expression                     shift and go to state 88
+    expression                     shift and go to state 84
     simpleExpression               shift and go to state 50
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
-state 66
+state 65
 
     (37) var -> ID LBRACKET . expression RBRACKET
-    (34) expression -> . var EQ expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -1226,124 +1166,112 @@ state 66
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
+    expression                     shift and go to state 85
+    var                            shift and go to state 49
+    simpleExpression               shift and go to state 50
+    additiveExpression             shift and go to state 52
+    term                           shift and go to state 53
+    factor                         shift and go to state 54
+    call                           shift and go to state 55
+
+state 66
+
+    (58) call -> ID LPARENT . args RPARENT
+    (59) args -> . argList
+    (60) args -> . empty
+    (61) argList -> . argList COMMA expression
+    (62) argList -> . expression
+    (63) empty -> .
+    (34) expression -> . var ASSIGN expression
+    (35) expression -> . simpleExpression
+    (36) var -> . ID
+    (37) var -> . ID LBRACKET expression RBRACKET
+    (38) simpleExpression -> . additiveExpression relop additiveExpression
+    (39) simpleExpression -> . additiveExpression
+    (46) additiveExpression -> . additiveExpression addop term
+    (47) additiveExpression -> . term
+    (50) term -> . term mulop factor
+    (51) term -> . factor
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
+
+    RPARENT         reduce using rule 63 (empty -> .)
+    ID              shift and go to state 51
+    LPARENT         shift and go to state 46
+    NUMBER          shift and go to state 56
+
+    args                           shift and go to state 86
+    argList                        shift and go to state 87
+    empty                          shift and go to state 88
     expression                     shift and go to state 89
     var                            shift and go to state 49
     simpleExpression               shift and go to state 50
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
 state 67
-
-    (62) call -> ID LPARENT . args RPARENT
-    (63) args -> . argList
-    (64) args -> . empty
-    (65) argList -> . argList COMMA expression
-    (66) argList -> . expression
-    (67) empty -> .
-    (34) expression -> . var EQ expression
-    (35) expression -> . simpleExpression
-    (36) var -> . ID
-    (37) var -> . ID LBRACKET expression RBRACKET
-    (38) simpleExpression -> . additiveExpression relop additiveExpression
-    (39) simpleExpression -> . additiveExpression
-    (46) additiveExpression -> . additiveExpression addop term
-    (47) additiveExpression -> . term
-    (50) term -> . term mulop factor
-    (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
-
-    RPARENT         reduce using rule 67 (empty -> .)
-    ID              shift and go to state 51
-    LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
-
-    args                           shift and go to state 90
-    argList                        shift and go to state 91
-    empty                          shift and go to state 92
-    expression                     shift and go to state 93
-    var                            shift and go to state 49
-    simpleExpression               shift and go to state 50
-    additiveExpression             shift and go to state 52
-    term                           shift and go to state 53
-    factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
-
-state 68
 
     (38) simpleExpression -> additiveExpression relop . additiveExpression
     (46) additiveExpression -> . additiveExpression addop term
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
-    (62) call -> . ID LPARENT args RPARENT
+    (58) call -> . ID LPARENT args RPARENT
 
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
     ID              shift and go to state 51
 
-    additiveExpression             shift and go to state 94
+    additiveExpression             shift and go to state 90
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    var                            shift and go to state 95
-    call                           shift and go to state 56
+    var                            shift and go to state 91
+    call                           shift and go to state 55
 
-state 69
+state 68
 
     (46) additiveExpression -> additiveExpression addop . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
-    (62) call -> . ID LPARENT args RPARENT
+    (58) call -> . ID LPARENT args RPARENT
 
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
     ID              shift and go to state 51
 
-    term                           shift and go to state 96
+    term                           shift and go to state 92
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    var                            shift and go to state 95
-    call                           shift and go to state 56
+    var                            shift and go to state 91
+    call                           shift and go to state 55
 
-state 70
+state 69
 
     (40) relop -> LEQ .
 
@@ -1352,7 +1280,7 @@ state 70
     ID              reduce using rule 40 (relop -> LEQ .)
 
 
-state 71
+state 70
 
     (41) relop -> LT .
 
@@ -1361,7 +1289,7 @@ state 71
     ID              reduce using rule 41 (relop -> LT .)
 
 
-state 72
+state 71
 
     (42) relop -> GT .
 
@@ -1370,7 +1298,7 @@ state 72
     ID              reduce using rule 42 (relop -> GT .)
 
 
-state 73
+state 72
 
     (43) relop -> GEQ .
 
@@ -1379,7 +1307,7 @@ state 73
     ID              reduce using rule 43 (relop -> GEQ .)
 
 
-state 74
+state 73
 
     (44) relop -> EQ .
 
@@ -1388,7 +1316,7 @@ state 74
     ID              reduce using rule 44 (relop -> EQ .)
 
 
-state 75
+state 74
 
     (45) relop -> NEQ .
 
@@ -1397,7 +1325,7 @@ state 75
     ID              reduce using rule 45 (relop -> NEQ .)
 
 
-state 76
+state 75
 
     (48) addop -> PLUS .
 
@@ -1406,7 +1334,7 @@ state 76
     ID              reduce using rule 48 (addop -> PLUS .)
 
 
-state 77
+state 76
 
     (49) addop -> MINUS .
 
@@ -1415,29 +1343,26 @@ state 77
     ID              reduce using rule 49 (addop -> MINUS .)
 
 
-state 78
+state 77
 
     (50) term -> term mulop . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
-    (62) call -> . ID LPARENT args RPARENT
+    (58) call -> . ID LPARENT args RPARENT
 
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
     ID              shift and go to state 51
 
-    factor                         shift and go to state 97
-    exp                            shift and go to state 55
-    var                            shift and go to state 95
-    call                           shift and go to state 56
+    factor                         shift and go to state 93
+    var                            shift and go to state 91
+    call                           shift and go to state 55
 
-state 79
+state 78
 
     (52) mulop -> TIMES .
 
@@ -1446,7 +1371,7 @@ state 79
     ID              reduce using rule 52 (mulop -> TIMES .)
 
 
-state 80
+state 79
 
     (53) mulop -> DIVIDE .
 
@@ -1455,81 +1380,42 @@ state 80
     ID              reduce using rule 53 (mulop -> DIVIDE .)
 
 
-state 81
-
-    (54) factor -> factor powop . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (36) var -> . ID
-    (37) var -> . ID LBRACKET expression RBRACKET
-    (62) call -> . ID LPARENT args RPARENT
-
-    LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
-    ID              shift and go to state 51
-
-    exp                            shift and go to state 98
-    var                            shift and go to state 95
-    call                           shift and go to state 56
-
-state 82
-
-    (56) powop -> POWOP1 .
-
-    LPARENT         reduce using rule 56 (powop -> POWOP1 .)
-    NUMBER          reduce using rule 56 (powop -> POWOP1 .)
-    ID              reduce using rule 56 (powop -> POWOP1 .)
-
-
-state 83
-
-    (57) powop -> POWOP2 .
-
-    LPARENT         reduce using rule 57 (powop -> POWOP2 .)
-    NUMBER          reduce using rule 57 (powop -> POWOP2 .)
-    ID              reduce using rule 57 (powop -> POWOP2 .)
-
-
-state 84
+state 80
 
     (29) selectionStmt -> IF LPARENT expression . RPARENT statement
     (30) selectionStmt -> IF LPARENT expression . RPARENT statement ELSE statement
 
-    RPARENT         shift and go to state 99
+    RPARENT         shift and go to state 94
 
 
-state 85
+state 81
 
-    (58) exp -> LPARENT expression RPARENT .
+    (54) factor -> LPARENT expression RPARENT .
 
-    POWOP1          reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    POWOP2          reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    TIMES           reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    DIVIDE          reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    LEQ             reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    LT              reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    GT              reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    GEQ             reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    EQ              reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    NEQ             reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    PLUS            reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    MINUS           reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    SEMICOLON       reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    RPARENT         reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    RBRACKET        reduce using rule 58 (exp -> LPARENT expression RPARENT .)
-    COMMA           reduce using rule 58 (exp -> LPARENT expression RPARENT .)
+    TIMES           reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    DIVIDE          reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    LEQ             reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    LT              reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    GT              reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    GEQ             reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    EQ              reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    NEQ             reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    PLUS            reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    MINUS           reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    SEMICOLON       reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    RPARENT         reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    RBRACKET        reduce using rule 54 (factor -> LPARENT expression RPARENT .)
+    COMMA           reduce using rule 54 (factor -> LPARENT expression RPARENT .)
 
 
-state 86
+state 82
 
     (31) iterationStmt -> WHILE LPARENT expression . RPARENT statement
 
-    RPARENT         shift and go to state 100
+    RPARENT         shift and go to state 95
 
 
-state 87
+state 83
 
     (33) returnStmt -> RETURN expression SEMICOLON .
 
@@ -1545,55 +1431,55 @@ state 87
     ELSE            reduce using rule 33 (returnStmt -> RETURN expression SEMICOLON .)
 
 
+state 84
+
+    (34) expression -> var ASSIGN expression .
+
+    SEMICOLON       reduce using rule 34 (expression -> var ASSIGN expression .)
+    RPARENT         reduce using rule 34 (expression -> var ASSIGN expression .)
+    RBRACKET        reduce using rule 34 (expression -> var ASSIGN expression .)
+    COMMA           reduce using rule 34 (expression -> var ASSIGN expression .)
+
+
+state 85
+
+    (37) var -> ID LBRACKET expression . RBRACKET
+
+    RBRACKET        shift and go to state 96
+
+
+state 86
+
+    (58) call -> ID LPARENT args . RPARENT
+
+    RPARENT         shift and go to state 97
+
+
+state 87
+
+    (59) args -> argList .
+    (61) argList -> argList . COMMA expression
+
+    RPARENT         reduce using rule 59 (args -> argList .)
+    COMMA           shift and go to state 98
+
+
 state 88
 
-    (34) expression -> var EQ expression .
+    (60) args -> empty .
 
-    SEMICOLON       reduce using rule 34 (expression -> var EQ expression .)
-    RPARENT         reduce using rule 34 (expression -> var EQ expression .)
-    RBRACKET        reduce using rule 34 (expression -> var EQ expression .)
-    COMMA           reduce using rule 34 (expression -> var EQ expression .)
+    RPARENT         reduce using rule 60 (args -> empty .)
 
 
 state 89
 
-    (37) var -> ID LBRACKET expression . RBRACKET
+    (62) argList -> expression .
 
-    RBRACKET        shift and go to state 101
+    COMMA           reduce using rule 62 (argList -> expression .)
+    RPARENT         reduce using rule 62 (argList -> expression .)
 
 
 state 90
-
-    (62) call -> ID LPARENT args . RPARENT
-
-    RPARENT         shift and go to state 102
-
-
-state 91
-
-    (63) args -> argList .
-    (65) argList -> argList . COMMA expression
-
-    RPARENT         reduce using rule 63 (args -> argList .)
-    COMMA           shift and go to state 103
-
-
-state 92
-
-    (64) args -> empty .
-
-    RPARENT         reduce using rule 64 (args -> empty .)
-
-
-state 93
-
-    (66) argList -> expression .
-
-    COMMA           reduce using rule 66 (argList -> expression .)
-    RPARENT         reduce using rule 66 (argList -> expression .)
-
-
-state 94
 
     (38) simpleExpression -> additiveExpression relop additiveExpression .
     (46) additiveExpression -> additiveExpression . addop term
@@ -1604,34 +1490,32 @@ state 94
     RPARENT         reduce using rule 38 (simpleExpression -> additiveExpression relop additiveExpression .)
     RBRACKET        reduce using rule 38 (simpleExpression -> additiveExpression relop additiveExpression .)
     COMMA           reduce using rule 38 (simpleExpression -> additiveExpression relop additiveExpression .)
-    PLUS            shift and go to state 76
-    MINUS           shift and go to state 77
+    PLUS            shift and go to state 75
+    MINUS           shift and go to state 76
 
-    addop                          shift and go to state 69
+    addop                          shift and go to state 68
 
-state 95
+state 91
 
-    (59) exp -> var .
+    (55) factor -> var .
 
-    POWOP1          reduce using rule 59 (exp -> var .)
-    POWOP2          reduce using rule 59 (exp -> var .)
-    TIMES           reduce using rule 59 (exp -> var .)
-    DIVIDE          reduce using rule 59 (exp -> var .)
-    PLUS            reduce using rule 59 (exp -> var .)
-    MINUS           reduce using rule 59 (exp -> var .)
-    SEMICOLON       reduce using rule 59 (exp -> var .)
-    RPARENT         reduce using rule 59 (exp -> var .)
-    RBRACKET        reduce using rule 59 (exp -> var .)
-    COMMA           reduce using rule 59 (exp -> var .)
-    LEQ             reduce using rule 59 (exp -> var .)
-    LT              reduce using rule 59 (exp -> var .)
-    GT              reduce using rule 59 (exp -> var .)
-    GEQ             reduce using rule 59 (exp -> var .)
-    EQ              reduce using rule 59 (exp -> var .)
-    NEQ             reduce using rule 59 (exp -> var .)
+    TIMES           reduce using rule 55 (factor -> var .)
+    DIVIDE          reduce using rule 55 (factor -> var .)
+    PLUS            reduce using rule 55 (factor -> var .)
+    MINUS           reduce using rule 55 (factor -> var .)
+    SEMICOLON       reduce using rule 55 (factor -> var .)
+    RPARENT         reduce using rule 55 (factor -> var .)
+    RBRACKET        reduce using rule 55 (factor -> var .)
+    COMMA           reduce using rule 55 (factor -> var .)
+    LEQ             reduce using rule 55 (factor -> var .)
+    LT              reduce using rule 55 (factor -> var .)
+    GT              reduce using rule 55 (factor -> var .)
+    GEQ             reduce using rule 55 (factor -> var .)
+    EQ              reduce using rule 55 (factor -> var .)
+    NEQ             reduce using rule 55 (factor -> var .)
 
 
-state 96
+state 92
 
     (46) additiveExpression -> additiveExpression addop term .
     (50) term -> term . mulop factor
@@ -1650,17 +1534,14 @@ state 96
     RPARENT         reduce using rule 46 (additiveExpression -> additiveExpression addop term .)
     RBRACKET        reduce using rule 46 (additiveExpression -> additiveExpression addop term .)
     COMMA           reduce using rule 46 (additiveExpression -> additiveExpression addop term .)
-    TIMES           shift and go to state 79
-    DIVIDE          shift and go to state 80
+    TIMES           shift and go to state 78
+    DIVIDE          shift and go to state 79
 
-    mulop                          shift and go to state 78
+    mulop                          shift and go to state 77
 
-state 97
+state 93
 
     (50) term -> term mulop factor .
-    (54) factor -> factor . powop exp
-    (56) powop -> . POWOP1
-    (57) powop -> . POWOP2
 
     TIMES           reduce using rule 50 (term -> term mulop factor .)
     DIVIDE          reduce using rule 50 (term -> term mulop factor .)
@@ -1676,34 +1557,9 @@ state 97
     RPARENT         reduce using rule 50 (term -> term mulop factor .)
     RBRACKET        reduce using rule 50 (term -> term mulop factor .)
     COMMA           reduce using rule 50 (term -> term mulop factor .)
-    POWOP1          shift and go to state 82
-    POWOP2          shift and go to state 83
-
-    powop                          shift and go to state 81
-
-state 98
-
-    (54) factor -> factor powop exp .
-
-    POWOP1          reduce using rule 54 (factor -> factor powop exp .)
-    POWOP2          reduce using rule 54 (factor -> factor powop exp .)
-    TIMES           reduce using rule 54 (factor -> factor powop exp .)
-    DIVIDE          reduce using rule 54 (factor -> factor powop exp .)
-    LEQ             reduce using rule 54 (factor -> factor powop exp .)
-    LT              reduce using rule 54 (factor -> factor powop exp .)
-    GT              reduce using rule 54 (factor -> factor powop exp .)
-    GEQ             reduce using rule 54 (factor -> factor powop exp .)
-    EQ              reduce using rule 54 (factor -> factor powop exp .)
-    NEQ             reduce using rule 54 (factor -> factor powop exp .)
-    PLUS            reduce using rule 54 (factor -> factor powop exp .)
-    MINUS           reduce using rule 54 (factor -> factor powop exp .)
-    SEMICOLON       reduce using rule 54 (factor -> factor powop exp .)
-    RPARENT         reduce using rule 54 (factor -> factor powop exp .)
-    RBRACKET        reduce using rule 54 (factor -> factor powop exp .)
-    COMMA           reduce using rule 54 (factor -> factor powop exp .)
 
 
-state 99
+state 94
 
     (29) selectionStmt -> IF LPARENT expression RPARENT . statement
     (30) selectionStmt -> IF LPARENT expression RPARENT . statement ELSE statement
@@ -1720,7 +1576,7 @@ state 99
     (31) iterationStmt -> . WHILE LPARENT expression RPARENT statement
     (32) returnStmt -> . RETURN SEMICOLON
     (33) returnStmt -> . RETURN expression SEMICOLON
-    (34) expression -> . var EQ expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -1730,13 +1586,11 @@ state 99
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     SEMICOLON       shift and go to state 44
     LBRACE          shift and go to state 27
@@ -1745,10 +1599,10 @@ state 99
     RETURN          shift and go to state 48
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
     expression                     shift and go to state 43
-    statement                      shift and go to state 104
+    statement                      shift and go to state 99
     expressionStmt                 shift and go to state 38
     compoundStmt                   shift and go to state 39
     selectionStmt                  shift and go to state 40
@@ -1759,10 +1613,9 @@ state 99
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
-state 100
+state 95
 
     (31) iterationStmt -> WHILE LPARENT expression RPARENT . statement
     (22) statement -> . expressionStmt
@@ -1778,7 +1631,7 @@ state 100
     (31) iterationStmt -> . WHILE LPARENT expression RPARENT statement
     (32) returnStmt -> . RETURN SEMICOLON
     (33) returnStmt -> . RETURN expression SEMICOLON
-    (34) expression -> . var EQ expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -1788,13 +1641,11 @@ state 100
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     SEMICOLON       shift and go to state 44
     LBRACE          shift and go to state 27
@@ -1803,10 +1654,10 @@ state 100
     RETURN          shift and go to state 48
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
     expression                     shift and go to state 43
-    statement                      shift and go to state 105
+    statement                      shift and go to state 100
     expressionStmt                 shift and go to state 38
     compoundStmt                   shift and go to state 39
     selectionStmt                  shift and go to state 40
@@ -1817,22 +1668,20 @@ state 100
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
-state 101
+state 96
 
     (37) var -> ID LBRACKET expression RBRACKET .
 
-    EQ              reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
-    POWOP1          reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
-    POWOP2          reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
+    ASSIGN          reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     TIMES           reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     DIVIDE          reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     LEQ             reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     LT              reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     GT              reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     GEQ             reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
+    EQ              reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     NEQ             reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     PLUS            reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
     MINUS           reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
@@ -1842,32 +1691,30 @@ state 101
     COMMA           reduce using rule 37 (var -> ID LBRACKET expression RBRACKET .)
 
 
-state 102
+state 97
 
-    (62) call -> ID LPARENT args RPARENT .
+    (58) call -> ID LPARENT args RPARENT .
 
-    POWOP1          reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    POWOP2          reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    TIMES           reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    DIVIDE          reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    LEQ             reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    LT              reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    GT              reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    GEQ             reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    EQ              reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    NEQ             reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    PLUS            reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    MINUS           reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    SEMICOLON       reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    RPARENT         reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    RBRACKET        reduce using rule 62 (call -> ID LPARENT args RPARENT .)
-    COMMA           reduce using rule 62 (call -> ID LPARENT args RPARENT .)
+    TIMES           reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    DIVIDE          reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    LEQ             reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    LT              reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    GT              reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    GEQ             reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    EQ              reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    NEQ             reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    PLUS            reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    MINUS           reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    SEMICOLON       reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    RPARENT         reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    RBRACKET        reduce using rule 58 (call -> ID LPARENT args RPARENT .)
+    COMMA           reduce using rule 58 (call -> ID LPARENT args RPARENT .)
 
 
-state 103
+state 98
 
-    (65) argList -> argList COMMA . expression
-    (34) expression -> . var EQ expression
+    (61) argList -> argList COMMA . expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -1877,28 +1724,25 @@ state 103
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
-    expression                     shift and go to state 106
+    expression                     shift and go to state 101
     var                            shift and go to state 49
     simpleExpression               shift and go to state 50
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
-state 104
+state 99
 
     (29) selectionStmt -> IF LPARENT expression RPARENT statement .
     (30) selectionStmt -> IF LPARENT expression RPARENT statement . ELSE statement
@@ -1914,10 +1758,10 @@ state 104
     NUMBER          reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
     ELSE            reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
 
-  ! ELSE            [ shift and go to state 107 ]
+  ! ELSE            [ shift and go to state 102 ]
 
 
-state 105
+state 100
 
     (31) iterationStmt -> WHILE LPARENT expression RPARENT statement .
 
@@ -1933,15 +1777,15 @@ state 105
     ELSE            reduce using rule 31 (iterationStmt -> WHILE LPARENT expression RPARENT statement .)
 
 
-state 106
+state 101
 
-    (65) argList -> argList COMMA expression .
+    (61) argList -> argList COMMA expression .
 
-    COMMA           reduce using rule 65 (argList -> argList COMMA expression .)
-    RPARENT         reduce using rule 65 (argList -> argList COMMA expression .)
+    COMMA           reduce using rule 61 (argList -> argList COMMA expression .)
+    RPARENT         reduce using rule 61 (argList -> argList COMMA expression .)
 
 
-state 107
+state 102
 
     (30) selectionStmt -> IF LPARENT expression RPARENT statement ELSE . statement
     (22) statement -> . expressionStmt
@@ -1957,7 +1801,7 @@ state 107
     (31) iterationStmt -> . WHILE LPARENT expression RPARENT statement
     (32) returnStmt -> . RETURN SEMICOLON
     (33) returnStmt -> . RETURN expression SEMICOLON
-    (34) expression -> . var EQ expression
+    (34) expression -> . var ASSIGN expression
     (35) expression -> . simpleExpression
     (36) var -> . ID
     (37) var -> . ID LBRACKET expression RBRACKET
@@ -1967,13 +1811,11 @@ state 107
     (47) additiveExpression -> . term
     (50) term -> . term mulop factor
     (51) term -> . factor
-    (54) factor -> . factor powop exp
-    (55) factor -> . exp
-    (58) exp -> . LPARENT expression RPARENT
-    (59) exp -> . var
-    (60) exp -> . call
-    (61) exp -> . NUMBER
-    (62) call -> . ID LPARENT args RPARENT
+    (54) factor -> . LPARENT expression RPARENT
+    (55) factor -> . var
+    (56) factor -> . call
+    (57) factor -> . NUMBER
+    (58) call -> . ID LPARENT args RPARENT
 
     SEMICOLON       shift and go to state 44
     LBRACE          shift and go to state 27
@@ -1982,10 +1824,10 @@ state 107
     RETURN          shift and go to state 48
     ID              shift and go to state 51
     LPARENT         shift and go to state 46
-    NUMBER          shift and go to state 57
+    NUMBER          shift and go to state 56
 
     expression                     shift and go to state 43
-    statement                      shift and go to state 108
+    statement                      shift and go to state 103
     expressionStmt                 shift and go to state 38
     compoundStmt                   shift and go to state 39
     selectionStmt                  shift and go to state 40
@@ -1996,10 +1838,9 @@ state 107
     additiveExpression             shift and go to state 52
     term                           shift and go to state 53
     factor                         shift and go to state 54
-    exp                            shift and go to state 55
-    call                           shift and go to state 56
+    call                           shift and go to state 55
 
-state 108
+state 103
 
     (30) selectionStmt -> IF LPARENT expression RPARENT statement ELSE statement .
 
@@ -2014,7 +1855,3 @@ state 108
     NUMBER          reduce using rule 30 (selectionStmt -> IF LPARENT expression RPARENT statement ELSE statement .)
     ELSE            reduce using rule 30 (selectionStmt -> IF LPARENT expression RPARENT statement ELSE statement .)
 
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for EQ in state 49 resolved as shift
