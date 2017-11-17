@@ -110,8 +110,8 @@ def p_param2(p):
 # 10
 def p_compoundStmt(p):
     '''compoundStmt : LBRACE localDeclarations statementList RBRACE'''
-    p[0] = compoundStmt(LBRACE(p[1]),p[2],p[3],RBRACE(p[4]),"compoundStmt")
-    print ("compound-stmt")
+    p[0] = compoundStmt(LBRACE(p[1]),p[2], p[3], RBRACE(p[4]), "compoundStmt")
+    print ("compoundStmt")
 
 # 11
 def p_localDeclarations1(p):
@@ -184,7 +184,7 @@ def p_selectionStmt1(p):
 # 15
 def p_selectionStmt2(p):
     '''selectionStmt : IF LPARENT expression RPARENT statement ELSE statement'''
-    p[0] = selectionStmt2(IF(p[1]), LPARENT(p[2]), p[3], RPARENT(p[4]), ELSE(p[5]),p[6], "selectionStmt2")
+    p[0] = selectionStmt2(IF(p[1]), LPARENT(p[2]), p[3], RPARENT(p[4]),p[5], ELSE(p[6]),p[7], "selectionStmt2")
     print ("selectionStmt2")
 
 # 16
@@ -207,8 +207,8 @@ def p_returnStmt2(p):
 
 # 18
 def p_expression1(p):
-    '''expression : var EQ expression'''
-    p[0] = expression1(p[1], EQ(p[2]),p[3],"expression1")
+    '''expression : var ASSIGN expression'''
+    p[0] = expression1(p[1], ASSIGN(p[2]),p[3],"expression1")
     print ("expression1")
 
 # 18
@@ -226,7 +226,7 @@ def p_var1(p):
 # 19
 def p_var2(p):
     '''var : ID LBRACKET expression RBRACKET'''
-    p[0] = var2(ID(p[1]),LBRACKET(p[2]),p[3],RBRACKET[4], "var2")
+    p[0] = var2(ID(p[1]),LBRACKET(p[2]),p[3],RBRACKET([4]), "var2")
     print ("var2")
 
 # 20
@@ -327,83 +327,60 @@ def p_mulop2(p):
 
 # 26
 def p_factor1(p):
-    '''factor : factor powop exp'''
+    '''factor : LPARENT expression RPARENT'''
     p[0] = factor1(p[1],p[2],p[3], "factor1")
     print ("factor1")
 
 # 26
 def p_factor2(p):
-    '''factor : exp'''
+    '''factor : var'''
     p[0] = factor2(p[1], "factor2")
     print ("factor2")
 
-# 27
-def p_powop1(p):
-    '''powop : POWOP1'''
-    p[0] = powop1(POWOP1(p[1]), "powop1")
-    print ("powop1")
+# 26
+def p_factor3(p):
+    '''factor : call'''
+    p[0] = factor3(p[1], "factor3")
+    print ("factor3")
+
+# 26
+def p_factor4(p):
+    '''factor : NUMBER'''
+    p[0] = factor4(NUMBER(p[1]), "factor4")
+    print ("factor4")
+
 
 # 27
-def p_powop2(p):
-    '''powop : POWOP2'''
-    p[0] = powop2(POWOP2(p[1]), "powop2")
-    print ("powop2")
-
-# 28
-def p_exp1(p):
-    '''exp : LPARENT expression RPARENT'''
-    p[0] = exp1(LPARENT(p[1]),p[2],RPARENT(p[3]), "exp1")
-    print ("exp1")
-
-# 28
-def p_exp2(p):
-    '''exp : var'''
-    p[0] = exp2(p[1], "exp2")
-    print ("exp2")
-
-# 28
-def p_exp3(p):
-    '''exp : call'''
-    p[0] = exp3(p[1], "exp3")
-    print ("exp3")
-
-# 28
-def p_exp4(p):
-    '''exp : NUMBER'''
-    p[0] = exp4(NUMBER(p[1]), "exp4")
-    print ("exp4")
-
-# 29
 def p_call(p):
     '''call : ID LPARENT args RPARENT'''
     p[0] = call(ID(p[1]),LPARENT(p[2]),p[3],RPARENT(p[4]),"call")
     print ("call")
 
-# 30
+# 28
 def p_args1(p):
     '''args : argList'''
     p[0] = args1(p[1],"args1")
     print ("args1")
 
-# 30
+# 28
 def p_args2(p):
     '''args : empty'''
     p[0] = Null()
     print ("args2")
 
-# 31
+# 29
 def p_argList1(p):
     '''argList : argList COMMA expression'''
     p[0] = argList1(p[1],COMMA(p[2]),p[3], "argList1")
     print ("argList1")
 
-# 31
+# 29
 def p_argList2(p):
     '''argList : expression'''
     p[0] = argList2(p[1],"argList2")
     print ("argList2")
 
-# 32
+
 def p_empty(p):
     '''empty : '''
     pass
@@ -462,7 +439,6 @@ result.imprimir(" ")
 
 graphFile = open('graphviztree.dot','w')
 graphFile.write(result.traducir())
-#.traducir()
 
 graphFile.close()
 print("Se ha guardado el programa traducido en /graphviztree.dot")
