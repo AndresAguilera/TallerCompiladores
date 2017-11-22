@@ -6,14 +6,7 @@ from scanner import *
 from sys import stdin
 from semantic import *
 
-precedence = (
-    ('right','ID','IF','WHILE'),
-    ('right','ASSIGN'),
-    ('left','LT','LEQ','GT','GEQ'),
-    ('left','PLUS','MINUS'),
-    ('left','TIMES','DIVIDE'),
-    ('left','LPARENT','RPARENT'),
-)
+
 # Tokens especiales
 
 
@@ -183,7 +176,7 @@ def p_selectionStmt1(p):
 # 15
 def p_selectionStmt2(p):
     '''selectionStmt : IF LPARENT expression RPARENT statement ELSE statement'''
-    p[0] = selectionStmt2(IF(p[1]), LPARENT(p[2]), p[3], RPARENT(p[4]),p[5], ELSE(p[6]),p[7], "selectionStmt2")
+    p[0] = selectionStmt2(IF(p[1]), LPARENT(p[2]), p[3], RPARENT(p[4]),p[5], ELSE(p[6]), p[7], "selectionStmt2")
     print ("selectionStmt2")
 
 # 16
