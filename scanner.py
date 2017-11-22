@@ -11,7 +11,6 @@ tokens = ['PLUS','MINUS','TIMES','DIVIDE',
             'SCOMMENT', 'BEGINCOMMENT','ENDCOMMENT', 'MCOMMENT',
           'POWOP1', 'POWOP2',
            'SEMICOLON', 'COMMA' ,'ID','ASSIGN', 'NUMBER'
-
           ]
 
 # Diccionario de palabras reservadas
@@ -26,9 +25,7 @@ reservadas = {
 
 tokens = tokens+list(reservadas.values())
 
-def t_ELSE(t) :
-    r'(?i)else'
-    return t
+
 def t_IF(t) :
     r'(?i)if'
     return t
@@ -43,6 +40,9 @@ def t_RETURN(t) :
     return t
 def t_WHILE(t) :
     r'(?i)while'
+    return t
+def t_ELSE(t) :
+    r'(?i)else'
     return t
 
 # Ignorar espacios en blanco y tabulaciones
@@ -79,7 +79,7 @@ t_MCOMMENT = r'<\/([^\/]|\n)*\/>'
 
 t_SEMICOLON = r';'
 t_COMMA = r','
-t_ASSIGN = r':='
+t_ASSIGN = r'='
 
 
 # r'(?i)[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+'

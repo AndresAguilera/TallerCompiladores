@@ -6,14 +6,7 @@ from scanner import *
 from sys import stdin
 from semantic import *
 
-precedence = (
-    ('right','ID','IF','WHILE'),
-    ('right','ASSIGN'),
-    ('left','LT','LEQ','GT','GEQ'),
-    ('left','PLUS','MINUS'),
-    ('left','TIMES','DIVIDE'),
-    ('left','LPARENT','RPARENT'),
-)
+
 # Tokens especiales
 
 
@@ -26,14 +19,13 @@ def p_program(p):
 # 2
 def p_declarationList1(p):
     '''declarationList : declarationList declaration'''
-
-    p[0] = declarationList1(p[1],p[2],"declarationList1")
+    p[0] = declarationList1(p[1], p[2],"declarationList1")
     print ("declaration-list")
 # 2
 def p_declarationList2(p):
     '''declarationList : declaration'''
     p[0] = declarationList2(p[1],"declarationList2")
-    # print ("declaration-list")
+    print ("declaration-list")
 # 3
 def p_declaration1(p):
     '''declaration : varDeclaration'''
@@ -184,7 +176,7 @@ def p_selectionStmt1(p):
 # 15
 def p_selectionStmt2(p):
     '''selectionStmt : IF LPARENT expression RPARENT statement ELSE statement'''
-    p[0] = selectionStmt2(IF(p[1]), LPARENT(p[2]), p[3], RPARENT(p[4]),p[5], ELSE(p[6]),p[7], "selectionStmt2")
+    p[0] = selectionStmt2(IF(p[1]), LPARENT(p[2]), p[3], RPARENT(p[4]),p[5], ELSE(p[6]), p[7], "selectionStmt2")
     print ("selectionStmt2")
 
 # 16
@@ -226,7 +218,7 @@ def p_var1(p):
 # 19
 def p_var2(p):
     '''var : ID LBRACKET expression RBRACKET'''
-    p[0] = var2(ID(p[1]),LBRACKET(p[2]),p[3],RBRACKET([4]), "var2")
+    p[0] = var2(ID(p[1]),LBRACKET(p[2]),p[3],RBRACKET(p[4]), "var2")
     print ("var2")
 
 # 20
@@ -304,7 +296,7 @@ def p_addop2(p):
 # 24
 def p_term1(p):
     '''term : term mulop factor'''
-    p[0] = term1(p[1],p[2],p[3], "term1")
+    p[0] = term1(p[1], p[2], p[3], "term1")
     print ("term1")
 
 # 24
@@ -328,7 +320,7 @@ def p_mulop2(p):
 # 26
 def p_factor1(p):
     '''factor : LPARENT expression RPARENT'''
-    p[0] = factor1(p[1],p[2],p[3], "factor1")
+    p[0] = factor1(LPARENT(p[1]),p[2],RPARENT(p[3]), "factor1")
     print ("factor1")
 
 # 26

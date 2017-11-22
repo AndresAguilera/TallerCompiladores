@@ -52,15 +52,21 @@ class declarationList1(Nodo):
         self.son2 = son2
 
     def imprimir(self,ident):
-        self.son1.imprimir(" " + ident)
-        self.son2.imprimir(" " + ident)
+        if type(self.son1) == type(tuple()):
+            self.son1[0].imprimir(" "+ident)
+        else:
+            self.son1.imprimir(" "+ident)
+        if type(self.son2) == type(tuple()):
+            self.son2[0].imprimir(" "+ident)
+        else:
+            self.son2.imprimir(" "+ident)
         print(ident+"Nodo: "+self.name)
 
     def traducir(self):
         global txt
         id = incrementarContador()
         son1 = self.son1.traducir()
-        son2 = self.son1.traducir()
+        son2 = self.son2.traducir()
 
         txt += id + "[label = " + self.name + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
@@ -186,9 +192,6 @@ class varDeclaration2(Nodo):
         self.son6 = son6
 
     def imprimir(self,ident):
-            # if type(self.son1) == type(tuple()):
-            #     self.son1[0].imprimir(" "+ident)
-            # else:
         self.son1.imprimir(" "+ident)
         self.son2.imprimir(" " + ident)
         self.son3.imprimir(" " + ident)
@@ -883,7 +886,7 @@ class selectionStmt1(Nodo):
     
 # 15
 class selectionStmt2(Nodo):
-    def __init__(self, son1, son2, son3, son4, son5, son6, son7,name):
+    def __init__(self, son1, son2, son3, son4, son5, son6, son7, name):
         self.name = name
         self.son1 = son1
         self.son2 = son2
@@ -894,16 +897,13 @@ class selectionStmt2(Nodo):
         self.son7 = son7
 
     def imprimir(self, ident):
-        if type(self.son1) == type(tuple()): 
-            self.son1[0].imprimir(" "+ident)
-            self.son2.imprimir(" "+ident)
-            self.son3.imprimir(" "+ident)
-            self.son4.imprimir(" "+ident)
-            self.son5.imprimir(" "+ident)
-            self.son6.imprimir(" "+ident)
-            self.son7.imprimir(" "+ident)
-        else:
-            self.son1.imprimir(" "+ident)
+        self.son1.imprimir(" "+ident)
+        self.son2.imprimir(" "+ident)
+        self.son3.imprimir(" "+ident)
+        self.son4.imprimir(" "+ident)
+        self.son5.imprimir(" "+ident)
+        self.son6.imprimir(" "+ident)
+        self.son7.imprimir(" "+ident)
         print(ident + "Nodo: " + self.name)
 
     def traducir(self):
@@ -1489,7 +1489,7 @@ class addop2(Nodo):
 
 # 24
 class term1(Nodo):
-    def __init__(self, son1,son2,son3, name):
+    def __init__(self, son1, son2 ,son3, name):
         self.name = name
         self.son1 = son1
         self.son2 = son2
@@ -1569,6 +1569,7 @@ class mulop1(Nodo):
 
         txt += id + "[label = " + self.name + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
+        return id
     
 
 # 25
@@ -1592,6 +1593,7 @@ class mulop2(Nodo):
 
         txt += id + "[label = " + self.name + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
+        return id
     
 
 # 26
@@ -1877,7 +1879,7 @@ class ID(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label=  \""+"ID: "+self.name+"\"]"+"\n\t"
         return id
 class PLUS(Nodo):
     def __init__(self , name):
@@ -1889,7 +1891,7 @@ class PLUS(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"PLUS: "+self.name+"\"]"+"\n\t"
         return id
 class MINUS(Nodo):
     def __init__(self , name):
@@ -1901,7 +1903,7 @@ class MINUS(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"MINUS: "+self.name+"\"]"+"\n\t"
         return id
 class TIMES(Nodo):
     def __init__(self , name):
@@ -1913,7 +1915,7 @@ class TIMES(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"TIMES: "+self.name+"\"]"+"\n\t"
         return id
 class DIVIDE(Nodo):
     def __init__(self , name):
@@ -1925,7 +1927,7 @@ class DIVIDE(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"DIVIDE: "+self.name+"\"]"+"\n\t"
         return id
 class LT(Nodo):
     def __init__(self , name):
@@ -1937,7 +1939,7 @@ class LT(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"LT: "+self.name+"\"]"+"\n\t"
         return id
 class LEQ(Nodo):
     def __init__(self , name):
@@ -1949,7 +1951,7 @@ class LEQ(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"LEQ: "+self.name+"\"]"+"\n\t"
         return id
 class GT(Nodo):
     def __init__(self , name):
@@ -1961,7 +1963,7 @@ class GT(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"GT: "+self.name+"\"]"+"\n\t"
         return id
 class GEQ(Nodo):
     def __init__(self , name):
@@ -1973,7 +1975,7 @@ class GEQ(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"GEQ: "+self.name+"\"]"+"\n\t"
         return id
 class EQ(Nodo):
     def __init__(self , name):
@@ -1985,7 +1987,7 @@ class EQ(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"EQ: "+self.name+"\"]"+"\n\t"
         return id
 class NEQ(Nodo):
     def __init__(self , name):
@@ -1997,7 +1999,7 @@ class NEQ(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"NEQ: "+self.name+"\"]"+"\n\t"
         return id
 class LPARENT(Nodo):
     def __init__(self , name):
@@ -2009,7 +2011,7 @@ class LPARENT(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"LPARENT: "+self.name+"\"]"+"\n\t"
         return id
 class RPARENT(Nodo):
     def __init__(self , name):
@@ -2021,7 +2023,7 @@ class RPARENT(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"RPARENT: "+self.name+"\"]"+"\n\t"
         return id
 class LBRACKET(Nodo):
     def __init__(self , name):
@@ -2033,7 +2035,7 @@ class LBRACKET(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"LBRACKET: "+self.name+"\"]"+"\n\t"
         return id
 class RBRACKET(Nodo):
     def __init__(self , name):
@@ -2045,7 +2047,7 @@ class RBRACKET(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"RBRACKET: "+self.name+"\"]"+"\n\t"
         return id
 class LBRACE(Nodo):
     def __init__(self , name):
@@ -2057,7 +2059,7 @@ class LBRACE(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"LBRACE: "+self.name+"\"]"+"\n\t"
         return id
 class RBRACE(Nodo):
     def __init__(self , name):
@@ -2069,7 +2071,7 @@ class RBRACE(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"RBRACE: "+self.name+"\"]"+"\n\t"
         return id
 class POWOP1(Nodo):
     def __init__(self , name):
@@ -2081,7 +2083,7 @@ class POWOP1(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"POWOP1: "+self.name+"\"]"+"\n\t"
         return id
 class POWOP2(Nodo):
     def __init__(self , name):
@@ -2093,7 +2095,7 @@ class POWOP2(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"POWOP2: "+self.name+"\"]"+"\n\t"
         return id
 class SEMICOLON(Nodo):
     def __init__(self , name):
@@ -2105,7 +2107,7 @@ class SEMICOLON(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"SEMICOLON: "+self.name+"\"]"+"\n\t"
         return id
 class COMMA(Nodo):
     def __init__(self , name):
@@ -2117,7 +2119,7 @@ class COMMA(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"COMMA: "+self.name+"\"]"+"\n\t"
         return id
 class ASSIGN(Nodo):
     def __init__(self , name):
@@ -2129,7 +2131,7 @@ class ASSIGN(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"ASSIGN: "+self.name+"\"]"+"\n\t"
         return id
 class NUMBER(Nodo):
     def __init__(self , name):
@@ -2141,7 +2143,7 @@ class NUMBER(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"NUMBER: "+self.name+"\"]"+"\n\t"
         return id
 
 
@@ -2156,7 +2158,7 @@ class SCOMMENT(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"SCOMMENT: "+self.name+"\"]"+"\n\t"
         return id
 class BEGINCOMMENT(Nodo):
     def __init__(self , name):
@@ -2193,8 +2195,9 @@ class ELSE(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"ELSE: "+self.name+"\"]"+"\n\t"
         return id
+
 class IF(Nodo):
     def __init__(self , name):
         self.name = name
@@ -2205,7 +2208,7 @@ class IF(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"IF: "+self.name+"\"]"+"\n\t"
         return id
 
 class INT(Nodo):
@@ -2218,7 +2221,7 @@ class INT(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"INT: "+self.name+"\"]"+"\n\t"
         return id
 
 class VOID(Nodo):
@@ -2231,7 +2234,7 @@ class VOID(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"VOID: "+self.name+"\"]"+"\n\t"
         return id
 
 class RETURN(Nodo):
@@ -2244,7 +2247,7 @@ class RETURN(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"RETURN: "+self.name+"\"]"+"\n\t"
         return id
 
 
@@ -2259,5 +2262,5 @@ class WHILE(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"WHILE: "+self.name+"\"]"+"\n\t"
         return id

@@ -1747,6 +1747,7 @@ state 99
     (29) selectionStmt -> IF LPARENT expression RPARENT statement .
     (30) selectionStmt -> IF LPARENT expression RPARENT statement . ELSE statement
 
+  ! shift/reduce conflict for ELSE resolved as shift
     RBRACE          reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
     SEMICOLON       reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
     LBRACE          reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
@@ -1756,9 +1757,9 @@ state 99
     ID              reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
     LPARENT         reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
     NUMBER          reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
-    ELSE            reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .)
+    ELSE            shift and go to state 102
 
-  ! ELSE            [ shift and go to state 102 ]
+  ! ELSE            [ reduce using rule 29 (selectionStmt -> IF LPARENT expression RPARENT statement .) ]
 
 
 state 100
@@ -1855,3 +1856,7 @@ state 103
     NUMBER          reduce using rule 30 (selectionStmt -> IF LPARENT expression RPARENT statement ELSE statement .)
     ELSE            reduce using rule 30 (selectionStmt -> IF LPARENT expression RPARENT statement ELSE statement .)
 
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ELSE in state 99 resolved as shift
