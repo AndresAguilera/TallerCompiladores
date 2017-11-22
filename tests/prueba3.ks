@@ -1,1 +1,4 @@
-int asAd ( void ) {}
+int asAd ( void ) {
+    if(1==1)
+    ;
+}
