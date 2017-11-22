@@ -1,106 +1,50 @@
 digraph G {
-	6[label= "int"]
-	5[label = typeSpecifier1]
+	6[label= "VOID: void"]
+	5[label = typeSpecifier2]
 	5->6
-	7[label= "miFuncion"]
-	8[label= "("]
-	10[label= "void"]
+	7[label=  "ID: main"]
+	8[label= "LPARENT: ("]
+	10[label= "VOID: void"]
 	9[label = params2]
 	9->10
-	11[label= ")"]
-	13[label= "{"]
-	15[label= Nodo_nulo]
-	18[label= "int"]
-	17[label = typeSpecifier1]
-	17->18
-	19[label= "aA"]
-	20[label= ";"]
-	16[label = varDeclaration1]
-	16->17
-	16->19
-	16->20
-	14[label = localDeclarations1]
-	14->15
-	14->16
-	22[label= Nodo_nulo]
-	25[label= "while"]
-	26[label= "("]
-	32[label= "1"]
-	31[label = factor4]
-	31->32
-	30[label = term2]
-	30->31
-	29[label = additiveExpression2]
-	29->30
-	34[label= "=="]
-	33[label = relop5]
-	33->34
-	38[label= "1"]
-	37[label = factor4]
-	37->38
-	36[label = term2]
-	36->37
-	35[label = additiveExpression2]
-	35->36
-	28[label = simpleExpression1]
-	28->29
-	28->33
-	28->35
-	27[label = expression2]
-	27->28
-	39[label= ")"]
-	42[label= "{"]
-	45[label= Nodo_nulo]
-	48[label= "int"]
-	47[label = typeSpecifier1]
-	47->48
-	49[label= "bB"]
-	50[label= ";"]
-	46[label = varDeclaration1]
-	46->47
-	46->49
-	46->50
-	44[label = localDeclarations1]
-	44->45
-	44->46
-	53[label= "int"]
-	52[label = typeSpecifier1]
-	52->53
-	54[label= "cC"]
-	55[label= ";"]
-	51[label = varDeclaration1]
-	51->52
-	51->54
-	51->55
-	43[label = localDeclarations1]
-	43->44
-	43->51
-	56[label= Nodo_nulo]
-	57[label= "}"]
-	41[label = compoundStmt]
-	41->42
-	41->43
-	41->56
-	41->57
-	40[label = statement2]
-	40->41
-	24[label = iterationStmt]
+	11[label= "LPARENT: )"]
+	13[label= "LBRACE: {"]
+	14[label= Nodo_nulo]
+	16[label= Nodo_nulo]
+	25[label=  "ID: aProcedure1"]
+	26[label= "LPARENT: ("]
+	27[label= Nodo_nulo]
+	28[label= "LPARENT: )"]
+	24[label = call]
 	24->25
 	24->26
 	24->27
-	24->39
-	24->40
-	23[label = statement4]
+	24->28
+	23[label = factor3]
 	23->24
-	21[label = statementList1]
+	22[label = term2]
+	22->23
+	21[label = additiveExpression2]
 	21->22
-	21->23
-	58[label= "}"]
+	20[label = simpleExpression2]
+	20->21
+	19[label = expression2]
+	19->20
+	29[label= "SEMICOLON: ;"]
+	18[label = statement2]
+	18->19
+	18->29
+	17[label = statement1]
+	17->18
+	15[label = statementList1]
+	15->16
+	15->17
+	30[label= "RBRACE: }"]
 	12[label = compoundStmt]
 	12->13
 	12->14
-	12->21
-	12->58
+	12->15
+	12->30
 	4[label = funDeclaration]
 	4->5
 	4->7

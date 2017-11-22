@@ -79,7 +79,7 @@ t_MCOMMENT = r'<\/([^\/]|\n)*\/>'
 
 t_SEMICOLON = r';'
 t_COMMA = r','
-t_ASSIGN = r':='
+t_ASSIGN = r'='
 
 
 # r'(?i)[a-zA-Z](_?[a-zA-Z]+)*_?[a-z0-9]+'
