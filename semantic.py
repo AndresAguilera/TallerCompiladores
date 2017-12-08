@@ -1,5 +1,7 @@
 txt = ""
 cont = 0
+raiz = []
+
 def incrementarContador ():
     global cont
     cont += 1
@@ -144,10 +146,11 @@ class declaration2(Nodo):
 
 class varDeclaration1(Nodo):
     def __init__(self,son1,son2,son3, name):
-        self.name = name
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
+        self.name = name
+
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
@@ -232,7 +235,6 @@ class typeSpecifier1(Nodo):
         else:
             self.son1.imprimir(" "+ident)
         print(ident + "Nodo: " + self.name)
-        
 
     def traducir(self):
         global txt

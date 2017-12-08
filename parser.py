@@ -434,13 +434,17 @@ parser = yacc.yacc()
 result = parser.parse(message)
 
 result.imprimir(" ")
-# print(result.traducir())
 
-graphFile = open('graphviztree.dot','w')
+graphFile = open('resultadoparser.dot','w')
 graphFile.write(result.traducir())
-
 graphFile.close()
-print("Se ha guardado el programa traducido en /graphviztree.dot")
+print("Se ha guardado el programa traducido en /resultadoparser.dot")
+
+# graphFile = open('resultadosemantic.dot','w')
+# graphFile.write(result.traducir2())
+# graphFile.close()
+# print("Se ha guardado el programa traducido en /resultadosemantic.dot")
+
 
 print(result)
 

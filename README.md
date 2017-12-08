@@ -4,3 +4,6 @@ Taller de compiladores
   
   Andrés Aguilera
   Walter Toro
+
+  ***Para el taller 3***
+  Ejecutar parser.py
