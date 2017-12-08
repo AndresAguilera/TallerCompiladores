@@ -888,7 +888,7 @@ class selectionStmt1(Nodo):
     
 # 15
 class selectionStmt2(Nodo):
-    def __init__(self, son1, son2, son3, son4, son5, son6, son7,name):
+    def __init__(self, son1, son2, son3, son4, son5, son6, son7, name):
         self.name = name
         self.son1 = son1
         self.son2 = son2
@@ -2025,7 +2025,7 @@ class RPARENT(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label= \""+"LPARENT: "+self.name+"\"]"+"\n\t"
+        txt += id + "[label= \""+"RPARENT: "+self.name+"\"]"+"\n\t"
         return id
 class LBRACKET(Nodo):
     def __init__(self , name):
