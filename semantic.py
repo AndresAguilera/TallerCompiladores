@@ -1,8 +1,13 @@
 txt = ""
 cont = 0
-raiz = []
+
 
 def incrementarContador ():
+    global cont
+    cont += 1
+    return "%d" %cont
+
+def incrementarScope ():
     global cont
     cont += 1
     return "%d" %cont
@@ -11,6 +16,9 @@ class Nodo():
     pass
 
 class Null(Nodo):
+    
+
+
     def __init__(self):
         self.type = 'void'
         self.name = "Nodo nulo"
@@ -27,9 +35,13 @@ class Null(Nodo):
 
 # 1
 class program(Nodo):
+    
+
+
     def __init__(self,son1,name):
         self.name = name
         self.son1 = son1
+        scope = 0
 
     def imprimir(self,ident):
         self.son1.imprimir(" "+ident)
@@ -40,7 +52,7 @@ class program(Nodo):
         id = incrementarContador()
         son1 = self.son1.traducir()
 
-        txt += id+"[label = "+self.name+"]"+"\n\t"
+        txt += id + "[label = " + self.name + "ID" + id + "]" + "\n\t"
         txt += id+"->"+son1+"\n\t"
 
 
@@ -48,6 +60,9 @@ class program(Nodo):
     
 # 2
 class declarationList1(Nodo):
+    
+
+
     def __init__(self, son1, son2, name):
         self.name = name
         self.son1 = son1
@@ -70,7 +85,7 @@ class declarationList1(Nodo):
         son1 = self.son1.traducir()
         son2 = self.son2.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = " + self.name + "ID" + id + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
 
@@ -78,6 +93,9 @@ class declarationList1(Nodo):
     
 # 2
 class declarationList2(Nodo):
+    
+
+
     def __init__(self,son1,name):
         self.name = name
         self.son1 = son1
@@ -91,12 +109,15 @@ class declarationList2(Nodo):
         id = incrementarContador()
         son1 = self.son1.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = " + self.name + "ID" + id + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         return id
     
 # 3
 class declaration1(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -120,6 +141,9 @@ class declaration1(Nodo):
 
 # 3
 class declaration2(Nodo):
+    
+
+
     def __init__(self,son1,name):
         self.name = name
         self.son1 = son1
@@ -145,6 +169,9 @@ class declaration2(Nodo):
 # 4
 
 class varDeclaration1(Nodo):
+    
+
+
     def __init__(self,son1,son2,son3, name):
         self.son1 = son1
         self.son2 = son2
@@ -185,6 +212,9 @@ class varDeclaration1(Nodo):
     
 # 4
 class varDeclaration2(Nodo):
+    
+
+
     def __init__(self,son1,son2,son3,son4,son5,son6,name):
         self.name = name
         self.son1 = son1
@@ -225,6 +255,9 @@ class varDeclaration2(Nodo):
     
 # 5
 class typeSpecifier1(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -241,13 +274,16 @@ class typeSpecifier1(Nodo):
         id = incrementarContador()
         son1 = self.son1.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = " + self.name + "ID" + id + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
 
         return id
     
 # 5
 class typeSpecifier2(Nodo):
+    
+
+
     def __init__(self,son1,name):
         self.name = name
         self.son1 = son1
@@ -272,6 +308,9 @@ class typeSpecifier2(Nodo):
     
 # 6
 class funDeclaration(Nodo):
+    
+
+
     def __init__(self,son1, son2, son3,son4,son5,son6, name):
         self.name = name
         self.son1 = son1
@@ -337,6 +376,9 @@ class funDeclaration(Nodo):
 
 # 7
 class params1(Nodo):
+    
+
+
     def __init__(self,son1, name):
         self.name = name
         self.son1 = son1
@@ -361,6 +403,9 @@ class params1(Nodo):
 
 # 7
 class params2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -384,6 +429,9 @@ class params2(Nodo):
 
 # 8
 class paramList1(Nodo):
+    
+
+
     def __init__(self,son1,son2,son3,name):
         self.name = name
         self.son1 = son1
@@ -421,6 +469,9 @@ class paramList1(Nodo):
     
 # 8
 class paramList2(Nodo):
+    
+
+
     def __init__(self,son1,name):
         self.name = name
         self.son1 = son1
@@ -445,6 +496,9 @@ class paramList2(Nodo):
 
 # 9
 class param1(Nodo):
+    
+
+
     def __init__(self,son1, son2, name):
         self.name = name
         self.son1 = son1
@@ -473,6 +527,9 @@ class param1(Nodo):
 
 # 9
 class param2(Nodo):
+    
+
+
     def __init__(self,son1, son2, son3, son4, name):
         self.name = name
         self.son1 = son1
@@ -508,6 +565,9 @@ class param2(Nodo):
 
 # 10
 class compoundStmt(Nodo):
+    
+
+
     def __init__(self,son1, son2, son3, son4, name):
         self.name = name
         self.son1 = son1
@@ -553,6 +613,9 @@ class compoundStmt(Nodo):
 
 # 11
 class localDeclarations1(Nodo):
+    
+
+
     def __init__(self,son1, son2, name):
         self.name = name
         self.son1 = son1
@@ -584,6 +647,9 @@ class localDeclarations1(Nodo):
 
 # 11
 class localDeclarations2(Nodo):
+    
+
+
     def __init__(self,son1, name):
         self.name = name
         self.son1 = son1
@@ -609,6 +675,9 @@ class localDeclarations2(Nodo):
 
 # 12
 class statementList1(Nodo):
+    
+
+
     def __init__(self, son1, son2, name):
         self.name = name
         self.son1 = son1
@@ -641,6 +710,9 @@ class statementList1(Nodo):
 
 # 12
 class statementList2(Nodo):
+    
+
+
     def __init__(self, son1,name):
         self.name = name
         self.son1 = son1
@@ -666,6 +738,9 @@ class statementList2(Nodo):
 
 # 13
 class statement1(Nodo):
+    
+
+
     def __init__(self,son1, name):
         self.name = name
         self.son1  = son1
@@ -691,6 +766,9 @@ class statement1(Nodo):
 
 # 13
 class statement2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -714,6 +792,9 @@ class statement2(Nodo):
     
 # 13
 class statement3(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -737,6 +818,9 @@ class statement3(Nodo):
     
 # 13
 class statement4(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -760,6 +844,9 @@ class statement4(Nodo):
     
 # 13
 class statement5(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -784,6 +871,9 @@ class statement5(Nodo):
 
 # 14
 class expressionStmt1(Nodo):
+    
+
+
     def __init__(self, son1, son2, name):
         self.name = name
         self.son1 = son1
@@ -814,6 +904,9 @@ class expressionStmt1(Nodo):
 
 # 14
 class expressionStmt2(Nodo):
+    
+
+
     def __init__(self,son1,name):
         self.name = name
         self.son1 = son1
@@ -838,6 +931,9 @@ class expressionStmt2(Nodo):
 
 # 15
 class selectionStmt1(Nodo):
+    
+
+
     def __init__(self, son1, son2, son3, son4, son5, name):
         self.name = name
         self.son1 = son1
@@ -888,6 +984,9 @@ class selectionStmt1(Nodo):
     
 # 15
 class selectionStmt2(Nodo):
+    
+
+
     def __init__(self, son1, son2, son3, son4, son5, son6, son7, name):
         self.name = name
         self.son1 = son1
@@ -932,6 +1031,9 @@ class selectionStmt2(Nodo):
 
 # 16
 class iterationStmt(Nodo):
+    
+
+
     def __init__(self, son1, son2, son3, son4, son5, name):
         self.name = name
         self.son1 = son1
@@ -982,6 +1084,9 @@ class iterationStmt(Nodo):
 
 # 17
 class returnStmt1(Nodo):
+    
+
+
     def __init__(self,son1, son2,name):
         self.name = name
         self.son1 = son1
@@ -1013,6 +1118,9 @@ class returnStmt1(Nodo):
 
 # 17
 class returnStmt2(Nodo):
+    
+
+
     def __init__(self, son1, son2,son3, name):
         self.name = name
         self.son1 = son1
@@ -1050,6 +1158,9 @@ class returnStmt2(Nodo):
 
 # 18
 class expression1(Nodo):
+    
+
+
     def __init__(self, son1, son2,son3, name):
         self.name = name
         self.son1 = son1
@@ -1087,6 +1198,9 @@ class expression1(Nodo):
 
 # 18
 class expression2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1110,6 +1224,9 @@ class expression2(Nodo):
 
 # 19
 class var1(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1133,6 +1250,9 @@ class var1(Nodo):
 
 # 19
 class var2(Nodo):
+    
+
+
     def __init__(self, son1, son2, son3, son4, name):
         self.name = name
         self.son1 = son1
@@ -1178,6 +1298,9 @@ class var2(Nodo):
 
 # 20
 class simpleExpression1(Nodo):
+    
+
+
     def __init__(self, son1, son2, son3, name):
         self.name = name
         self.son1 = son1
@@ -1216,6 +1339,9 @@ class simpleExpression1(Nodo):
 
 # 20
 class simpleExpression2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1240,6 +1366,9 @@ class simpleExpression2(Nodo):
 
 # 21
 class relop1(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1263,6 +1392,9 @@ class relop1(Nodo):
     
 # 21
 class relop2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1286,6 +1418,9 @@ class relop2(Nodo):
    
 # 21
 class relop3(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1310,6 +1445,9 @@ class relop3(Nodo):
 
 # 21
 class relop4(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1334,6 +1472,9 @@ class relop4(Nodo):
 
 # 21
 class relop5(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1358,6 +1499,9 @@ class relop5(Nodo):
 
 # 21
 class relop6(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1382,6 +1526,9 @@ class relop6(Nodo):
 
 # 22
 class additiveExpression1(Nodo):
+    
+
+
     def __init__(self, son1,son2,son3, name):
         self.name = name
         self.son1 = son1
@@ -1420,6 +1567,9 @@ class additiveExpression1(Nodo):
 
 # 22
 class additiveExpression2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1444,6 +1594,9 @@ class additiveExpression2(Nodo):
 
 # 23
 class addop1(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1468,6 +1621,9 @@ class addop1(Nodo):
 
 # 23
 class addop2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1491,6 +1647,9 @@ class addop2(Nodo):
 
 # 24
 class term1(Nodo):
+    
+
+
     def __init__(self, son1, son2 ,son3, name):
         self.name = name
         self.son1 = son1
@@ -1528,6 +1687,9 @@ class term1(Nodo):
 
 # 24
 class term2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1552,6 +1714,9 @@ class term2(Nodo):
 
 # 25
 class mulop1(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1576,6 +1741,9 @@ class mulop1(Nodo):
 
 # 25
 class mulop2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1600,6 +1768,9 @@ class mulop2(Nodo):
 
 # 26
 class factor1(Nodo):
+    
+
+
     def __init__(self, son1,son2,son3, name):
         self.name = name
         self.son1 = son1
@@ -1638,6 +1809,9 @@ class factor1(Nodo):
 
 # 26
 class factor2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1662,6 +1836,9 @@ class factor2(Nodo):
 
 # 27
 class factor3(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1686,6 +1863,9 @@ class factor3(Nodo):
 
 # 27
 class factor4(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1710,6 +1890,9 @@ class factor4(Nodo):
 
 #27
 class call(Nodo):
+    
+
+
     def __init__(self, son1, son2, son3, son4, name):
         self.name = name
         self.son1 = son1
@@ -1744,6 +1927,9 @@ class call(Nodo):
 
 # 28
 class args1(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1767,6 +1953,9 @@ class args1(Nodo):
 
 # 28
 class args2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1790,6 +1979,9 @@ class args2(Nodo):
 
 # 29
 class argList1(Nodo):
+    
+
+
     def __init__(self, son1, son2, son3, name):
         self.name = name
         self.son1 = son1
@@ -1820,6 +2012,9 @@ class argList1(Nodo):
 
 #  29
 class argList2(Nodo):
+    
+
+
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
@@ -1841,6 +2036,9 @@ class argList2(Nodo):
         return id;
 # 32
 class empty(Nodo):
+    
+
+
     def __init__(self,name):
         self.name = name
 
@@ -1856,6 +2054,9 @@ class empty(Nodo):
         return id
 
 class error(Nodo):
+    
+
+
     def __init__(self,name):
         self.name = name
 
@@ -1872,6 +2073,9 @@ class error(Nodo):
 
 # Terminales y reservadas
 class ID(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1881,9 +2085,12 @@ class ID(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label=  \""+"ID: "+self.name+"\"]"+"\n\t"
+        txt += id + "[label=  \""+"ID: "+self.name + id + "\"]"+"\n\t"
         return id
 class PLUS(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1896,6 +2103,9 @@ class PLUS(Nodo):
         txt += id + "[label= \""+"PLUS: "+self.name+"\"]"+"\n\t"
         return id
 class MINUS(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1908,6 +2118,9 @@ class MINUS(Nodo):
         txt += id + "[label= \""+"MINUS: "+self.name+"\"]"+"\n\t"
         return id
 class TIMES(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1920,6 +2133,9 @@ class TIMES(Nodo):
         txt += id + "[label= \""+"TIMES: "+self.name+"\"]"+"\n\t"
         return id
 class DIVIDE(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1932,6 +2148,9 @@ class DIVIDE(Nodo):
         txt += id + "[label= \""+"DIVIDE: "+self.name+"\"]"+"\n\t"
         return id
 class LT(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1944,6 +2163,9 @@ class LT(Nodo):
         txt += id + "[label= \""+"LT: "+self.name+"\"]"+"\n\t"
         return id
 class LEQ(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1956,6 +2178,9 @@ class LEQ(Nodo):
         txt += id + "[label= \""+"LEQ: "+self.name+"\"]"+"\n\t"
         return id
 class GT(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1968,6 +2193,9 @@ class GT(Nodo):
         txt += id + "[label= \""+"GT: "+self.name+"\"]"+"\n\t"
         return id
 class GEQ(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1980,6 +2208,9 @@ class GEQ(Nodo):
         txt += id + "[label= \""+"GEQ: "+self.name+"\"]"+"\n\t"
         return id
 class EQ(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -1992,6 +2223,9 @@ class EQ(Nodo):
         txt += id + "[label= \""+"EQ: "+self.name+"\"]"+"\n\t"
         return id
 class NEQ(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2004,6 +2238,9 @@ class NEQ(Nodo):
         txt += id + "[label= \""+"NEQ: "+self.name+"\"]"+"\n\t"
         return id
 class LPARENT(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2016,6 +2253,9 @@ class LPARENT(Nodo):
         txt += id + "[label= \""+"LPARENT: "+self.name+"\"]"+"\n\t"
         return id
 class RPARENT(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2028,6 +2268,9 @@ class RPARENT(Nodo):
         txt += id + "[label= \""+"RPARENT: "+self.name+"\"]"+"\n\t"
         return id
 class LBRACKET(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2040,6 +2283,9 @@ class LBRACKET(Nodo):
         txt += id + "[label= \""+"LBRACKET: "+self.name+"\"]"+"\n\t"
         return id
 class RBRACKET(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2052,6 +2298,9 @@ class RBRACKET(Nodo):
         txt += id + "[label= \""+"RBRACKET: "+self.name+"\"]"+"\n\t"
         return id
 class LBRACE(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2064,6 +2313,9 @@ class LBRACE(Nodo):
         txt += id + "[label= \""+"LBRACE: "+self.name+"\"]"+"\n\t"
         return id
 class RBRACE(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2076,6 +2328,9 @@ class RBRACE(Nodo):
         txt += id + "[label= \""+"RBRACE: "+self.name+"\"]"+"\n\t"
         return id
 class POWOP1(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2088,6 +2343,9 @@ class POWOP1(Nodo):
         txt += id + "[label= \""+"POWOP1: "+self.name+"\"]"+"\n\t"
         return id
 class POWOP2(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2100,6 +2358,9 @@ class POWOP2(Nodo):
         txt += id + "[label= \""+"POWOP2: "+self.name+"\"]"+"\n\t"
         return id
 class SEMICOLON(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2112,6 +2373,9 @@ class SEMICOLON(Nodo):
         txt += id + "[label= \""+"SEMICOLON: "+self.name+"\"]"+"\n\t"
         return id
 class COMMA(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2124,6 +2388,9 @@ class COMMA(Nodo):
         txt += id + "[label= \""+"COMMA: "+self.name+"\"]"+"\n\t"
         return id
 class ASSIGN(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2136,6 +2403,9 @@ class ASSIGN(Nodo):
         txt += id + "[label= \""+"ASSIGN: "+self.name+"\"]"+"\n\t"
         return id
 class NUMBER(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = str(name)
 
@@ -2151,6 +2421,9 @@ class NUMBER(Nodo):
 
 
 class SCOMMENT(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2163,6 +2436,9 @@ class SCOMMENT(Nodo):
         txt += id + "[label= \""+"SCOMMENT: "+self.name+"\"]"+"\n\t"
         return id
 class BEGINCOMMENT(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2175,6 +2451,9 @@ class BEGINCOMMENT(Nodo):
         txt += id + "[label= \""+self.name+"\"]"+"\n\t"
         return id
 class ENDCOMMENT(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2188,6 +2467,9 @@ class ENDCOMMENT(Nodo):
         return id
 
 class ELSE(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2201,6 +2483,9 @@ class ELSE(Nodo):
         return id
 
 class IF(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2214,6 +2499,9 @@ class IF(Nodo):
         return id
 
 class INT(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2227,6 +2515,9 @@ class INT(Nodo):
         return id
 
 class VOID(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2240,6 +2531,9 @@ class VOID(Nodo):
         return id
 
 class RETURN(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 
@@ -2255,6 +2549,9 @@ class RETURN(Nodo):
 
 
 class WHILE(Nodo):
+    
+
+
     def __init__(self , name):
         self.name = name
 

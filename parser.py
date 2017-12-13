@@ -426,7 +426,7 @@ analyzer.input(message)
 parser = yacc.yacc()
 result = parser.parse(message)
 
-result.imprimir(" ")
+# result.imprimir(" ")
 
 graphFile = open('resultadoparser.dot','w')
 graphFile.write(result.traducir())
@@ -439,7 +439,7 @@ print("Se ha guardado el programa traducido en /resultadoparser.dot")
 # print("Se ha guardado el programa traducido en /resultadosemantic.dot")
 
 
-print(result)
+# print(result)
 
 while True:
     tok = analyzer.token()

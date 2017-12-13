@@ -1,8 +1,8 @@
 digraph G {
 	15[label= "INT: int"]
-	14[label = typeSpecifier1]
+	14[label = typeSpecifier1ID14]
 	14->15
-	16[label=  "ID: aNumber1"]
+	16[label=  "ID: aNumber116"]
 	17[label= "SEMICOLON: ;"]
 	13[label = varDeclaration1]
 	13->14
@@ -10,12 +10,12 @@ digraph G {
 	13->17
 	12[label = declaration1]
 	12->13
-	11[label = declarationList2]
+	11[label = declarationList2ID11]
 	11->12
 	21[label= "INT: int"]
-	20[label = typeSpecifier1]
+	20[label = typeSpecifier1ID20]
 	20->21
-	22[label=  "ID: aNumber2"]
+	22[label=  "ID: aNumber222"]
 	23[label= "SEMICOLON: ;"]
 	19[label = varDeclaration1]
 	19->20
@@ -23,13 +23,13 @@ digraph G {
 	19->23
 	18[label = declaration1]
 	18->19
-	10[label = declarationList1]
+	10[label = declarationList1ID10]
 	10->11
 	10->18
 	27[label= "INT: int"]
-	26[label = typeSpecifier1]
+	26[label = typeSpecifier1ID26]
 	26->27
-	28[label=  "ID: anArray"]
+	28[label=  "ID: anArray28"]
 	29[label= "LBRACKET: ["]
 	30[label= "NUMBER: 123"]
 	31[label= "RBRACKET: ]"]
@@ -43,13 +43,13 @@ digraph G {
 	25->32
 	24[label = declaration1]
 	24->25
-	9[label = declarationList1]
+	9[label = declarationList1ID9]
 	9->10
 	9->24
 	36[label= "VOID: void"]
 	35[label = typeSpecifier2]
 	35->36
-	37[label=  "ID: aVariable"]
+	37[label=  "ID: aVariable37"]
 	38[label= "SEMICOLON: ;"]
 	34[label = varDeclaration1]
 	34->35
@@ -57,13 +57,13 @@ digraph G {
 	34->38
 	33[label = declaration1]
 	33->34
-	8[label = declarationList1]
+	8[label = declarationList1ID8]
 	8->9
 	8->33
 	42[label= "VOID: void"]
 	41[label = typeSpecifier2]
 	41->42
-	43[label=  "ID: anotherArray"]
+	43[label=  "ID: anotherArray43"]
 	44[label= "LBRACKET: ["]
 	45[label= "NUMBER: 234"]
 	46[label= "RBRACKET: ]"]
@@ -77,18 +77,18 @@ digraph G {
 	40->47
 	39[label = declaration1]
 	39->40
-	7[label = declarationList1]
+	7[label = declarationList1ID7]
 	7->8
 	7->39
 	51[label= "VOID: void"]
 	50[label = typeSpecifier2]
 	50->51
-	52[label=  "ID: aProcedure1"]
+	52[label=  "ID: aProcedure152"]
 	53[label= "LPARENT: ("]
 	55[label= "VOID: void"]
 	54[label = params2]
 	54->55
-	56[label= "LPARENT: )"]
+	56[label= "RPARENT: )"]
 	58[label= "LBRACE: {"]
 	59[label= Nodo_nulo]
 	60[label= Nodo_nulo]
@@ -107,18 +107,18 @@ digraph G {
 	49->57
 	48[label = declaration2]
 	48->49
-	6[label = declarationList1]
+	6[label = declarationList1ID6]
 	6->7
 	6->48
 	65[label= "VOID: void"]
 	64[label = typeSpecifier2]
 	64->65
-	66[label=  "ID: aProcedure2"]
+	66[label=  "ID: aProcedure266"]
 	67[label= "LPARENT: ("]
 	69[label= "VOID: void"]
 	68[label = params2]
 	68->69
-	70[label= "LPARENT: )"]
+	70[label= "RPARENT: )"]
 	72[label= "LBRACE: {"]
 	73[label= Nodo_nulo]
 	75[label= Nodo_nulo]
@@ -145,18 +145,18 @@ digraph G {
 	63->71
 	62[label = declaration2]
 	62->63
-	5[label = declarationList1]
+	5[label = declarationList1ID5]
 	5->6
 	5->62
 	83[label= "INT: int"]
-	82[label = typeSpecifier1]
+	82[label = typeSpecifier1ID82]
 	82->83
-	84[label=  "ID: aProcedure3"]
+	84[label=  "ID: aProcedure384"]
 	85[label= "LPARENT: ("]
 	87[label= "VOID: void"]
 	86[label = params2]
 	86->87
-	88[label= "LPARENT: )"]
+	88[label= "RPARENT: )"]
 	90[label= "LBRACE: {"]
 	91[label= Nodo_nulo]
 	97[label= Nodo_nulo]
@@ -215,18 +215,18 @@ digraph G {
 	81->89
 	80[label = declaration2]
 	80->81
-	4[label = declarationList1]
+	4[label = declarationList1ID4]
 	4->5
 	4->80
 	117[label= "INT: int"]
-	116[label = typeSpecifier1]
+	116[label = typeSpecifier1ID116]
 	116->117
-	118[label=  "ID: aProcedure4"]
+	118[label=  "ID: aProcedure4118"]
 	119[label= "LPARENT: ("]
 	127[label= "INT: int"]
-	126[label = typeSpecifier1]
+	126[label = typeSpecifier1ID126]
 	126->127
-	128[label=  "ID: aNum1"]
+	128[label=  "ID: aNum1128"]
 	125[label = paramList2]
 	125->126
 	125->128
@@ -236,7 +236,7 @@ digraph G {
 	132[label= "VOID: void"]
 	131[label = typeSpecifier2]
 	131->132
-	133[label=  "ID: aNum2"]
+	133[label=  "ID: aNum2133"]
 	130[label = paramList2]
 	130->131
 	130->133
@@ -246,9 +246,9 @@ digraph G {
 	123->130
 	134[label= "COMMA: ,"]
 	137[label= "INT: int"]
-	136[label = typeSpecifier1]
+	136[label = typeSpecifier1ID136]
 	136->137
-	138[label=  "ID: anArray1"]
+	138[label=  "ID: anArray1138"]
 	139[label= "LBRACKET: ["]
 	135[label = param2]
 	135->136
@@ -262,7 +262,7 @@ digraph G {
 	143[label= "VOID: void"]
 	142[label = typeSpecifier2]
 	142->143
-	144[label=  "ID: anArray2"]
+	144[label=  "ID: anArray2144"]
 	145[label= "LBRACKET: ["]
 	141[label = param2]
 	141->142
@@ -274,13 +274,13 @@ digraph G {
 	121->141
 	120[label = params1]
 	120->121
-	146[label= "LPARENT: )"]
+	146[label= "RPARENT: )"]
 	148[label= "LBRACE: {"]
 	154[label= Nodo_nulo]
 	157[label= "INT: int"]
-	156[label = typeSpecifier1]
+	156[label = typeSpecifier1ID156]
 	156->157
-	158[label=  "ID: aNum3"]
+	158[label=  "ID: aNum3158"]
 	159[label= "SEMICOLON: ;"]
 	155[label = varDeclaration1]
 	155->156
@@ -290,9 +290,9 @@ digraph G {
 	153->154
 	153->155
 	162[label= "INT: int"]
-	161[label = typeSpecifier1]
+	161[label = typeSpecifier1ID161]
 	161->162
-	163[label=  "ID: anArray3"]
+	163[label=  "ID: anArray3163"]
 	164[label= "LBRACKET: ["]
 	165[label= "NUMBER: 456"]
 	166[label= "RBRACKET: ]"]
@@ -310,7 +310,7 @@ digraph G {
 	170[label= "VOID: void"]
 	169[label = typeSpecifier2]
 	169->170
-	171[label=  "ID: aNum4"]
+	171[label=  "ID: aNum4171"]
 	172[label= "SEMICOLON: ;"]
 	168[label = varDeclaration1]
 	168->169
@@ -322,7 +322,7 @@ digraph G {
 	175[label= "VOID: void"]
 	174[label = typeSpecifier2]
 	174->175
-	176[label=  "ID: anArray4"]
+	176[label=  "ID: anArray4176"]
 	177[label= "LBRACKET: ["]
 	178[label= "NUMBER: 78"]
 	179[label= "RBRACKET: ]"]
@@ -338,9 +338,9 @@ digraph G {
 	150->151
 	150->173
 	183[label= "INT: int"]
-	182[label = typeSpecifier1]
+	182[label = typeSpecifier1ID182]
 	182->183
-	184[label=  "ID: aNum5"]
+	184[label=  "ID: aNum5184"]
 	185[label= "SEMICOLON: ;"]
 	181[label = varDeclaration1]
 	181->182
@@ -350,11 +350,11 @@ digraph G {
 	149->150
 	149->181
 	196[label= Nodo_nulo]
-	201[label=  "ID: aNum3"]
+	201[label=  "ID: aNum3201"]
 	200[label = var1]
 	200->201
 	202[label= "ASSIGN: ="]
-	209[label=  "ID: aNum1"]
+	209[label=  "ID: aNum1209"]
 	208[label = var1]
 	208->209
 	207[label = factor2]
@@ -380,11 +380,11 @@ digraph G {
 	195[label = statementList1]
 	195->196
 	195->197
-	215[label=  "ID: aNum2"]
+	215[label=  "ID: aNum2215"]
 	214[label = var1]
 	214->215
 	216[label= "ASSIGN: ="]
-	224[label=  "ID: aNum3"]
+	224[label=  "ID: aNum3224"]
 	223[label = var1]
 	223->224
 	222[label = factor2]
@@ -422,7 +422,7 @@ digraph G {
 	194[label = statementList1]
 	194->195
 	194->211
-	235[label=  "ID: anArray3"]
+	235[label=  "ID: anArray3235"]
 	236[label= "LBRACKET: ["]
 	242[label= "NUMBER: 0"]
 	241[label = factor4]
@@ -442,7 +442,7 @@ digraph G {
 	234->237
 	234->243
 	244[label= "ASSIGN: ="]
-	251[label=  "ID: anArray1"]
+	251[label=  "ID: anArray1251"]
 	252[label= "LBRACKET: ["]
 	258[label= "NUMBER: 2"]
 	257[label = factor4]
@@ -484,7 +484,7 @@ digraph G {
 	193[label = statementList1]
 	193->194
 	193->231
-	265[label=  "ID: anArray2"]
+	265[label=  "ID: anArray2265"]
 	266[label= "LBRACKET: ["]
 	272[label= "NUMBER: 3"]
 	271[label = factor4]
@@ -504,7 +504,7 @@ digraph G {
 	264->267
 	264->273
 	274[label= "ASSIGN: ="]
-	281[label=  "ID: anarray3"]
+	281[label=  "ID: anarray3281"]
 	282[label= "LBRACKET: ["]
 	288[label= "NUMBER: 4"]
 	287[label = factor4]
@@ -564,7 +564,7 @@ digraph G {
 	190->294
 	299[label= "WHILE: while"]
 	300[label= "LPARENT: ("]
-	307[label=  "ID: aNum3"]
+	307[label=  "ID: aNum3307"]
 	306[label = var1]
 	306->307
 	305[label = factor2]
@@ -576,7 +576,7 @@ digraph G {
 	309[label= "GT: >"]
 	308[label = relop3]
 	308->309
-	314[label=  "ID: aNum4"]
+	314[label=  "ID: aNum4314"]
 	313[label = var1]
 	313->314
 	312[label = factor2]
@@ -591,7 +591,7 @@ digraph G {
 	302->310
 	301[label = expression2]
 	301->302
-	315[label= "LPARENT: )"]
+	315[label= "RPARENT: )"]
 	318[label= "SEMICOLON: ;"]
 	317[label = statement2]
 	317->318
@@ -610,7 +610,7 @@ digraph G {
 	189->297
 	321[label= "WHILE: while"]
 	322[label= "LPARENT: ("]
-	330[label=  "ID: aNum3"]
+	330[label=  "ID: aNum3330"]
 	329[label = var1]
 	329->330
 	328[label = factor2]
@@ -642,7 +642,7 @@ digraph G {
 	344[label= "TIMES: *"]
 	343[label = mulop1]
 	343->344
-	347[label=  "ID: aNum5"]
+	347[label=  "ID: aNum5347"]
 	346[label = var1]
 	346->347
 	345[label = factor2]
@@ -659,7 +659,7 @@ digraph G {
 	324->338
 	323[label = expression2]
 	323->324
-	348[label= "LPARENT: )"]
+	348[label= "RPARENT: )"]
 	351[label= "LBRACE: {"]
 	352[label= Nodo_nulo]
 	354[label= Nodo_nulo]
@@ -705,7 +705,7 @@ digraph G {
 	365->366
 	364[label = expression2]
 	364->365
-	370[label= "LPARENT: )"]
+	370[label= "RPARENT: )"]
 	373[label= "SEMICOLON: ;"]
 	372[label = statement2]
 	372->373
@@ -724,7 +724,7 @@ digraph G {
 	187->360
 	376[label= "IF: if"]
 	377[label= "LPARENT: ("]
-	384[label=  "ID: aNum5"]
+	384[label=  "ID: aNum5384"]
 	383[label = var1]
 	383->384
 	382[label = factor2]
@@ -737,7 +737,7 @@ digraph G {
 	379->380
 	378[label = expression2]
 	378->379
-	385[label= "LPARENT: )"]
+	385[label= "RPARENT: )"]
 	388[label= "SEMICOLON: ;"]
 	387[label = statement2]
 	387->388
@@ -769,25 +769,25 @@ digraph G {
 	115->147
 	114[label = declaration2]
 	114->115
-	3[label = declarationList1]
+	3[label = declarationList1ID3]
 	3->4
 	3->114
 	393[label= "VOID: void"]
 	392[label = typeSpecifier2]
 	392->393
-	394[label=  "ID: main"]
+	394[label=  "ID: main394"]
 	395[label= "LPARENT: ("]
 	397[label= "VOID: void"]
 	396[label = params2]
 	396->397
-	398[label= "LPARENT: )"]
+	398[label= "RPARENT: )"]
 	400[label= "LBRACE: {"]
 	401[label= Nodo_nulo]
 	403[label= Nodo_nulo]
-	412[label=  "ID: aProcedure1"]
+	412[label=  "ID: aProcedure1412"]
 	413[label= "LPARENT: ("]
 	414[label= Nodo_nulo]
-	415[label= "LPARENT: )"]
+	415[label= "RPARENT: )"]
 	411[label = call]
 	411->412
 	411->413
@@ -827,9 +827,9 @@ digraph G {
 	391->399
 	390[label = declaration2]
 	390->391
-	2[label = declarationList1]
+	2[label = declarationList1ID2]
 	2->3
 	2->390
-	1[label = program]
+	1[label = programID1]
 	1->2
 	}
