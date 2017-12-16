@@ -1,4 +1,3 @@
-int asAd ( void ) {
-    if(1==1)
-    ;
+void miFuncion (int a, int b){
+    int c;
 }

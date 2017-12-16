@@ -1,23 +1,38 @@
 txt = ""
 cont = 0
-
+nivel = 0
 
 def incrementarContador ():
     global cont
     cont += 1
     return "%d" %cont
 
-def incrementarScope ():
-    global cont
-    cont += 1
-    return "%d" %cont
+def getScope(id):
+    if(len(Nodo.scopes)==0):
+        return
+    else:
+        for x in range(0, len(Nodo.scopes)):
+            print("Scope: "+str(Nodo.scopes[x]))
+            if(Nodo.scopes[x].id==id):
+                print(Nodo.scopes[x])
+                return Nodo.scopes[x]
 
 class Nodo():
-    pass
+    variablesGlobales = []
+    funciones = []
+    scopes = []
+
+
+
+
+class Scope():
+    def __init__(self, id):
+        self.id = id
+        self.nivel = nivel
+        self.localVariables = []
+
 
 class Null(Nodo):
-    
-
 
     def __init__(self):
         self.type = 'void'
@@ -35,13 +50,10 @@ class Null(Nodo):
 
 # 1
 class program(Nodo):
-    
 
-
-    def __init__(self,son1,name):
+    def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-        scope = 0
 
     def imprimir(self,ident):
         self.son1.imprimir(" "+ident)
@@ -52,7 +64,8 @@ class program(Nodo):
         id = incrementarContador()
         son1 = self.son1.traducir()
 
-        txt += id + "[label = " + self.name + "ID" + id + "]" + "\n\t"
+
+        txt += id + "[label = \"" + self.name + "\\nVariables globales" + str(Nodo.variablesGlobales) + "\\nFunciones" + str(Nodo.funciones) + "\"]" + "\n\t"
         txt += id+"->"+son1+"\n\t"
 
 
@@ -67,7 +80,6 @@ class declarationList1(Nodo):
         self.name = name
         self.son1 = son1
         self.son2 = son2
-
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
             self.son1[0].imprimir(" "+ident)
@@ -85,7 +97,7 @@ class declarationList1(Nodo):
         son1 = self.son1.traducir()
         son2 = self.son2.traducir()
 
-        txt += id + "[label = " + self.name + "ID" + id + "]" + "\n\t"
+        txt += id + "[label = " + self.name + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
 
@@ -109,7 +121,7 @@ class declarationList2(Nodo):
         id = incrementarContador()
         son1 = self.son1.traducir()
 
-        txt += id + "[label = " + self.name + "ID" + id + "]" + "\n\t"
+        txt += id + "[label = " + self.name + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         return id
     
@@ -169,14 +181,25 @@ class declaration2(Nodo):
 # 4
 
 class varDeclaration1(Nodo):
-    
-
 
     def __init__(self,son1,son2,son3, name):
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
         self.name = name
+        self.tipoVariable = son1.tipo
+        self.idVariable = son2.name
+        self.variable = "id: " + self.idVariable + " - tipo: " + son1.tipo
+        print(self.variable)
+        if(len(Nodo.scopes)==0):
+            print("Esta variable es global: " +self.idVariable + " y es de tipo: " +self.tipoVariable)
+            variable = []
+            variable.append("id: "+self.idVariable+" - tipo: "+self.tipoVariable)
+            Nodo.variablesGlobales.append(variable)
+        else:
+            print("Esta variable es local: " +self.idVariable + " y es de tipo: " +self.tipoVariable)
+
+
 
 
     def imprimir(self,ident):
@@ -212,8 +235,6 @@ class varDeclaration1(Nodo):
     
 # 4
 class varDeclaration2(Nodo):
-    
-
 
     def __init__(self,son1,son2,son3,son4,son5,son6,name):
         self.name = name
@@ -223,6 +244,17 @@ class varDeclaration2(Nodo):
         self.son4 = son4
         self.son5 = son5
         self.son6 = son6
+        self.tipoVariable = son1.tipo
+        self.idVariable = son2.name
+        self.variable = "id: " + self.idVariable + "tipo: " + son1.tipo
+        # print("Scopes: " + str(len(Nodo.scopes)))
+        if (len(Nodo.scopes) == 0):
+            print("Esta variable es global: " + self.idVariable + " y es de tipo: " + self.tipoVariable)
+            variable = []
+            variable.append("id: " + self.idVariable + " - tipo: " + self.tipoVariable)
+            Nodo.variablesGlobales.append(variable)
+        else:
+            print("Esta variable es local: " + self.idVariable + " y es de tipo: " + self.tipoVariable)
 
     def imprimir(self,ident):
         self.son1.imprimir(" "+ident)
@@ -261,6 +293,7 @@ class typeSpecifier1(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
+        self.tipo = son1.name
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -274,7 +307,7 @@ class typeSpecifier1(Nodo):
         id = incrementarContador()
         son1 = self.son1.traducir()
 
-        txt += id + "[label = " + self.name + "ID" + id + "]" + "\n\t"
+        txt += id + "[label = " + self.name + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
 
         return id
@@ -287,6 +320,7 @@ class typeSpecifier2(Nodo):
     def __init__(self,son1,name):
         self.name = name
         self.son1 = son1
+        self.tipo = son1.name
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -319,7 +353,14 @@ class funDeclaration(Nodo):
         self.son4 = son4
         self.son5 = son5
         self.son6 = son6
-
+        self.tipoFuncion = son1.tipo
+        self.idFuncion = son2.name
+        self.params = son4.params
+        self.variablesLocales = son6.variablesLocales
+        print("Esta funcion se llama: " + self.idFuncion + " y es de tipo: " + self.tipoFuncion + " y tiene variables: "+str(self.variablesLocales))
+        funcion = []
+        funcion.append("id: "+self.idFuncion+" tipo: "+self.tipoFuncion)
+        Nodo.funciones.append(funcion)
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
             self.son1[0].imprimir(" "+ident)
@@ -364,7 +405,7 @@ class funDeclaration(Nodo):
         son6 = self.son6.traducir()
 
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\nParametros: " + str(self.params) + "\\nVariables locales: " + str(self.variablesLocales) + " \"]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -382,6 +423,8 @@ class params1(Nodo):
     def __init__(self,son1, name):
         self.name = name
         self.son1 = son1
+        self.params = son1.params
+
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -409,6 +452,7 @@ class params2(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
+        self.params = son1.name
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -437,6 +481,9 @@ class paramList1(Nodo):
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
+        self.params = []
+        self.params.append(son1.params)
+        self.params.append(son3.param)
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
@@ -475,6 +522,7 @@ class paramList2(Nodo):
     def __init__(self,son1,name):
         self.name = name
         self.son1 = son1
+        self.params = son1.param
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -503,6 +551,9 @@ class param1(Nodo):
         self.name = name
         self.son1 = son1
         self.son2 = son2
+        self.param = []
+        self.param.append(son1.tipo)
+        self.param.append(son2.name)
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -536,6 +587,9 @@ class param2(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.son4 = son4
+        self.param = []
+        self.param.append(son1.tipo)
+        self.param.append(son2.name)
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -574,6 +628,10 @@ class compoundStmt(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.son4 = son4
+        self.variablesLocales =  []
+        if(son2.name != "Nodo nulo"):
+            self.variablesLocales.append(son2.variables)
+        Nodo.scopes.append("")
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
@@ -603,7 +661,7 @@ class compoundStmt(Nodo):
         son3 = self.son3.traducir()
         son4 = self.son4.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\nVariables locales: " +str(self.variablesLocales) + "\"]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -620,6 +678,12 @@ class localDeclarations1(Nodo):
         self.name = name
         self.son1 = son1
         self.son2 = son2
+        self.variables = []
+        if(son1.name=="Nodo nulo"):
+            self.variables.append(son2.variable)
+        else:
+            self.variables.append(son1.variables)
+            self.variables.append(son2.variable)
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
@@ -2085,7 +2149,7 @@ class ID(Nodo):
     def traducir(self):
         global txt
         id = incrementarContador()
-        txt += id + "[label=  \""+"ID: "+self.name + id + "\"]"+"\n\t"
+        txt += id + "[label=  \""+"ID: "+self.name +"\"]"+"\n\t"
         return id
 class PLUS(Nodo):
     
@@ -2093,6 +2157,7 @@ class PLUS(Nodo):
 
     def __init__(self , name):
         self.name = name
+        # self.value =
 
     def imprimir(self , ident):
         print(ident+"PLUS: "+self.name)
@@ -2303,7 +2368,7 @@ class LBRACE(Nodo):
 
     def __init__(self , name):
         self.name = name
-
+        self.id = id
     def imprimir(self , ident):
         print(ident+"LBRACE: "+self.name)
 
@@ -2408,6 +2473,7 @@ class NUMBER(Nodo):
 
     def __init__(self , name):
         self.name = str(name)
+        self.value = name
 
     def imprimir(self , ident):
         print(ident+"NUMBER: "+self.name)
