@@ -1,0 +1,382 @@
+digraph G {
+	ratio = fill; 
+ node [style=filled];
+10[label= "INT: int"]
+	9[label = typeSpecifier1]
+	9->10
+	11[label=  "ID: a"]
+	12[label= "SEMICOLON: ;"]
+	8[label = varDeclaration1]
+	8->9
+	8->11
+	8->12
+	7[label = declaration1]
+	7->8
+	6[label = declarationList2]
+	6->7
+	16[label= "INT: int"]
+	15[label = typeSpecifier1]
+	15->16
+	17[label=  "ID: miFuncion"]
+	18[label= "LPARENT: ("]
+	23[label= "INT: int"]
+	22[label = typeSpecifier1]
+	22->23
+	24[label=  "ID: a0"]
+	21[label = paramList2]
+	21->22
+	21->24
+	20[label = paramList2]
+	20->21
+	19[label = params1]
+	19->20
+	25[label= "RPARENT: )"]
+	27[label= "LBRACE: {"]
+	28[label= Nodo_nulo]
+	29[label= Nodo_nulo]
+	30[label= "RBRACE: }"]
+	26[label = "compoundStmt\nVariables locales: \n Mensaje: OK"][color="limegreen"];
+	26->27
+	26->28
+	26->29
+	26->30
+	14[label = "funDeclaration\nParametros: [id: a0 - tipo: int] \nVariables locales: \nMensaje: OK  "][color="limegreen"];
+	14->15
+	14->17
+	14->18
+	14->19
+	14->25
+	14->26
+	13[label = declaration2]
+	13->14
+	5[label = declarationList1]
+	5->6
+	5->13
+	34[label= "INT: int"]
+	33[label = typeSpecifier1]
+	33->34
+	35[label=  "ID: miFuncion"]
+	36[label= "LPARENT: ("]
+	42[label= "INT: int"]
+	41[label = typeSpecifier1]
+	41->42
+	43[label=  "ID: c"]
+	40[label = paramList2]
+	40->41
+	40->43
+	39[label = paramList2]
+	39->40
+	44[label= "COMMA: ,"]
+	47[label= "INT: int"]
+	46[label = typeSpecifier1]
+	46->47
+	48[label=  "ID: d"]
+	45[label = paramList2]
+	45->46
+	45->48
+	38[label = paramList1]
+	38->39
+	38->44
+	38->45
+	37[label = params1]
+	37->38
+	49[label= "RPARENT: )"]
+	51[label= "LBRACE: {"]
+	52[label= Nodo_nulo]
+	53[label= Nodo_nulo]
+	54[label= "RBRACE: }"]
+	50[label = "compoundStmt\nVariables locales: \n Mensaje: OK"][color="limegreen"];
+	50->51
+	50->52
+	50->53
+	50->54
+	32[label = "funDeclaration\nParametros: [id: c - tipo: int] [id: d - tipo: int] \nVariables locales: \nMensaje: OK  "][color="limegreen"];
+	32->33
+	32->35
+	32->36
+	32->37
+	32->49
+	32->50
+	31[label = declaration2]
+	31->32
+	4[label = declarationList1]
+	4->5
+	4->31
+	58[label= "INT: int"]
+	57[label = typeSpecifier1]
+	57->58
+	59[label=  "ID: asd"]
+	60[label= "LPARENT: ("]
+	65[label= "INT: int"]
+	64[label = typeSpecifier1]
+	64->65
+	66[label=  "ID: zzz"]
+	63[label = paramList2]
+	63->64
+	63->66
+	62[label = paramList2]
+	62->63
+	61[label = params1]
+	61->62
+	67[label= "RPARENT: )"]
+	69[label= "LBRACE: {"]
+	70[label= Nodo_nulo]
+	71[label= Nodo_nulo]
+	72[label= "RBRACE: }"]
+	68[label = "compoundStmt\nVariables locales: \n Mensaje: OK"][color="limegreen"];
+	68->69
+	68->70
+	68->71
+	68->72
+	56[label = "funDeclaration\nParametros: [id: zzz - tipo: int] \nVariables locales: \nMensaje: OK  "][color="limegreen"];
+	56->57
+	56->59
+	56->60
+	56->61
+	56->67
+	56->68
+	55[label = declaration2]
+	55->56
+	3[label = declarationList1]
+	3->4
+	3->55
+	76[label= "VOID: void"]
+	75[label = typeSpecifier2]
+	75->76
+	77[label=  "ID: miFuncion2"]
+	78[label= "LPARENT: ("]
+	80[label= "VOID: void"]
+	79[label = params2]
+	79->80
+	81[label= "RPARENT: )"]
+	83[label= "LBRACE: {"]
+	86[label= Nodo_nulo]
+	89[label= "INT: int"]
+	88[label = typeSpecifier1]
+	88->89
+	90[label=  "ID: d"]
+	91[label= "SEMICOLON: ;"]
+	87[label = varDeclaration1]
+	87->88
+	87->90
+	87->91
+	85[label = localDeclarations1]
+	85->86
+	85->87
+	94[label= "VOID: void"]
+	93[label = typeSpecifier2]
+	93->94
+	95[label=  "ID: e"]
+	96[label= "SEMICOLON: ;"]
+	92[label = varDeclaration1]
+	92->93
+	92->95
+	92->96
+	84[label = localDeclarations1]
+	84->85
+	84->92
+	101[label= Nodo_nulo]
+	106[label=  "ID: a"]
+	105[label = var1]
+	105->106
+	107[label= "ASSIGN: ="]
+	113[label= "NUMBER: 1"]
+	112[label = factor4]
+	112->113
+	111[label = term2]
+	111->112
+	110[label = additiveExpression2]
+	110->111
+	109[label = simpleExpression2]
+	109->110
+	108[label = expression2]
+	108->109
+	104[label = expression1]
+	104->105
+	104->107
+	104->108
+	114[label= "SEMICOLON: ;"]
+	103[label = statement2]
+	103->104
+	103->114
+	102[label = statement1]
+	102->103
+	100[label = statementList1]
+	100->101
+	100->102
+	117[label= "WHILE: while"]
+	118[label= "LPARENT: ("]
+	125[label=  "ID: a"]
+	124[label = var1]
+	124->125
+	123[label = factor2]
+	123->124
+	122[label = term2]
+	122->123
+	121[label = additiveExpression2]
+	121->122
+	120[label = simpleExpression2]
+	120->121
+	119[label = expression2]
+	119->120
+	126[label= "RPARENT: )"]
+	129[label= "LBRACE: {"]
+	133[label= Nodo_nulo]
+	136[label= "INT: int"]
+	135[label = typeSpecifier1]
+	135->136
+	137[label=  "ID: f"]
+	138[label= "SEMICOLON: ;"]
+	134[label = varDeclaration1]
+	134->135
+	134->137
+	134->138
+	132[label = localDeclarations1]
+	132->133
+	132->134
+	141[label= "INT: int"]
+	140[label = typeSpecifier1]
+	140->141
+	142[label=  "ID: z"]
+	143[label= "SEMICOLON: ;"]
+	139[label = varDeclaration1]
+	139->140
+	139->142
+	139->143
+	131[label = localDeclarations1]
+	131->132
+	131->139
+	146[label= "INT: int"]
+	145[label = typeSpecifier1]
+	145->146
+	147[label=  "ID: e"]
+	148[label= "SEMICOLON: ;"]
+	144[label = varDeclaration1]
+	144->145
+	144->147
+	144->148
+	130[label = localDeclarations1]
+	130->131
+	130->144
+	149[label= Nodo_nulo]
+	150[label= "RBRACE: }"]
+	128[label = "compoundStmt\nVariables locales: [id: f - tipo: int] [id: z - tipo: int] [id: e - tipo: int] \n Mensaje: OK"][color="limegreen"];
+	128->129
+	128->130
+	128->149
+	128->150
+	127[label = statement2]
+	127->128
+	116[label = "iterationStmt\n Mensaje: "][color="limegreen"];
+	116->117
+	116->118
+	116->119
+	116->126
+	116->127
+	115[label = statement4]
+	115->116
+	99[label = statementList1]
+	99->100
+	99->115
+	155[label=  "ID: f"]
+	154[label = var1]
+	154->155
+	156[label= "ASSIGN: ="]
+	163[label= "NUMBER: 1"]
+	162[label = factor4]
+	162->163
+	161[label = term2]
+	161->162
+	165[label= "TIMES: *"]
+	164[label = mulop1]
+	164->165
+	167[label= "NUMBER: 2"]
+	166[label = factor4]
+	166->167
+	160[label = "term1\n Mensaje: OK"][color="limegreen"];
+	160->161
+	160->164
+	160->166
+	159[label = additiveExpression2]
+	159->160
+	158[label = simpleExpression2]
+	158->159
+	157[label = expression2]
+	157->158
+	153[label = expression1]
+	153->154
+	153->156
+	153->157
+	168[label= "SEMICOLON: ;"]
+	152[label = statement2]
+	152->153
+	152->168
+	151[label = statement1]
+	151->152
+	98[label = statementList1]
+	98->99
+	98->151
+	177[label=  "ID: asd"]
+	178[label= "LPARENT: ("]
+	186[label= "NUMBER: 3"]
+	185[label = factor4]
+	185->186
+	184[label = term2]
+	184->185
+	183[label = additiveExpression2]
+	183->184
+	182[label = simpleExpression2]
+	182->183
+	181[label = expression2]
+	181->182
+	180[label = argList2]
+	180->181
+	179[label = args1]
+	179->180
+	187[label= "RPARENT: )"]
+	176[label =" call\n mensaje: OK"][color="limegreen"];
+	
+	176->177
+	176->178
+	176->179
+	176->187
+	175[label = factor3]
+	175->176
+	174[label = term2]
+	174->175
+	173[label = additiveExpression2]
+	173->174
+	172[label = simpleExpression2]
+	172->173
+	171[label = expression2]
+	171->172
+	188[label= "SEMICOLON: ;"]
+	170[label = statement2]
+	170->171
+	170->188
+	169[label = statement1]
+	169->170
+	97[label = statementList1]
+	97->98
+	97->169
+	189[label= "RBRACE: }"]
+	82[label = "compoundStmt\nVariables locales: [id: d - tipo: int] [id: e - tipo: void] \n Mensaje: OK"][color="limegreen"];
+	82->83
+	82->84
+	82->97
+	82->189
+	74[label = "funDeclaration\nParametros: [id: void - tipo: void] \nVariables locales: [id: d - tipo: int] [id: e - tipo: void] \nMensaje: OK  "][color="limegreen"];
+	74->75
+	74->77
+	74->78
+	74->79
+	74->81
+	74->82
+	73[label = declaration2]
+	73->74
+	2[label = declarationList1]
+	2->3
+	2->73
+	1[label = "program\nVariables globales: [id: a - tipo: int] \nFunciones: [id: miFuncion - tipo: int - parametros: [id: a0 - tipo: int] ] [id: miFuncion - tipo: int - parametros: [id: c - tipo: int] [id: d - tipo: int] ] [id: asd - tipo: int - parametros: [id: zzz - tipo: int] ] [id: miFuncion2 - tipo: void - parametros: [id: void - tipo: void] ] \nMensajes de error: \n"][color="limegreen"];
+	1->2
+	}

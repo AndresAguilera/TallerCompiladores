@@ -1,14 +1,21 @@
-void miFuncion (void){
 int a;
-while (02==01+01)
-{
- int aA;
+int miFuncion (int a0){
+}
+int miFuncion (int c, int d){
+}
 
- }
- if(03==03){
+int asd(int zzz){
 
- }else{
-
- }
- ;
+}
+void miFuncion2 (void){
+    int d;
+    void e;
+    a = 01;
+    while(a){
+        int f;
+        int z;
+        int e;
+    }
+    f = 01 * 02;
+    asd(03);
 }

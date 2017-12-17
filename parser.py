@@ -426,16 +426,15 @@ analyzer.input(message)
 parser = yacc.yacc()
 result = parser.parse(message)
 
-result.imprimir(" ")
-# print(result.traducir())
+# result.imprimir(" ")
 
-graphFile = open('graphviztree.dot','w')
+graphFile = open('resultado.dot','w')
 graphFile.write(result.traducir())
-
 graphFile.close()
-print("Se ha guardado el programa traducido en /graphviztree.dot")
+print("Se ha guardado el programa traducido en /resultado.dot")
 
-print(result)
+
+# print(result)
 
 while True:
     tok = analyzer.token()
