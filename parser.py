@@ -428,15 +428,10 @@ result = parser.parse(message)
 
 # result.imprimir(" ")
 
-graphFile = open('resultadoparser.dot','w')
+graphFile = open('resultado.dot','w')
 graphFile.write(result.traducir())
 graphFile.close()
-print("Se ha guardado el programa traducido en /resultadoparser.dot")
-
-# graphFile = open('resultadosemantic.dot','w')
-# graphFile.write(result.traducir2())
-# graphFile.close()
-# print("Se ha guardado el programa traducido en /resultadosemantic.dot")
+print("Se ha guardado el programa traducido en /resultado.dot")
 
 
 # print(result)

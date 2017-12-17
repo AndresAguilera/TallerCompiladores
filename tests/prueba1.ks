@@ -8,6 +8,14 @@ void aProcedure1 (void)
 {
 }
 
+void aProcedure1 (int a123)
+{
+}
+
+void aProcedure1 (void)
+{
+}
+
 void aProcedure2 ( void)
 {
     ;
@@ -20,7 +28,6 @@ int aProcedure3 ( void )
 
 int aProcedure4 ( int aNum1, void aNum2, int anArray1[], void anArray2[] )
 {
-    int aNum3;
     int aNum3;
     int anArray3[456];
     void aNum4;

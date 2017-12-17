@@ -1,36 +1,116 @@
+from builtins import print
+
 txt = ""
 cont = 0
-nivel = 0
+mensaje = "\\n"
+rojo = "[color=\"indianred1\"];"
+verde = "[color=\"limegreen\"];"
 
-def incrementarContador ():
-    global cont
-    cont += 1
-    return "%d" %cont
-
-def getScope(id):
-    if(len(Nodo.scopes)==0):
-        return
-    else:
-        for x in range(0, len(Nodo.scopes)):
-            print("Scope: "+str(Nodo.scopes[x]))
-            if(Nodo.scopes[x].id==id):
-                print(Nodo.scopes[x])
-                return Nodo.scopes[x]
-
+# Clases
 class Nodo():
     variablesGlobales = []
     funciones = []
     scopes = []
 
 
-
-
-class Scope():
-    def __init__(self, id):
+class Funcion():
+    def __init__(self,id,tipo,params,variablesLocales):
         self.id = id
-        self.nivel = nivel
-        self.localVariables = []
+        self.tipo = tipo
+        self.params = params
+        self.variablesLocales = variablesLocales
+        global mensaje
+        # Verificar si el identificador de la funcion ya existe para comprobar duplicado
+        if(self.id in getIdsFunciones()):
+            if(hasattr(self.params, "__len__")):
+                for item in Nodo.funciones:
+                    if(item.id == self.id):
+                        if(hasattr(item.params, "__len__")):
+                            if(len(item.params) == len(self.params)):
+                                for x in range(0,len(item.params)):
+                                    if(item.params[x].tipo != self.params[x].tipo):
+                                        print("Sobrecarga")
+                                        break
+                                    else:
+                                        print("Error func duplicada")
+                                        mensaje += "Funcion duplicada: "+ self.id + "\\n"
+                                        break
+                        else:
+                            print("Sobrecarga")
+                            break
+            else:
+                for item in Nodo.funciones:
+                    if (hasattr(item.params, "__len__")):
+                        print("Sobrecarga")
+                        break
+                    else:
+                        if(item.params.tipo != self.tipo):
+                            print("Sobrecarga")
+                            break
+                        else:
+                            print("Error func duplicada")
+                            mensaje += "Funcion duplicada: " + self.id + "\\n"
+                            break
 
+
+
+
+
+
+    def getParams(self):
+        listaParametros = ""
+        if hasattr(self.params, "__len__"):
+            for x in range(0, len(self.params)):
+                listaParametros += "[id: " + self.params[x].id + " - tipo: " + self.params[x].tipo + "] "
+        else:
+            listaParametros += "[id: " +self.params.id + " - tipo: "  + self.params.tipo + "] "
+        return listaParametros
+
+    def getVariablesLocales(self):
+        listaVariables = ""
+        if hasattr(self.variablesLocales, "__len__"):
+            for x in range(0, len(self.variablesLocales)):
+                listaVariables += "[id: " + self.variablesLocales[x].id + " - tipo: " + self.variablesLocales[x].tipo + "] "
+        else:
+            listaVariables += self.variablesLocales
+        return listaVariables
+
+class Bloque():
+    def __init__(self,variablesLocales):
+        self.variablesLocales = variablesLocales
+
+    def getVariablesLocales(self):
+        listaVariables = ""
+        if hasattr(self.variablesLocales, "__len__"):
+            for x in range(0, len(self.variablesLocales)):
+                # self.variablesLocales[x].imprimir()
+                listaVariables += "[id: " + self.variablesLocales[x].id + " - tipo: " + self.variablesLocales[
+                    x].tipo + "] "
+        else:
+            listaVariables += self.variablesLocales
+        return listaVariables
+
+
+        # print("id: "+self.id +  " - tipo: " + self.tipo +" - parametros: "+str(self.params))
+
+class Parametro():
+    def __init__(self,id, tipo):
+        self.id = id
+        self.tipo = tipo
+
+    def imprimir(self):
+        print("id: "+self.id + " - tipo: "+self.tipo)
+
+class Variable():
+    def __init__(self, id, tipo):
+        self.id = id
+        self.tipo = tipo
+        if (self.id in getIdsVariablesGlobales()):
+            global mensaje
+            mensaje += " Variable global duplicada - ID: " + self.id + "\\n "
+
+    def imprimir(self):
+        print("id: " + self.id + " - tipo: " + self.tipo)
 
 class Null(Nodo):
 
@@ -48,12 +128,51 @@ class Null(Nodo):
 
         return id
 
+
+# ******Métodos globales*******
+
+def incrementarContador():
+    global cont
+    cont += 1
+    return "%d" % cont
+
+def getVariablesGlobales():
+    listaVariables = ""
+    for x in range(0, len(Nodo.variablesGlobales)):
+        # Nodo.funciones[x].imprimir()
+        listaVariables += "[id: " + Nodo.variablesGlobales[x].id + " - tipo: " + Nodo.variablesGlobales[
+            x].tipo + "] "
+    return listaVariables
+
+def getFunciones():
+    listaFunciones = ""
+    for x in range(0, len(Nodo.funciones)):
+        # Nodo.funciones[x].imprimir()
+        listaFunciones += "[id: " + Nodo.funciones[x].id + " - tipo: " + Nodo.funciones[
+            x].tipo + " - parametros: " + Nodo.funciones[x].getParams() + "] "
+    return listaFunciones
+
+def getIdsFunciones():
+    IDs = []
+    for x in range(0,len(Nodo.funciones)):
+        IDs.append(Nodo.funciones[x].id)
+    return IDs
+
+def getIdsVariablesGlobales():
+    IDs = []
+    for x in range(0,len(Nodo.variablesGlobales)):
+        IDs.append(Nodo.variablesGlobales[x].id)
+    return IDs
+
+
+
 # 1
 class program(Nodo):
 
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
+
 
     def imprimir(self,ident):
         self.son1.imprimir(" "+ident)
@@ -63,13 +182,22 @@ class program(Nodo):
         global txt
         id = incrementarContador()
         son1 = self.son1.traducir()
+        color = "";
+        estilo = "ratio = fill; \n node [style=filled];\n"
+        if(mensaje!="\\n"):
+            # Rojo
+            color = rojo
+        else:
+            # Verde
+            color = verde
 
 
-        txt += id + "[label = \"" + self.name + "\\nVariables globales" + str(Nodo.variablesGlobales) + "\\nFunciones" + str(Nodo.funciones) + "\"]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\nVariables globales: " + getVariablesGlobales() + \
+               "\\nFunciones: " + getFunciones() + "\\nMensajes de error: " + mensaje + "\"]" + color + "\n\t"
         txt += id+"->"+son1+"\n\t"
 
 
-        return "digraph G {\n\t"+txt+"}"
+        return "digraph G {\n\t"+estilo+txt+"}"
     
 # 2
 class declarationList1(Nodo):
@@ -189,18 +317,14 @@ class varDeclaration1(Nodo):
         self.name = name
         self.tipoVariable = son1.tipo
         self.idVariable = son2.name
-        self.variable = "id: " + self.idVariable + " - tipo: " + son1.tipo
-        print(self.variable)
-        if(len(Nodo.scopes)==0):
-            print("Esta variable es global: " +self.idVariable + " y es de tipo: " +self.tipoVariable)
-            variable = []
-            variable.append("id: "+self.idVariable+" - tipo: "+self.tipoVariable)
+        self.variable = Variable(self.idVariable,self.tipoVariable)
+
+        if (len(Nodo.scopes) == 0):
+            print("Esta variable es global: " + self.idVariable + " y es de tipo: " + self.tipoVariable)
+            variable = Variable(self.idVariable,self.tipoVariable)
             Nodo.variablesGlobales.append(variable)
         else:
-            print("Esta variable es local: " +self.idVariable + " y es de tipo: " +self.tipoVariable)
-
-
-
+            print("Esta variable es local: " + self.idVariable + " y es de tipo: " + self.tipoVariable)
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
@@ -244,14 +368,13 @@ class varDeclaration2(Nodo):
         self.son4 = son4
         self.son5 = son5
         self.son6 = son6
-        self.tipoVariable = son1.tipo
+        self.tipoVariable = son1.tipo + "[]"
         self.idVariable = son2.name
-        self.variable = "id: " + self.idVariable + "tipo: " + son1.tipo
+        self.variable = Variable(self.idVariable, self.tipoVariable)
         # print("Scopes: " + str(len(Nodo.scopes)))
         if (len(Nodo.scopes) == 0):
             print("Esta variable es global: " + self.idVariable + " y es de tipo: " + self.tipoVariable)
-            variable = []
-            variable.append("id: " + self.idVariable + " - tipo: " + self.tipoVariable)
+            variable = Variable(self.idVariable,self.tipoVariable)
             Nodo.variablesGlobales.append(variable)
         else:
             print("Esta variable es local: " + self.idVariable + " y es de tipo: " + self.tipoVariable)
@@ -342,8 +465,6 @@ class typeSpecifier2(Nodo):
     
 # 6
 class funDeclaration(Nodo):
-    
-
 
     def __init__(self,son1, son2, son3,son4,son5,son6, name):
         self.name = name
@@ -357,10 +478,15 @@ class funDeclaration(Nodo):
         self.idFuncion = son2.name
         self.params = son4.params
         self.variablesLocales = son6.variablesLocales
-        print("Esta funcion se llama: " + self.idFuncion + " y es de tipo: " + self.tipoFuncion + " y tiene variables: "+str(self.variablesLocales))
-        funcion = []
-        funcion.append("id: "+self.idFuncion+" tipo: "+self.tipoFuncion)
-        Nodo.funciones.append(funcion)
+        self.color = verde
+        self.mensaje = "OK"
+
+        objFuncion = Funcion(self.idFuncion, self.tipoFuncion, self.params, self.variablesLocales)
+        self.funcion = objFuncion
+        Nodo.funciones.append(objFuncion)
+
+
+
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
             self.son1[0].imprimir(" "+ident)
@@ -405,7 +531,7 @@ class funDeclaration(Nodo):
         son6 = self.son6.traducir()
 
 
-        txt += id + "[label = \"" + self.name + "\\nParametros: " + str(self.params) + "\\nVariables locales: " + str(self.variablesLocales) + " \"]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\nParametros: " + self.funcion.getParams() + "\\nVariables locales: " + self.funcion.getVariablesLocales() + "\\nMensaje: " + self.mensaje + "  \"]" + self.color + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -417,14 +543,11 @@ class funDeclaration(Nodo):
 
 # 7
 class params1(Nodo):
-    
-
 
     def __init__(self,son1, name):
         self.name = name
         self.son1 = son1
         self.params = son1.params
-
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -452,8 +575,7 @@ class params2(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-        self.params = son1.name
-
+        self.params = Parametro(son1.name,son1.name)
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
             self.son1[0].imprimir(" "+ident)
@@ -473,8 +595,6 @@ class params2(Nodo):
 
 # 8
 class paramList1(Nodo):
-    
-
 
     def __init__(self,son1,son2,son3,name):
         self.name = name
@@ -482,8 +602,12 @@ class paramList1(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.params = []
-        self.params.append(son1.params)
-        self.params.append(son3.param)
+        if hasattr(self.son1.params, "__len__"):
+            for x in range(0,len(self.son1.params)):
+                self.params.append(self.son1.params[x])
+        else:
+            self.params.append(self.son1.params)
+        self.params.append(self.son3.param)
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
@@ -544,23 +668,23 @@ class paramList2(Nodo):
 
 # 9
 class param1(Nodo):
-    
-
 
     def __init__(self,son1, son2, name):
         self.name = name
         self.son1 = son1
         self.son2 = son2
-        self.param = []
-        self.param.append(son1.tipo)
-        self.param.append(son2.name)
+        self.param = Parametro(son2.name,son1.tipo)
+        # self.param = []
+        # self.param.append(son1.tipo)
+        # self.param.append(son2.name)
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
             self.son1[0].imprimir(" "+ident)
-            self.son2.imprimir(" "+ident)
+            self.son2[0].imprimir(" "+ident)
         else:
             self.son1.imprimir(" "+ident)
+            self.son2.imprimir(" " + ident)
         print(ident + "Nodo: " + self.name)
         
 
@@ -578,8 +702,6 @@ class param1(Nodo):
 
 # 9
 class param2(Nodo):
-    
-
 
     def __init__(self,son1, son2, son3, son4, name):
         self.name = name
@@ -587,9 +709,10 @@ class param2(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.son4 = son4
-        self.param = []
-        self.param.append(son1.tipo)
-        self.param.append(son2.name)
+        self.param = Parametro(son2.name, son1.tipo+"[]")
+        # self.param = []
+        # self.param.append(son1.tipo)
+        # self.param.append(son2.name)
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -619,8 +742,6 @@ class param2(Nodo):
 
 # 10
 class compoundStmt(Nodo):
-    
-
 
     def __init__(self,son1, son2, son3, son4, name):
         self.name = name
@@ -628,10 +749,28 @@ class compoundStmt(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.son4 = son4
-        self.variablesLocales =  []
+        self.variablesLocales = []
+        self.bloque = Bloque(self.variablesLocales)
+        self.mensaje = "OK"
+        self.color = verde
+
         if(son2.name != "Nodo nulo"):
-            self.variablesLocales.append(son2.variables)
+            self.variablesLocales = son2.variables
+            self.bloque = Bloque(self.variablesLocales)
         Nodo.scopes.append("")
+
+        if len(self.variablesLocales) != len(set(self.getIdsVariablesLocales())):
+            print("Variable duplicada")
+            self.mensaje = " Variable duplicada \\n"
+            self.color = rojo
+            global mensaje
+            mensaje += "Variable local duplicada dentro de un bloque (compoundStmt) \\n"
+
+    def getIdsVariablesLocales(self):
+        IDs = []
+        for x in range(0, len(self.variablesLocales)):
+            IDs.append(self.variablesLocales[x].id)
+        return IDs
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
@@ -661,7 +800,7 @@ class compoundStmt(Nodo):
         son3 = self.son3.traducir()
         son4 = self.son4.traducir()
 
-        txt += id + "[label = \"" + self.name + "\\nVariables locales: " +str(self.variablesLocales) + "\"]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\nVariables locales: " +self.bloque.getVariablesLocales() + "\\n Mensaje: " + self.mensaje + "\"]"  + self.color + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -671,8 +810,6 @@ class compoundStmt(Nodo):
 
 # 11
 class localDeclarations1(Nodo):
-    
-
 
     def __init__(self,son1, son2, name):
         self.name = name
@@ -681,9 +818,15 @@ class localDeclarations1(Nodo):
         self.variables = []
         if(son1.name=="Nodo nulo"):
             self.variables.append(son2.variable)
+            return
         else:
-            self.variables.append(son1.variables)
-            self.variables.append(son2.variable)
+            if hasattr(self.son1.variables, "__len__"):
+                for x in range(0, len(self.son1.variables)):
+                    self.variables.append(self.son1.variables[x])
+            else:
+                self.variables.append(self.son1.variables)
+            self.variables.append(self.son2.variable)
+
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()):
@@ -1954,8 +2097,6 @@ class factor4(Nodo):
 
 #27
 class call(Nodo):
-    
-
 
     def __init__(self, son1, son2, son3, son4, name):
         self.name = name
@@ -1963,7 +2104,14 @@ class call(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.son4 = son4
+        self.mensaje = "OK"
+        self.color = verde
 
+        if(son1.name not in getIdsFunciones()):
+            global mensaje
+            mensaje += " Llamado a funcion no declarada - ID: " + son1.name + " \\n"
+            self.mensaje = " Llamado a funcion no declarada - ID: " + son1.name + " \\n"
+            self.color = rojo
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()):
             self.son1[0].imprimir(" "+ident)
@@ -1972,6 +2120,9 @@ class call(Nodo):
             self.son4[0].imprimir(" "+ident)
         else:
             self.son1.imprimir(" "+ident)
+            self.son2.imprimir(" " + ident)
+            self.son3.imprimir(" " + ident)
+            self.son4.imprimir(" " + ident)
         print(ident + "Nodo: " + self.name)
 
     def traducir(self):
@@ -1982,7 +2133,7 @@ class call(Nodo):
         son3 = self.son3.traducir()
         son4 = self.son4.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label =\" " + self.name + "\\n mensaje: " + self.mensaje +  "\"]" + self.color + "\n\t" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -2013,7 +2164,7 @@ class args1(Nodo):
 
         txt += id + "[label = " + self.name + "]" + "\n\t"
         txt += id + "->" + son1 + "\n\t"
-        return id;
+        return id
 
 # 28
 class args2(Nodo):
@@ -2565,11 +2716,10 @@ class IF(Nodo):
         return id
 
 class INT(Nodo):
-    
-
 
     def __init__(self , name):
         self.name = name
+        self.value = name
 
     def imprimir(self , ident):
         print(ident+"INT: "+self.name)
@@ -2581,8 +2731,6 @@ class INT(Nodo):
         return id
 
 class VOID(Nodo):
-    
-
 
     def __init__(self , name):
         self.name = name
