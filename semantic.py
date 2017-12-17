@@ -10,7 +10,7 @@ verde = "[color=\"limegreen\"];"
 class Nodo():
     variablesGlobales = []
     funciones = []
-    scopes = []
+    alcances = []
 
 
 class Funcion():
@@ -44,13 +44,17 @@ class Funcion():
                         print("Sobrecarga")
                         break
                     else:
-                        if(item.params.tipo != self.tipo):
-                            print("Sobrecarga")
-                            break
-                        else:
-                            print("Error func duplicada")
-                            mensaje += "Funcion duplicada: " + self.id + "\\n"
-                            break
+                        if(item.id == self.id):
+                            print("asd" + self.id + item.id)
+                            print(item.params.tipo)
+                            print(self.params.tipo)
+                            if(item.params.tipo != self.params.tipo):
+                                print("Sobrecarga")
+                                break
+                            else:
+                                print("Error func duplicada")
+                                mensaje += "Funcion duplicada: " + self.id + "\\n"
+                                break
 
 
 
@@ -83,15 +87,17 @@ class Bloque():
         listaVariables = ""
         if hasattr(self.variablesLocales, "__len__"):
             for x in range(0, len(self.variablesLocales)):
-                # self.variablesLocales[x].imprimir()
                 listaVariables += "[id: " + self.variablesLocales[x].id + " - tipo: " + self.variablesLocales[
                     x].tipo + "] "
         else:
             listaVariables += self.variablesLocales
         return listaVariables
 
-
-        # print("id: "+self.id +  " - tipo: " + self.tipo +" - parametros: "+str(self.params))
+class Alcance():
+    def __init__(self, funcionPadre, bloquePadre, variables):
+        self.funcionPadre = funcionPadre
+        self.bloquePadre = bloquePadre
+        self.variables = variables
 
 class Parametro():
     def __init__(self,id, tipo):
@@ -1148,6 +1154,15 @@ class selectionStmt1(Nodo):
         self.son3 = son3
         self.son4 = son4
         self.son5 = son5
+        self.color = verde
+        self.mensaje = ""
+        self.tipo = son3.tipo
+        if(self.tipo!="int"):
+            self.color = rojo
+            self.mensaje = "La condicion no es de tipo entero (porque retorna bool, un tipo que no existe en C-) \\n"
+            global mensaje
+            mensaje += " Error en un if \\n"
+
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1181,7 +1196,7 @@ class selectionStmt1(Nodo):
         son4 = self.son4.traducir()
         son5 = self.son5.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\n Mensaje: " + self.mensaje + "\"]" + self.color + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -1203,6 +1218,9 @@ class selectionStmt2(Nodo):
         self.son5 = son5
         self.son6 = son6
         self.son7 = son7
+        self.color = verde
+        self.mensaje = ""
+        self.tipo = son3.tipo
 
     def imprimir(self, ident):
         self.son1.imprimir(" "+ident)
@@ -1225,7 +1243,7 @@ class selectionStmt2(Nodo):
         son6 = self.son6.traducir()
         son7 = self.son7.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\n Mensaje: " + self.mensaje + "\"]" + self.color + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -1248,6 +1266,15 @@ class iterationStmt(Nodo):
         self.son3 = son3
         self.son4 = son4
         self.son5 = son5
+        self.color = verde
+        self.mensaje = ""
+        self.tipo = son3.tipo
+        if(self.tipo!="int"):
+            self.color = rojo
+            self.mensaje = "La condicion no es de tipo entero (porque retorna bool, un tipo que no existe en C-) \\n"
+            global mensaje
+            mensaje += " Error en un while \\n"
+
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1281,7 +1308,7 @@ class iterationStmt(Nodo):
         son4 = self.son4.traducir()
         son5 = self.son5.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\n Mensaje: " + self.mensaje + "\"]" + self.color + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -1298,6 +1325,7 @@ class returnStmt1(Nodo):
         self.name = name
         self.son1 = son1
         self.son2 = son2
+        self.tipo = "void"
 
     def imprimir(self,ident):
         if type(self.son1) == type(tuple()): 
@@ -1333,6 +1361,7 @@ class returnStmt2(Nodo):
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
+        self.tipo = "int"
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1373,6 +1402,8 @@ class expression1(Nodo):
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
+        self.value = son3.value
+        self.tipo = ""
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1411,6 +1442,8 @@ class expression2(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
+        self.value = son1.value
+        self.tipo = son1.tipo
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1431,12 +1464,13 @@ class expression2(Nodo):
 
 # 19
 class var1(Nodo):
-    
-
 
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
+        self.tipo = "int"
+        self.value = 0
+
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1457,8 +1491,6 @@ class var1(Nodo):
 
 # 19
 class var2(Nodo):
-    
-
 
     def __init__(self, son1, son2, son3, son4, name):
         self.name = name
@@ -1466,7 +1498,8 @@ class var2(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.son4 = son4
-
+        self.tipo = "int[]"
+        self.value = 0
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1505,14 +1538,15 @@ class var2(Nodo):
 
 # 20
 class simpleExpression1(Nodo):
-    
-
 
     def __init__(self, son1, son2, son3, name):
         self.name = name
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
+        self.tipo = ""
+        self.value = ""
+
 
 
     def imprimir(self, ident):
@@ -1552,8 +1586,8 @@ class simpleExpression2(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-
-
+        self.tipo = self.son1.tipo
+        self.value = ""
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
             self.son1[0].imprimir(" "+ident)
@@ -1679,8 +1713,6 @@ class relop4(Nodo):
 
 # 21
 class relop5(Nodo):
-    
-
 
     def __init__(self, son1, name):
         self.name = name
@@ -1741,6 +1773,9 @@ class additiveExpression1(Nodo):
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
+        self.tipo = ""
+        if (son1.tipo == son3.tipo):
+            self.tipo = son3.tipo
 
 
     def imprimir(self, ident):
@@ -1780,7 +1815,7 @@ class additiveExpression2(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-
+        self.tipo = son1.tipo
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1862,7 +1897,17 @@ class term1(Nodo):
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
+        self.color = verde
+        self.mensaje = "OK"
+        self.value = -999
+        self.tipo = ""
+        if (son1.tipo == son3.tipo):
+            self.tipo = son3.tipo
 
+        if(son2.operacion == "TIMES"):
+            self.value = son1.value * son2.value
+        if(son2.operacion == "DIVIDE"):
+            self.value = son1.value / son2.value
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1886,7 +1931,7 @@ class term1(Nodo):
         son2 = self.son2.traducir()
         son3 = self.son3.traducir()
 
-        txt += id + "[label = " + self.name + "]" + "\n\t"
+        txt += id + "[label = \"" + self.name + "\\n Mensaje: " + self.mensaje + "\"]" + self.color + "\n\t"
         txt += id + "->" + son1 + "\n\t"
         txt += id + "->" + son2 + "\n\t"
         txt += id + "->" + son3 + "\n\t"
@@ -1900,7 +1945,8 @@ class term2(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-
+        self.value = son1.value
+        self.tipo = self.son1.tipo
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1927,7 +1973,7 @@ class mulop1(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-
+        self.operacion = son1.name
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1954,7 +2000,7 @@ class mulop2(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-
+        self.operacion = son1.name
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1983,7 +2029,7 @@ class factor1(Nodo):
         self.son1 = son1
         self.son2 = son2
         self.son3 = son3
-
+        self.tipo = son2.tipo
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -2022,7 +2068,8 @@ class factor2(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-
+        self.tipo = son1.tipo
+        self.value = son1.value
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -2049,7 +2096,8 @@ class factor3(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-
+        self.tipo = son1.tipo
+        self.value = 0
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -2076,7 +2124,8 @@ class factor4(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
-
+        self.tipo = son1.tipo
+        self.value = son1.name
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -2106,12 +2155,21 @@ class call(Nodo):
         self.son4 = son4
         self.mensaje = "OK"
         self.color = verde
+        self.tipo = ""
 
         if(son1.name not in getIdsFunciones()):
             global mensaje
             mensaje += " Llamado a funcion no declarada - ID: " + son1.name + " \\n"
             self.mensaje = " Llamado a funcion no declarada - ID: " + son1.name + " \\n"
             self.color = rojo
+        else:
+            for funcion in Nodo.funciones:
+                if(self.son1.name == funcion.id):
+                    self.tipo = funcion.tipo
+                else:
+                    self.tipo = "Error"
+
+
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()):
             self.son1[0].imprimir(" "+ident)
@@ -2618,13 +2676,13 @@ class ASSIGN(Nodo):
         id = incrementarContador()
         txt += id + "[label= \""+"ASSIGN: "+self.name+"\"]"+"\n\t"
         return id
-class NUMBER(Nodo):
-    
 
+class NUMBER(Nodo):
 
     def __init__(self , name):
         self.name = str(name)
         self.value = name
+        self.tipo = "int"
 
     def imprimir(self , ident):
         print(ident+"NUMBER: "+self.name)
@@ -2719,7 +2777,7 @@ class INT(Nodo):
 
     def __init__(self , name):
         self.name = name
-        self.value = name
+        self.tipo = name
 
     def imprimir(self , ident):
         print(ident+"INT: "+self.name)

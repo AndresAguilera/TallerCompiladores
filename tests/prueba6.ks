@@ -1,4 +1,5 @@
-asd 01 :=;
-while()
-return
-)(;
+int a;
+int a;
+void miFuncion(void){
+
+}

@@ -12,8 +12,7 @@ void aProcedure1 (int a123)
 {
 }
 
-void aProcedure1 (void)
-{
+void aProcedure1 (int a321, int a231){
 }
 
 void aProcedure2 ( void)
@@ -38,9 +37,9 @@ int aProcedure4 ( int aNum1, void aNum2, int anArray1[], void anArray2[] )
     anArray3[00] = anArray1[02];
     anArray2[03] = anarray3[04];
     ; ;
-    while (aNum3 > aNum4)
+    while (01)
         ;
-    while (aNum3+02 >= 03*aNum5)
+    while (02)
     {
         return;
     }

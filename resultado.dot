@@ -107,228 +107,276 @@ digraph G {
 	57->58
 	59[label=  "ID: asd"]
 	60[label= "LPARENT: ("]
-	62[label= "VOID: void"]
-	61[label = params2]
-	61->62
-	63[label= "RPARENT: )"]
-	65[label= "LBRACE: {"]
-	66[label= Nodo_nulo]
-	67[label= Nodo_nulo]
-	68[label= "RBRACE: }"]
-	64[label = "compoundStmt\nVariables locales: \n Mensaje: OK"][color="limegreen"];
+	65[label= "INT: int"]
+	64[label = typeSpecifier1]
 	64->65
-	64->66
-	64->67
-	64->68
-	56[label = "funDeclaration\nParametros: [id: void - tipo: void] \nVariables locales: \nMensaje: OK  "][color="limegreen"];
+	66[label=  "ID: zzz"]
+	63[label = paramList2]
+	63->64
+	63->66
+	62[label = paramList2]
+	62->63
+	61[label = params1]
+	61->62
+	67[label= "RPARENT: )"]
+	69[label= "LBRACE: {"]
+	70[label= Nodo_nulo]
+	71[label= Nodo_nulo]
+	72[label= "RBRACE: }"]
+	68[label = "compoundStmt\nVariables locales: \n Mensaje: OK"][color="limegreen"];
+	68->69
+	68->70
+	68->71
+	68->72
+	56[label = "funDeclaration\nParametros: [id: zzz - tipo: int] \nVariables locales: \nMensaje: OK  "][color="limegreen"];
 	56->57
 	56->59
 	56->60
 	56->61
-	56->63
-	56->64
+	56->67
+	56->68
 	55[label = declaration2]
 	55->56
 	3[label = declarationList1]
 	3->4
 	3->55
-	72[label= "VOID: void"]
-	71[label = typeSpecifier2]
-	71->72
-	73[label=  "ID: miFuncion2"]
-	74[label= "LPARENT: ("]
 	76[label= "VOID: void"]
-	75[label = params2]
+	75[label = typeSpecifier2]
 	75->76
-	77[label= "RPARENT: )"]
-	79[label= "LBRACE: {"]
-	82[label= Nodo_nulo]
-	85[label= "INT: int"]
-	84[label = typeSpecifier1]
-	84->85
-	86[label=  "ID: d"]
-	87[label= "SEMICOLON: ;"]
-	83[label = varDeclaration1]
-	83->84
-	83->86
-	83->87
-	81[label = localDeclarations1]
-	81->82
-	81->83
-	90[label= "INT: int"]
-	89[label = typeSpecifier1]
-	89->90
-	91[label=  "ID: e"]
-	92[label= "SEMICOLON: ;"]
-	88[label = varDeclaration1]
+	77[label=  "ID: miFuncion2"]
+	78[label= "LPARENT: ("]
+	80[label= "VOID: void"]
+	79[label = params2]
+	79->80
+	81[label= "RPARENT: )"]
+	83[label= "LBRACE: {"]
+	86[label= Nodo_nulo]
+	89[label= "INT: int"]
+	88[label = typeSpecifier1]
 	88->89
-	88->91
-	88->92
-	80[label = localDeclarations1]
-	80->81
-	80->88
-	96[label= Nodo_nulo]
-	99[label= "WHILE: while"]
-	100[label= "LPARENT: ("]
-	106[label= "NUMBER: 1"]
-	105[label = factor4]
+	90[label=  "ID: d"]
+	91[label= "SEMICOLON: ;"]
+	87[label = varDeclaration1]
+	87->88
+	87->90
+	87->91
+	85[label = localDeclarations1]
+	85->86
+	85->87
+	94[label= "VOID: void"]
+	93[label = typeSpecifier2]
+	93->94
+	95[label=  "ID: e"]
+	96[label= "SEMICOLON: ;"]
+	92[label = varDeclaration1]
+	92->93
+	92->95
+	92->96
+	84[label = localDeclarations1]
+	84->85
+	84->92
+	101[label= Nodo_nulo]
+	106[label=  "ID: a"]
+	105[label = var1]
 	105->106
-	104[label = term2]
-	104->105
-	103[label = additiveExpression2]
-	103->104
-	108[label= "EQ: =="]
-	107[label = relop5]
-	107->108
-	112[label= "NUMBER: 1"]
-	111[label = factor4]
+	107[label= "ASSIGN: ="]
+	113[label= "NUMBER: 1"]
+	112[label = factor4]
+	112->113
+	111[label = term2]
 	111->112
-	110[label = term2]
+	110[label = additiveExpression2]
 	110->111
-	109[label = additiveExpression2]
+	109[label = simpleExpression2]
 	109->110
-	102[label = simpleExpression1]
+	108[label = expression2]
+	108->109
+	104[label = expression1]
+	104->105
+	104->107
+	104->108
+	114[label= "SEMICOLON: ;"]
+	103[label = statement2]
+	103->104
+	103->114
+	102[label = statement1]
 	102->103
-	102->107
-	102->109
-	101[label = expression2]
-	101->102
-	113[label= "RPARENT: )"]
-	116[label= "LBRACE: {"]
-	119[label= Nodo_nulo]
-	122[label= "INT: int"]
-	121[label = typeSpecifier1]
+	100[label = statementList1]
+	100->101
+	100->102
+	117[label= "WHILE: while"]
+	118[label= "LPARENT: ("]
+	125[label=  "ID: a"]
+	124[label = var1]
+	124->125
+	123[label = factor2]
+	123->124
+	122[label = term2]
+	122->123
+	121[label = additiveExpression2]
 	121->122
-	123[label=  "ID: f"]
-	124[label= "SEMICOLON: ;"]
-	120[label = varDeclaration1]
+	120[label = simpleExpression2]
 	120->121
-	120->123
-	120->124
-	118[label = localDeclarations1]
-	118->119
-	118->120
-	127[label= "INT: int"]
-	126[label = typeSpecifier1]
-	126->127
-	128[label=  "ID: z"]
-	129[label= "SEMICOLON: ;"]
-	125[label = varDeclaration1]
-	125->126
-	125->128
-	125->129
-	117[label = localDeclarations1]
-	117->118
-	117->125
-	130[label= Nodo_nulo]
-	131[label= "RBRACE: }"]
-	115[label = "compoundStmt\nVariables locales: [id: f - tipo: int] [id: z - tipo: int] \n Mensaje: OK"][color="limegreen"];
-	115->116
-	115->117
-	115->130
-	115->131
-	114[label = statement2]
-	114->115
-	98[label = iterationStmt]
-	98->99
-	98->100
-	98->101
-	98->113
-	98->114
-	97[label = statement4]
-	97->98
-	95[label = statementList1]
-	95->96
-	95->97
-	136[label=  "ID: f"]
-	135[label = var1]
+	119[label = expression2]
+	119->120
+	126[label= "RPARENT: )"]
+	129[label= "LBRACE: {"]
+	133[label= Nodo_nulo]
+	136[label= "INT: int"]
+	135[label = typeSpecifier1]
 	135->136
-	137[label= "ASSIGN: ="]
-	143[label= "NUMBER: 1"]
-	142[label = factor4]
-	142->143
-	141[label = term2]
-	141->142
-	140[label = additiveExpression2]
-	140->141
-	139[label = simpleExpression2]
-	139->140
-	138[label = expression2]
-	138->139
-	134[label = expression1]
+	137[label=  "ID: f"]
+	138[label= "SEMICOLON: ;"]
+	134[label = varDeclaration1]
 	134->135
 	134->137
 	134->138
-	144[label= "SEMICOLON: ;"]
-	133[label = statement2]
-	133->134
-	133->144
-	132[label = statement1]
+	132[label = localDeclarations1]
 	132->133
-	94[label = statementList1]
-	94->95
-	94->132
-	153[label=  "ID: asd"]
-	154[label= "LPARENT: ("]
-	162[label= "NUMBER: 3"]
-	161[label = factor4]
+	132->134
+	141[label= "INT: int"]
+	140[label = typeSpecifier1]
+	140->141
+	142[label=  "ID: z"]
+	143[label= "SEMICOLON: ;"]
+	139[label = varDeclaration1]
+	139->140
+	139->142
+	139->143
+	131[label = localDeclarations1]
+	131->132
+	131->139
+	146[label= "INT: int"]
+	145[label = typeSpecifier1]
+	145->146
+	147[label=  "ID: e"]
+	148[label= "SEMICOLON: ;"]
+	144[label = varDeclaration1]
+	144->145
+	144->147
+	144->148
+	130[label = localDeclarations1]
+	130->131
+	130->144
+	149[label= Nodo_nulo]
+	150[label= "RBRACE: }"]
+	128[label = "compoundStmt\nVariables locales: [id: f - tipo: int] [id: z - tipo: int] [id: e - tipo: int] \n Mensaje: OK"][color="limegreen"];
+	128->129
+	128->130
+	128->149
+	128->150
+	127[label = statement2]
+	127->128
+	116[label = "iterationStmt\n Mensaje: "][color="limegreen"];
+	116->117
+	116->118
+	116->119
+	116->126
+	116->127
+	115[label = statement4]
+	115->116
+	99[label = statementList1]
+	99->100
+	99->115
+	155[label=  "ID: f"]
+	154[label = var1]
+	154->155
+	156[label= "ASSIGN: ="]
+	163[label= "NUMBER: 1"]
+	162[label = factor4]
+	162->163
+	161[label = term2]
 	161->162
-	160[label = term2]
+	165[label= "TIMES: *"]
+	164[label = mulop1]
+	164->165
+	167[label= "NUMBER: 2"]
+	166[label = factor4]
+	166->167
+	160[label = "term1\n Mensaje: OK"][color="limegreen"];
 	160->161
+	160->164
+	160->166
 	159[label = additiveExpression2]
 	159->160
 	158[label = simpleExpression2]
 	158->159
 	157[label = expression2]
 	157->158
-	156[label = argList2]
-	156->157
-	155[label = args1]
-	155->156
-	163[label= "RPARENT: )"]
-	152[label =" call\n mensaje: OK"][color="limegreen"];
-	
+	153[label = expression1]
+	153->154
+	153->156
+	153->157
+	168[label= "SEMICOLON: ;"]
+	152[label = statement2]
 	152->153
-	152->154
-	152->155
-	152->163
-	151[label = factor3]
+	152->168
+	151[label = statement1]
 	151->152
-	150[label = term2]
-	150->151
-	149[label = additiveExpression2]
-	149->150
-	148[label = simpleExpression2]
-	148->149
-	147[label = expression2]
-	147->148
-	164[label= "SEMICOLON: ;"]
-	146[label = statement2]
-	146->147
-	146->164
-	145[label = statement1]
-	145->146
-	93[label = statementList1]
-	93->94
-	93->145
-	165[label= "RBRACE: }"]
-	78[label = "compoundStmt\nVariables locales: [id: d - tipo: int] [id: e - tipo: int] \n Mensaje: OK"][color="limegreen"];
-	78->79
-	78->80
-	78->93
-	78->165
-	70[label = "funDeclaration\nParametros: [id: void - tipo: void] \nVariables locales: [id: d - tipo: int] [id: e - tipo: int] \nMensaje: OK  "][color="limegreen"];
-	70->71
-	70->73
-	70->74
-	70->75
-	70->77
-	70->78
-	69[label = declaration2]
-	69->70
+	98[label = statementList1]
+	98->99
+	98->151
+	177[label=  "ID: asd"]
+	178[label= "LPARENT: ("]
+	186[label= "NUMBER: 3"]
+	185[label = factor4]
+	185->186
+	184[label = term2]
+	184->185
+	183[label = additiveExpression2]
+	183->184
+	182[label = simpleExpression2]
+	182->183
+	181[label = expression2]
+	181->182
+	180[label = argList2]
+	180->181
+	179[label = args1]
+	179->180
+	187[label= "RPARENT: )"]
+	176[label =" call\n mensaje: OK"][color="limegreen"];
+	
+	176->177
+	176->178
+	176->179
+	176->187
+	175[label = factor3]
+	175->176
+	174[label = term2]
+	174->175
+	173[label = additiveExpression2]
+	173->174
+	172[label = simpleExpression2]
+	172->173
+	171[label = expression2]
+	171->172
+	188[label= "SEMICOLON: ;"]
+	170[label = statement2]
+	170->171
+	170->188
+	169[label = statement1]
+	169->170
+	97[label = statementList1]
+	97->98
+	97->169
+	189[label= "RBRACE: }"]
+	82[label = "compoundStmt\nVariables locales: [id: d - tipo: int] [id: e - tipo: void] \n Mensaje: OK"][color="limegreen"];
+	82->83
+	82->84
+	82->97
+	82->189
+	74[label = "funDeclaration\nParametros: [id: void - tipo: void] \nVariables locales: [id: d - tipo: int] [id: e - tipo: void] \nMensaje: OK  "][color="limegreen"];
+	74->75
+	74->77
+	74->78
+	74->79
+	74->81
+	74->82
+	73[label = declaration2]
+	73->74
 	2[label = declarationList1]
 	2->3
-	2->69
-	1[label = "program\nVariables globales: [id: a - tipo: int] \nFunciones: [id: miFuncion - tipo: int - parametros: [id: a0 - tipo: int] ] [id: miFuncion - tipo: int - parametros: [id: c - tipo: int] [id: d - tipo: int] ] [id: asd - tipo: int - parametros: [id: void - tipo: void] ] [id: miFuncion2 - tipo: void - parametros: [id: void - tipo: void] ] \nMensajes de error: \n"][color="limegreen"];
+	2->73
+	1[label = "program\nVariables globales: [id: a - tipo: int] \nFunciones: [id: miFuncion - tipo: int - parametros: [id: a0 - tipo: int] ] [id: miFuncion - tipo: int - parametros: [id: c - tipo: int] [id: d - tipo: int] ] [id: asd - tipo: int - parametros: [id: zzz - tipo: int] ] [id: miFuncion2 - tipo: void - parametros: [id: void - tipo: void] ] \nMensajes de error: \n"][color="limegreen"];
 	1->2
 	}
