@@ -9,7 +9,7 @@ int asd(int zzz){
 }
 void miFuncion2 (void){
     int d;
-    void e;
+    int e;
     a = 01;
     while(a){
         int f;
