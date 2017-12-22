@@ -1,10 +1,15 @@
-int a = 03;
-b = 03
+int asd;
+
+int hola(void){
+
+}
 void main(void){
+    int a;
+    a = hola();
     if(03){
 
     }
-    while(a=04){
+    while(hola()){
 
     }
 }

@@ -163,8 +163,8 @@ digraph G {
 	85[label = localDeclarations1]
 	85->86
 	85->87
-	94[label= "VOID: void"]
-	93[label = typeSpecifier2]
+	94[label= "INT: int"]
+	93[label = typeSpecifier1]
 	93->94
 	95[label=  "ID: e"]
 	96[label= "SEMICOLON: ;"]
@@ -221,50 +221,62 @@ digraph G {
 	119->120
 	126[label= "RPARENT: )"]
 	129[label= "LBRACE: {"]
-	133[label= Nodo_nulo]
-	136[label= "INT: int"]
-	135[label = typeSpecifier1]
+	134[label= Nodo_nulo]
+	137[label= "INT: int"]
+	136[label = typeSpecifier1]
+	136->137
+	138[label=  "ID: f"]
+	139[label= "SEMICOLON: ;"]
+	135[label = varDeclaration1]
 	135->136
-	137[label=  "ID: f"]
-	138[label= "SEMICOLON: ;"]
-	134[label = varDeclaration1]
-	134->135
-	134->137
-	134->138
+	135->138
+	135->139
+	133[label = localDeclarations1]
+	133->134
+	133->135
+	142[label= "INT: int"]
+	141[label = typeSpecifier1]
+	141->142
+	143[label=  "ID: z"]
+	144[label= "SEMICOLON: ;"]
+	140[label = varDeclaration1]
+	140->141
+	140->143
+	140->144
 	132[label = localDeclarations1]
 	132->133
-	132->134
-	141[label= "INT: int"]
-	140[label = typeSpecifier1]
-	140->141
-	142[label=  "ID: z"]
-	143[label= "SEMICOLON: ;"]
-	139[label = varDeclaration1]
-	139->140
-	139->142
-	139->143
+	132->140
+	147[label= "INT: int"]
+	146[label = typeSpecifier1]
+	146->147
+	148[label=  "ID: z"]
+	149[label= "SEMICOLON: ;"]
+	145[label = varDeclaration1]
+	145->146
+	145->148
+	145->149
 	131[label = localDeclarations1]
 	131->132
-	131->139
-	146[label= "INT: int"]
-	145[label = typeSpecifier1]
-	145->146
-	147[label=  "ID: e"]
-	148[label= "SEMICOLON: ;"]
-	144[label = varDeclaration1]
-	144->145
-	144->147
-	144->148
+	131->145
+	152[label= "INT: int"]
+	151[label = typeSpecifier1]
+	151->152
+	153[label=  "ID: e"]
+	154[label= "SEMICOLON: ;"]
+	150[label = varDeclaration1]
+	150->151
+	150->153
+	150->154
 	130[label = localDeclarations1]
 	130->131
-	130->144
-	149[label= Nodo_nulo]
-	150[label= "RBRACE: }"]
-	128[label = "compoundStmt\nVariables locales: [id: f - tipo: int] [id: z - tipo: int] [id: e - tipo: int] \n Mensaje: OK"][color="limegreen"];
+	130->150
+	155[label= Nodo_nulo]
+	156[label= "RBRACE: }"]
+	128[label = "compoundStmt\nVariables locales: [id: f - tipo: int] [id: z - tipo: int] [id: z - tipo: int] [id: e - tipo: int] \n Mensaje:  Variable duplicada \n"][color="indianred1"];
 	128->129
 	128->130
-	128->149
-	128->150
+	128->155
+	128->156
 	127[label = statement2]
 	127->128
 	116[label = "iterationStmt\n Mensaje: "][color="limegreen"];
@@ -278,94 +290,94 @@ digraph G {
 	99[label = statementList1]
 	99->100
 	99->115
-	155[label=  "ID: f"]
-	154[label = var1]
-	154->155
-	156[label= "ASSIGN: ="]
-	163[label= "NUMBER: 1"]
-	162[label = factor4]
-	162->163
-	161[label = term2]
-	161->162
-	165[label= "TIMES: *"]
-	164[label = mulop1]
-	164->165
-	167[label= "NUMBER: 2"]
-	166[label = factor4]
-	166->167
-	160[label = "term1\n Mensaje: OK"][color="limegreen"];
+	161[label=  "ID: f"]
+	160[label = var1]
 	160->161
-	160->164
-	160->166
-	159[label = additiveExpression2]
+	162[label= "ASSIGN: ="]
+	169[label= "NUMBER: 1"]
+	168[label = factor4]
+	168->169
+	167[label = term2]
+	167->168
+	171[label= "TIMES: *"]
+	170[label = mulop1]
+	170->171
+	173[label= "NUMBER: 2"]
+	172[label = factor4]
+	172->173
+	166[label = "term1\n Mensaje: OK"][color="limegreen"];
+	166->167
+	166->170
+	166->172
+	165[label = additiveExpression2]
+	165->166
+	164[label = simpleExpression2]
+	164->165
+	163[label = expression2]
+	163->164
+	159[label = expression1]
 	159->160
-	158[label = simpleExpression2]
+	159->162
+	159->163
+	174[label= "SEMICOLON: ;"]
+	158[label = statement2]
 	158->159
-	157[label = expression2]
+	158->174
+	157[label = statement1]
 	157->158
-	153[label = expression1]
-	153->154
-	153->156
-	153->157
-	168[label= "SEMICOLON: ;"]
-	152[label = statement2]
-	152->153
-	152->168
-	151[label = statement1]
-	151->152
 	98[label = statementList1]
 	98->99
-	98->151
-	177[label=  "ID: asd"]
-	178[label= "LPARENT: ("]
-	186[label= "NUMBER: 3"]
-	185[label = factor4]
+	98->157
+	183[label=  "ID: asd"]
+	184[label= "LPARENT: ("]
+	192[label= "NUMBER: 3"]
+	191[label = factor4]
+	191->192
+	190[label = term2]
+	190->191
+	189[label = additiveExpression2]
+	189->190
+	188[label = simpleExpression2]
+	188->189
+	187[label = expression2]
+	187->188
+	186[label = argList2]
+	186->187
+	185[label = args1]
 	185->186
-	184[label = term2]
-	184->185
-	183[label = additiveExpression2]
-	183->184
-	182[label = simpleExpression2]
-	182->183
-	181[label = expression2]
-	181->182
-	180[label = argList2]
-	180->181
-	179[label = args1]
-	179->180
-	187[label= "RPARENT: )"]
-	176[label =" call\n mensaje: OK"][color="limegreen"];
+	193[label= "RPARENT: )"]
+	182[label =" call\n mensaje: OK"][color="limegreen"];
 	
+	182->183
+	182->184
+	182->185
+	182->193
+	181[label = factor3]
+	181->182
+	180[label = term2]
+	180->181
+	179[label = additiveExpression2]
+	179->180
+	178[label = simpleExpression2]
+	178->179
+	177[label = expression2]
+	177->178
+	194[label= "SEMICOLON: ;"]
+	176[label = statement2]
 	176->177
-	176->178
-	176->179
-	176->187
-	175[label = factor3]
+	176->194
+	175[label = statement1]
 	175->176
-	174[label = term2]
-	174->175
-	173[label = additiveExpression2]
-	173->174
-	172[label = simpleExpression2]
-	172->173
-	171[label = expression2]
-	171->172
-	188[label= "SEMICOLON: ;"]
-	170[label = statement2]
-	170->171
-	170->188
-	169[label = statement1]
-	169->170
 	97[label = statementList1]
 	97->98
-	97->169
-	189[label= "RBRACE: }"]
-	82[label = "compoundStmt\nVariables locales: [id: d - tipo: int] [id: e - tipo: void] \n Mensaje: OK"][color="limegreen"];
+	97->175
+	195[label= "RBRACE: }"]
+	82[label = "compoundStmt\nVariables locales: [id: d - tipo: int] [id: e - tipo: int] \n Mensaje: OK"][color="limegreen"];
 	82->83
 	82->84
 	82->97
-	82->189
-	74[label = "funDeclaration\nParametros: [id: void - tipo: void] \nVariables locales: [id: d - tipo: int] [id: e - tipo: void] \nMensaje: OK  "][color="limegreen"];
+	82->195
+	74[label = "funDeclaration\nParametros: [id: void - tipo: void] \nVariables locales: [id: d - tipo: int] [id: e - tipo: int] \nMensaje: OK  "][color="limegreen"];
 	74->75
 	74->77
 	74->78
@@ -377,6 +389,6 @@ digraph G {
 	2[label = declarationList1]
 	2->3
 	2->73
-	1[label = "program\nVariables globales: [id: a - tipo: int] \nFunciones: [id: miFuncion - tipo: int - parametros: [id: a0 - tipo: int] ] [id: miFuncion - tipo: int - parametros: [id: c - tipo: int] [id: d - tipo: int] ] [id: asd - tipo: int - parametros: [id: zzz - tipo: int] ] [id: miFuncion2 - tipo: void - parametros: [id: void - tipo: void] ] \nMensajes de error: \n"][color="limegreen"];
+	1[label = "program\nVariables globales: [id: a - tipo: int] \nFunciones: [id: miFuncion - tipo: int - parametros: [id: a0 - tipo: int] ] [id: miFuncion - tipo: int - parametros: [id: c - tipo: int] [id: d - tipo: int] ] [id: asd - tipo: int - parametros: [id: zzz - tipo: int] ] [id: miFuncion2 - tipo: void - parametros: [id: void - tipo: void] ] \nMensajes de error: \nVariable local duplicada dentro de un bloque (compoundStmt) \n"][color="indianred1"];
 	1->2
 	}

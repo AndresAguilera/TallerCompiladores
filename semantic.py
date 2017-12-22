@@ -10,7 +10,7 @@ verde = "[color=\"limegreen\"];"
 class Nodo():
     variablesGlobales = []
     funciones = []
-    alcances = []
+    scopes = []
 
 
 class Funcion():
@@ -45,9 +45,6 @@ class Funcion():
                         break
                     else:
                         if(item.id == self.id):
-                            print("asd" + self.id + item.id)
-                            print(item.params.tipo)
-                            print(self.params.tipo)
                             if(item.params.tipo != self.params.tipo):
                                 print("Sobrecarga")
                                 break
@@ -94,9 +91,7 @@ class Bloque():
         return listaVariables
 
 class Alcance():
-    def __init__(self, funcionPadre, bloquePadre, variables):
-        self.funcionPadre = funcionPadre
-        self.bloquePadre = bloquePadre
+    def __init__(self, variables):
         self.variables = variables
 
 class Parametro():
@@ -111,9 +106,11 @@ class Variable():
     def __init__(self, id, tipo):
         self.id = id
         self.tipo = tipo
+        global mensaje
         if (self.id in getIdsVariablesGlobales()):
-            global mensaje
             mensaje += " Variable global duplicada - ID: " + self.id + "\\n "
+        if (self.tipo == "void" or self.tipo == "void[]"):
+            mensaje += " Variable de tipo void. ID: " +self.id + "\\n"
 
     def imprimir(self):
         print("id: " + self.id + " - tipo: " + self.tipo)
@@ -763,7 +760,8 @@ class compoundStmt(Nodo):
         if(son2.name != "Nodo nulo"):
             self.variablesLocales = son2.variables
             self.bloque = Bloque(self.variablesLocales)
-        Nodo.scopes.append("")
+        self.scope = Alcance(self.variablesLocales)
+        Nodo.scopes.append(self.scope)
 
         if len(self.variablesLocales) != len(set(self.getIdsVariablesLocales())):
             print("Variable duplicada")
@@ -1156,10 +1154,10 @@ class selectionStmt1(Nodo):
         self.son5 = son5
         self.color = verde
         self.mensaje = ""
-        self.tipo = son3.tipo
+        self.tipo = self.son3.tipo
         if(self.tipo!="int"):
             self.color = rojo
-            self.mensaje = "La condicion no es de tipo entero (porque retorna bool, un tipo que no existe en C-) \\n"
+            self.mensaje = "La condicion no es de tipo entero \\n"
             global mensaje
             mensaje += " Error en un if \\n"
 
@@ -1403,7 +1401,7 @@ class expression1(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.value = son3.value
-        self.tipo = ""
+        self.tipo = son3.tipo
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()): 
@@ -1546,8 +1544,8 @@ class simpleExpression1(Nodo):
         self.son3 = son3
         self.tipo = ""
         self.value = ""
-
-
+        if(self.son1.tipo == "int" and self.son3.tipo == "int"):
+            self.tipo = "int"
 
     def imprimir(self, ident):
         if type(self.son1) == type(tuple()):
@@ -1613,6 +1611,7 @@ class relop1(Nodo):
     def __init__(self, son1, name):
         self.name = name
         self.son1 = son1
+
 
 
     def imprimir(self, ident):
@@ -1774,8 +1773,13 @@ class additiveExpression1(Nodo):
         self.son2 = son2
         self.son3 = son3
         self.tipo = ""
-        if (son1.tipo == son3.tipo):
+        if (son1.tipo == son3.tipo and son3.tipo == "int"):
             self.tipo = son3.tipo
+        else:
+            self.color = rojo;
+            self.mensaje = "Se requiere operandos int en operaciones aritmeticas"
+            global mensaje
+            mensaje += "Se requiere operandos int en operaciones aritmeticas \\n"
 
 
     def imprimir(self, ident):
@@ -1901,8 +1905,13 @@ class term1(Nodo):
         self.mensaje = "OK"
         self.value = -999
         self.tipo = ""
-        if (son1.tipo == son3.tipo):
+        if (son1.tipo == son3.tipo and son3.tipo == "int"):
             self.tipo = son3.tipo
+        else:
+            self.color = rojo;
+            self.mensaje = "Se requiere operandos int en operaciones aritmeticas"
+            global mensaje
+            mensaje += "Se requiere operandos int en operaciones aritmeticas \\n"
 
         if(son2.operacion == "TIMES"):
             self.value = son1.value * son2.value
