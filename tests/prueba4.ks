@@ -3,7 +3,7 @@ void main(void){
     if(a==b){
         a = b + 03;
     }
-    while(b==a){
+    while(main()){
 
     }
 }

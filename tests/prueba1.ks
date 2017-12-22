@@ -36,7 +36,7 @@ int aProcedure4 ( int aNum1, void aNum2, int anArray1[], void anArray2[] )
     aNum3 = aNum1;
     aNum2 = aNum3 + 01;
     anArray3[00] = anArray1[02];
-    anArray2[03] = anarray3[04];
+    anArray2[03] = anArray3[04];
     ; ;
     while (01)
         ;

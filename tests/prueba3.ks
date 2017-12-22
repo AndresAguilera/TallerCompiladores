@@ -1,6 +1,6 @@
 int asd;
 
-void hola(void){
+int hola(void){
 
 }
 void main(void){

@@ -91,9 +91,7 @@ class Bloque():
         return listaVariables
 
 class Alcance():
-    def __init__(self, funcionPadre, bloquePadre, variables):
-        self.funcionPadre = funcionPadre
-        self.bloquePadre = bloquePadre
+    def __init__(self, variables):
         self.variables = variables
 
 class Parametro():
@@ -762,7 +760,8 @@ class compoundStmt(Nodo):
         if(son2.name != "Nodo nulo"):
             self.variablesLocales = son2.variables
             self.bloque = Bloque(self.variablesLocales)
-        Nodo.scopes.append("")
+        self.scope = Alcance(self.variablesLocales)
+        Nodo.scopes.append(self.scope)
 
         if len(self.variablesLocales) != len(set(self.getIdsVariablesLocales())):
             print("Variable duplicada")
@@ -1776,6 +1775,11 @@ class additiveExpression1(Nodo):
         self.tipo = ""
         if (son1.tipo == son3.tipo and son3.tipo == "int"):
             self.tipo = son3.tipo
+        else:
+            self.color = rojo;
+            self.mensaje = "Se requiere operandos int en operaciones aritmeticas"
+            global mensaje
+            mensaje += "Se requiere operandos int en operaciones aritmeticas \\n"
 
 
     def imprimir(self, ident):
@@ -1903,6 +1907,11 @@ class term1(Nodo):
         self.tipo = ""
         if (son1.tipo == son3.tipo and son3.tipo == "int"):
             self.tipo = son3.tipo
+        else:
+            self.color = rojo;
+            self.mensaje = "Se requiere operandos int en operaciones aritmeticas"
+            global mensaje
+            mensaje += "Se requiere operandos int en operaciones aritmeticas \\n"
 
         if(son2.operacion == "TIMES"):
             self.value = son1.value * son2.value
